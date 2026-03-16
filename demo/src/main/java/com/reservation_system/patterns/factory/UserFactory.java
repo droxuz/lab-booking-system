@@ -1,10 +1,6 @@
 package com.reservation_system.patterns.factory;
 
-import com.reservation_system.model.student;
-import com.reservation_system.model.faculty;
-import com.reservation_system.model.researcher;
-import com.reservation_system.model.guest;
-import com.reservation_system.model.user;
+import com.reservation_system.model.*;
 
 public class UserFactory {
 
@@ -22,6 +18,10 @@ public class UserFactory {
                 return new researcher(id, name, email, password);
             case "guest":
                 return new guest(id, name, email, password);
+            case "headlabcoordinator":
+                return new headlabcoordinator(id, name, email, password);
+            case "labmanager":
+                return new labmanager(id, name, email, password);
             default:
                 throw new IllegalArgumentException("Invalid user type: " + type);
         }
