@@ -1,42 +1,34 @@
 package com.reservation_system.model;
 
-public abstract class user {
+public abstract class User {
     protected int id;
     protected String name;
     protected String email;
     protected String password;
+    protected boolean approved;
 
-    public user(int id, String name, String email, String password){
+    public User(int id, String name, String email, String password, boolean approved) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.approved = approved;
     }
 
-    public int getID(){
-        return id;
-    }
+    public int getID() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public boolean isApproved() { return approved; }
 
-    public void setID(int id){
-        this.id = id;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
-
-    public String getPassword(){
-        return this.password;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     public abstract String getUserType();
 
-    @Override
-    public String toString(){
-        return id + "," + name + "," + email + "," + getUserType();
+    public boolean requiresDepartmentApproval() {
+        String type = getUserType().toLowerCase();
+        return type.equals("student") || type.equals("faculty") || type.equals("researcher");
     }
 }

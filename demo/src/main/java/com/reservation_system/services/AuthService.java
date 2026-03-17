@@ -1,7 +1,7 @@
 package com.reservation_system.services;
 
-import com.reservation_system.model.user;
-import com.reservation_system.userRepository.UserRepository;
+import com.reservation_system.model.User;
+import com.reservation_system.repository.UserRepository;
 
 public class AuthService {
     private final UserRepository userRepository;
@@ -10,8 +10,8 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public user login(String email, String password) {
-        user user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("No user found with that email."));
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("No user found with that email."));
 
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password.");

@@ -1,6 +1,6 @@
-package com.reservation_system.userRepository;
+package com.reservation_system.repository;
 
-import com.reservation_system.model.user;
+import com.reservation_system.model.User;
 import com.reservation_system.patterns.factory.UserFactory;
 
 import java.io.*;
@@ -28,7 +28,7 @@ public class UserRepository {
             if (Files.notExists(filePath)) {
                 Files.createFile(filePath);
                 try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-                    writer.write("name,id,email,password,type");
+                    writer.write("name,id,email,password,type,approved");
                     writer.newLine();
                 }
             }
@@ -37,16 +37,16 @@ public class UserRepository {
         }
     }
 
-    public List<user> getAllUsers() {
-        List<user> users = new ArrayList<>();
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
-            String line = reader.readLine(); 
+            String line = reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
 
-                if (parts.length < 5) {
+                if (parts.length < 6) {
                     continue;
                 }
 
@@ -55,44 +55,45 @@ public class UserRepository {
                 String email = parts[2].trim();
                 String password = parts[3].trim();
                 String type = parts[4].trim();
+                boolean approved = Boolean.parseBoolean(parts[5].trim());
 
-                user user = UserFactory.createUser(type, id, name, email, password);
+                User user = UserFactory.createUser(type, id, name, email, password, approved);
                 users.add(user);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read users from CSV", e);
+        throw new RuntimeException("Failed to read users from CSV", e);
         }
-
-        return users;
+    return users;
     }
 
-    public void saveAllUsers(List<user> users) {
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-            writer.write("name,id,email,password,type");
+    public void saveAllUsers(List<User> users) {
+    try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
+        writer.write("name,id,email,password,type,approved");
+        writer.newLine();
+
+        for (User user : users) {
+            writer.write(String.format("%s,%d,%s,%s,%s,%b",
+                    user.getName(),
+                    user.getID(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getUserType(),
+                    user.isApproved()
+            ));
             writer.newLine();
-
-            for (user user : users) {
-                writer.write(String.format("%s,%d,%s,%s,%s",
-                        user.getName(),
-                        user.getID(),
-                        user.getEmail(),
-                        user.getPassword(),
-                        user.getUserType()
-                ));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to save users to CSV", e);
         }
+    } catch (IOException e) {
+        throw new RuntimeException("Failed to save users to CSV", e);
+    }
     }
 
-    public void addUser(user user) {
-        List<user> users = getAllUsers();
+    public void addUser(User user) {
+        List<User> users = getAllUsers();
         users.add(user);
         saveAllUsers(users);
     }
 
-    public Optional<user> findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return getAllUsers().stream()
                 .filter(user -> user.getEmail().equalsIgnoreCase(email))
                 .findFirst();
@@ -104,7 +105,7 @@ public class UserRepository {
 
     public int getNextID() {
         return getAllUsers().stream()
-                .mapToInt(user::getID)
+                .mapToInt(User::getID)
                 .max()
                 .orElse(0) + 1;
     }

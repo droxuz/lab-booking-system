@@ -1,8 +1,8 @@
 package com.reservation_system.model;
 
-public class labmanager extends user {
-    public labmanager(int id, String name, String email, String password) {
-        super(id, name, email, password);
+public class LabManager extends User {
+    public LabManager(int id, String name, String email, String password, boolean approved) {
+        super(id, name, email, password, approved);
     }
 
     @Override
