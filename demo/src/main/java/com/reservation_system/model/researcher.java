@@ -1,8 +1,8 @@
 package com.reservation_system.model;
 
-public class researcher extends user {
-    public researcher(int id, String name, String email, String password) {
-        super(id, name, email, password);
+public class Researcher extends User {
+    public Researcher(int id, String name, String email, String password, boolean approved) {
+        super(id, name, email, password, approved);
     }
 
     @Override
