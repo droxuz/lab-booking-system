@@ -1,0 +1,24 @@
+# Compiled class files
+target/
+*.class
+
+# Log files
+*.log
+
+# VS Code specific
+.vscode/
+.history/
+
+# IntelliJ specific
+.idea/
+*.iml
+out/
+
+# Eclipse/Generic Java metadata
+.project
+.classpath
+.settings/
+
+# OS specific
+.DS_Store
+Thumbs.db
