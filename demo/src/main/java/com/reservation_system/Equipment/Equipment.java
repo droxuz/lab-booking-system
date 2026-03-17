@@ -1,27 +1,66 @@
 package com.reservation_system.Equipment;
 
-import com.reservation_system.LabManager.LabManager;
-
 import java.util.UUID;
 
 public class Equipment {
-    LabManager user_labmanager;
 
     private UUID equipmentId;
-    private Equipments equipmennt_name;
-    private Lablocation lablocation;
-    private EquipmentStatus equipmentstatus;
+    private EquipmentType equipmentType;
+    private String description;
+    private LabLocation labLocation;
+    private EquipmentStatus equipmentStatus;
 
-    public Equipment(UUID equipmentId, Equipments equip_name, Lablocation lablocation){
+    public Equipment(UUID equipmentId, EquipmentType equipmentType, String description, LabLocation labLocation) {
         this.equipmentId = equipmentId;
-        this.equipmentstatus = EquipmentStatus.Available;
-        this.equipmennt_name = equip_name;
-        this.lablocation = lablocation;
+        this.equipmentType = equipmentType;
+        this.description = description;
+        this.labLocation = labLocation;
+        this.equipmentStatus = EquipmentStatus.AVAILABLE;
     }
 
-    public void enable(){}
-    public void disable(){}
-    public void markunavaible(){}
-    public void updateDetail(){}
+     public void enable() {
+        this.equipmentStatus = EquipmentStatus.AVAILABLE;
+    }
 
+    public void disable() {
+        this.equipmentStatus = EquipmentStatus.DISABLED;
+    }
+
+    public void markUnavailable() {
+        this.equipmentStatus = EquipmentStatus.MAINTENANCE;
+    }
+
+    public void setInUse() {
+        this.equipmentStatus = EquipmentStatus.IN_USE;
+    }
+
+    public void updateDetail(EquipmentType equipmentType, String description, LabLocation labLocation) {
+        this.equipmentType = equipmentType;
+        this.description = description;
+        this.labLocation = labLocation;
+    }
+    public UUID getEquipmentId() {
+        return equipmentId;
+    }
+
+    public EquipmentType getEquipmentType() {
+        return equipmentType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LabLocation getLabLocation() {
+        return labLocation;
+    }
+
+    public EquipmentStatus getEquipmentStatus() {
+        return equipmentStatus;
+    }
+
+    public boolean isAvailable() {
+        return equipmentStatus == EquipmentStatus.AVAILABLE;
+    }
 }
+
