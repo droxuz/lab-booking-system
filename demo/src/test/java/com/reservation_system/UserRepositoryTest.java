@@ -116,4 +116,6 @@ public class UserRepositoryTest {
         List<User> users = repository.getAllUsers();
         assertEquals(0, users.size());
     }
+
+
 }
