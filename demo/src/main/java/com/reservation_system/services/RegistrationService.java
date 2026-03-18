@@ -1,8 +1,8 @@
 package com.reservation_system.services;
 
-import com.reservation_system.model.user;
+import com.reservation_system.model.User;
 import com.reservation_system.patterns.factory.UserFactory;
-import com.reservation_system.userRepository.UserRepository;
+import com.reservation_system.repository.UserRepository;
 
 public class RegistrationService {
     private final UserRepository userRepository;
@@ -11,35 +11,92 @@ public class RegistrationService {
         this.userRepository = userRepository;
     }
 
-    public user registerUser(String type, String name, String email, String password) {
+    public User registerUser(String type, String name, String email, String password) {
         validateRegistrationInput(type, name, email, password);
 
         if (userRepository.emailExists(email)) {
             throw new IllegalArgumentException("Email is already registered.");
         }
 
-        int newId = userRepository.getNextID();
-        user user = UserFactory.createUser(type, newId, name, email, password);
-        userRepository.addUser(user);
+        boolean approved = getDefaultApprovalStatus(type);
+        int id = userRepository.getNextID();
 
-        return user;
+        User newUser = UserFactory.createUser(type, id, name, email, password, approved);
+        userRepository.addUser(newUser);
+
+        return newUser;
     }
 
     private void validateRegistrationInput(String type, String name, String email, String password) {
         if (type == null || type.isBlank()) {
             throw new IllegalArgumentException("User type is required.");
         }
+
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name is required.");
         }
+
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email is required.");
         }
-        if (!email.contains("@")) {
-            throw new IllegalArgumentException("Email format is invalid.");
+
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format.");
         }
-        if (password == null || password.length() < 4) {
-            throw new IllegalArgumentException("Password must be at least 4 characters.");
+
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password is required.");
+        }
+
+        if (!isStrongPassword(password)) {
+            throw new IllegalArgumentException(
+                    "Password must contain uppercase, lowercase, number, and symbol, and be at least 8 characters long."
+            );
         }
     }
+
+    private boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".");
+    }
+
+    private boolean isStrongPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isLowerCase(c)) {
+                hasLower = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else {
+                hasSymbol = true;
+            }
+        }
+
+        return hasUpper && hasLower && hasDigit && hasSymbol;
+    }
+
+    private boolean getDefaultApprovalStatus(String type) {
+    switch (type.trim().toLowerCase()) {
+        case "guest":
+            return true;
+        case "student":
+        case "faculty":
+        case "researcher":
+        case "labmanager":
+            return true;  // temporary simplification
+        case "headlabcoordinator":
+            return true;  // also allow for now
+        default:
+            throw new IllegalArgumentException("Invalid user type: " + type);
+    }
+}
 }
