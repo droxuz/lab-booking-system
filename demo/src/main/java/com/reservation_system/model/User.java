@@ -27,6 +27,8 @@ public abstract class User {
 
     public abstract String getUserType();
 
+
+    //Placeholder for when departmental approval
     public boolean requiresDepartmentApproval() {
         String type = getUserType().toLowerCase();
         return type.equals("student") || type.equals("faculty") || type.equals("researcher");
