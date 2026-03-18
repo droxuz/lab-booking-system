@@ -109,4 +109,8 @@ public class UserRepository {
                 .max()
                 .orElse(0) + 1;
     }
+
+    public boolean headLabCoordinatorExists(){
+        return getAllUsers().stream().anyMatch(user -> user.getUserType().equalsIgnoreCase("headlabcoordinator"));
+    }
 }
