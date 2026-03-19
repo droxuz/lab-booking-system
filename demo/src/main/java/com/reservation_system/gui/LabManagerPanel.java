@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class LabManagerPanel extends JPanel {
 
@@ -19,6 +20,7 @@ public class LabManagerPanel extends JPanel {
 
     private User currentUser;
 
+    private final JTextField searchIdField;
     private final JTextField descriptionField;
     private final JComboBox<EquipmentType> equipmentTypeComboBox;
     private final JComboBox<LabLocation> labLocationComboBox;
@@ -43,18 +45,29 @@ public class LabManagerPanel extends JPanel {
 
         JPanel centerPanel = new JPanel(new GridLayout(1, 2));
 
-        JPanel formPanel = new JPanel(new GridLayout(6, 2, 10, 10));
+        JPanel formPanel = new JPanel(new GridLayout(10, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
+        searchIdField = new JTextField();
         descriptionField = new JTextField();
         equipmentTypeComboBox = new JComboBox<>(EquipmentType.values());
         labLocationComboBox = new JComboBox<>(LabLocation.values());
 
+        JButton searchByIdButton = new JButton("Search by ID");
         JButton addButton = new JButton("Add Equipment");
+        JButton updateButton = new JButton("Update Equipment");
+        JButton removeButton = new JButton("Remove Equipment");
         JButton enableButton = new JButton("Enable");
         JButton disableButton = new JButton("Disable");
         JButton maintenanceButton = new JButton("Mark Maintenance");
+        JButton clearButton = new JButton("Clear");
         JButton backButton = new JButton("Back");
+
+        formPanel.add(new JLabel("Search Equipment ID:"));
+        formPanel.add(searchIdField);
+
+        formPanel.add(searchByIdButton);
+        formPanel.add(clearButton);
 
         formPanel.add(new JLabel("Description:"));
         formPanel.add(descriptionField);
@@ -66,6 +79,9 @@ public class LabManagerPanel extends JPanel {
         formPanel.add(labLocationComboBox);
 
         formPanel.add(addButton);
+        formPanel.add(updateButton);
+
+        formPanel.add(removeButton);
         formPanel.add(enableButton);
 
         formPanel.add(disableButton);
@@ -89,13 +105,30 @@ public class LabManagerPanel extends JPanel {
         statusArea.setWrapStyleWord(true);
         add(new JScrollPane(statusArea), BorderLayout.SOUTH);
 
+        searchByIdButton.addActionListener(e -> handleSearchById());
+        clearButton.addActionListener(e -> clearForm());
         addButton.addActionListener(e -> handleAddEquipment());
+        updateButton.addActionListener(e -> handleUpdateEquipment());
+        removeButton.addActionListener(e -> handleRemoveEquipment());
         enableButton.addActionListener(e -> handleEnableEquipment());
         disableButton.addActionListener(e -> handleDisableEquipment());
         maintenanceButton.addActionListener(e -> handleMarkMaintenance());
+
         backButton.addActionListener(e -> {
             if (currentUser != null) {
                 mainUI.showDashboard(currentUser);
+            }
+        });
+
+        equipmentJList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                Equipment selected = equipmentJList.getSelectedValue();
+                if (selected != null) {
+                    descriptionField.setText(selected.getDescription());
+                    equipmentTypeComboBox.setSelectedItem(selected.getEquipmentType());
+                    labLocationComboBox.setSelectedItem(selected.getLabLocation());
+                    refreshStatus("Selected equipment ID: " + selected.getEquipmentId());
+                }
             }
         });
     }
@@ -110,6 +143,37 @@ public class LabManagerPanel extends JPanel {
             throw new IllegalStateException("Current user is not a lab manager.");
         }
         return (LabManager) currentUser;
+    }
+
+    private void handleSearchById() {
+        try {
+            String inputId = searchIdField.getText().trim();
+
+            if (inputId.isBlank()) {
+                throw new IllegalArgumentException("Enter an equipment ID to search.");
+            }
+
+            UUID searchedId;
+            try {
+                searchedId = UUID.fromString(inputId);
+            } catch (IllegalArgumentException ex) {
+                throw new IllegalArgumentException("Invalid equipment ID format.");
+            }
+
+            for (int i = 0; i < equipmentListModel.size(); i++) {
+                Equipment equipment = equipmentListModel.getElementAt(i);
+                if (equipment.getEquipmentId().equals(searchedId)) {
+                    equipmentJList.setSelectedIndex(i);
+                    equipmentJList.ensureIndexIsVisible(i);
+                    refreshStatus("Equipment found: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+                    return;
+                }
+            }
+
+            throw new IllegalArgumentException("No equipment found with that ID.");
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleAddEquipment() {
@@ -131,9 +195,59 @@ public class LabManagerPanel extends JPanel {
 
             equipmentList.add(equipment);
             equipmentListModel.addElement(equipment);
-            refreshStatus("Added equipment: " + equipment.getDescription());
 
-            descriptionField.setText("");
+            refreshStatus("Added equipment: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            clearForm();
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
+    }
+
+    private void handleUpdateEquipment() {
+        try {
+            Equipment equipment = equipmentJList.getSelectedValue();
+            if (equipment == null) {
+                throw new IllegalArgumentException("Select an equipment item first.");
+            }
+
+            String description = descriptionField.getText().trim();
+            EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
+            LabLocation labLocation = (LabLocation) labLocationComboBox.getSelectedItem();
+
+            if (description.isBlank()) {
+                throw new IllegalArgumentException("Description is required.");
+            }
+
+            equipmentManagementService.updateEquipmentDetails(
+                    getManager(),
+                    equipment,
+                    description,
+                    equipmentType,
+                    labLocation
+            );
+
+            equipmentJList.repaint();
+            refreshStatus("Updated equipment: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            clearForm();
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
+    }
+
+    private void handleRemoveEquipment() {
+        try {
+            Equipment equipment = equipmentJList.getSelectedValue();
+            if (equipment == null) {
+                throw new IllegalArgumentException("Select an equipment item first.");
+            }
+
+            equipmentManagementService.removeEquipment(getManager(), equipment);
+
+            equipmentList.remove(equipment);
+            equipmentListModel.removeElement(equipment);
+
+            refreshStatus("Removed equipment: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            clearForm();
         } catch (Exception ex) {
             showError(ex.getMessage());
         }
@@ -148,7 +262,7 @@ public class LabManagerPanel extends JPanel {
 
             equipmentManagementService.enableEquipment(getManager(), equipment);
             equipmentJList.repaint();
-            refreshStatus("Enabled equipment: " + equipment.getDescription());
+            refreshStatus("Enabled equipment: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
         } catch (Exception ex) {
             showError(ex.getMessage());
         }
@@ -163,7 +277,7 @@ public class LabManagerPanel extends JPanel {
 
             equipmentManagementService.disableEquipment(getManager(), equipment);
             equipmentJList.repaint();
-            refreshStatus("Disabled equipment: " + equipment.getDescription());
+            refreshStatus("Disabled equipment: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
         } catch (Exception ex) {
             showError(ex.getMessage());
         }
@@ -178,10 +292,18 @@ public class LabManagerPanel extends JPanel {
 
             equipmentManagementService.markEquipmentMaintenance(getManager(), equipment);
             equipmentJList.repaint();
-            refreshStatus("Marked maintenance: " + equipment.getDescription());
+            refreshStatus("Marked maintenance: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
         } catch (Exception ex) {
             showError(ex.getMessage());
         }
+    }
+
+    private void clearForm() {
+        searchIdField.setText("");
+        descriptionField.setText("");
+        equipmentTypeComboBox.setSelectedIndex(0);
+        labLocationComboBox.setSelectedIndex(0);
+        equipmentJList.clearSelection();
     }
 
     private void refreshStatus(String message) {

@@ -1,0 +1,69 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>728</x><y>63</y><w>147</w><h>84</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+EquipmentStatus
+--
+    AVAILABLE,
+    IN_USE,
+    RESERVED,
+    MAINTENANCE,
+    DISABLED</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>728</x><y>154</y><w>147</w><h>119</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+EquipmentType
+--
+OSCILLOSCOPE,
+FPGA_BOARD,
+MULTIMETER,
+POWER_SUPPLY,
+SIGNAL_GENERATOR,
+MICROCONTROLLER,
+SOLDERING_STATION,
+PRINTER_3D</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>728</x><y>280</y><w>147</w><h>77</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+LabLocation
+--
+    LAS1001,
+    LAS1002,
+    BERGERON200,
+    BERGERON300</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>287</x><y>35</y><w>357</w><h>322</h></coordinates><panel_attributes>Equipment
+--
+equipmentId: UUID
+- equipmentType: EquipmentType
+- description: String
+- labLocation: LabLocation
+- equipmentStatus: EquipmentStatus
+- lastUsedTime: LocalDateTime
+- lastSensorTriggered: SensorType
+--
++ Equipment(id: UUID, Etype: EquipmentType, description: String, location: LabLocation)
++ enable(): void
++ disable(): void
++ markUnavailable(): void
++ updateDetail(Etype: EquipmentType, description: String, location: LabLocation): void
++ reserve(): void
++ cancelReservation(): void
++ checkIn(sensorType: SensorType): void
++ finishUse(): void
++ setInUse(sensorType: SensorType): void
++ autoSetAvailable(): void
++ isAvailable(): boolean
++ isReserved(): boolean
++ isInUse(): boolean
++ getEquipmentId(): UUID
++ getEquipmentType(): EquipmentType
++ getDescription(): String
++ getLabLocation(): LabLocation
++ getEquipmentStatus(): EquipmentStatus
++ getLastUsedTime(): LocalDateTime
++ getLastSensorTriggered(): SensorType</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>728</x><y>427</y><w>147</w><h>63</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+SensorType
+--
+    BEING_USED,
+    IDLE_DETECTED,
+    ERROR_DETECTED,</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>637</x><y>175</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>637</x><y>301</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>637</x><y>63</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>497</x><y>420</y><w>147</w><h>112</h></coordinates><panel_attributes>Sensor
+--
+- sensorID: UUID
+- type: SensorType
+- equipment: Equipment
+--
++ Sensor(type: SensorType, equipment: Equipment)
++ recordUsage(): void
++ getSensorID(): UUID
++ getType(): SensorType
++ getEquipment(): Equipment</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>637</x><y>462</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>350</y><w>21</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element></diagram>
