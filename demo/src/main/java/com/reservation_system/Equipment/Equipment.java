@@ -99,5 +99,10 @@ public class Equipment {
     public LocalDateTime getLastUsedTime() {return lastUsedTime;}
 
     public SensorType getLastSensorTriggered() {return lastSensorTriggered;}
+
+    @Override
+    public String toString() {
+        return description + " | " + equipmentType + " | " + labLocation + " | " + equipmentStatus;
+    }
 }
 
