@@ -80,29 +80,52 @@ public class Equipment {
         this.lastSensorTriggered = sensorType;
     }
 
-    public boolean isAvailable() {return equipmentStatus == EquipmentStatus.AVAILABLE;}
+    public boolean isAvailable() {
+        return equipmentStatus == EquipmentStatus.AVAILABLE;
+    }
 
-    public boolean isReserved() {return equipmentStatus == EquipmentStatus.RESERVED;}
+    public boolean isReserved() {
+        return equipmentStatus == EquipmentStatus.RESERVED;
+    }
 
-    public boolean isInUse() {return equipmentStatus == EquipmentStatus.IN_USE;}
+    public boolean isInUse() {
+        return equipmentStatus == EquipmentStatus.IN_USE;
+    }
 
-    public UUID getEquipmentId() {return equipmentId;}
+    public UUID getEquipmentId() {
+        return equipmentId;
+    }
 
-    public EquipmentType getEquipmentType() {return equipmentType;}
+    public EquipmentType getEquipmentType() {
+        return equipmentType;
+    }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public LabLocation getLabLocation() {return labLocation;}
+    public LabLocation getLabLocation() {
+        return labLocation;
+    }
 
-    public EquipmentStatus getEquipmentStatus() {return equipmentStatus;}
+    public EquipmentStatus getEquipmentStatus() {
+        return equipmentStatus;
+    }
 
-    public LocalDateTime getLastUsedTime() {return lastUsedTime;}
+    public LocalDateTime getLastUsedTime() {
+        return lastUsedTime;
+    }
 
-    public SensorType getLastSensorTriggered() {return lastSensorTriggered;}
+    public SensorType getLastSensorTriggered() {
+        return lastSensorTriggered;
+    }
 
     @Override
     public String toString() {
-        return description + " | " + equipmentType + " | " + labLocation + " | " + equipmentStatus;
+        return "ID: " + equipmentId
+                + " | " + description
+                + " | " + equipmentType
+                + " | " + labLocation
+                + " | " + equipmentStatus;
     }
 }
-
