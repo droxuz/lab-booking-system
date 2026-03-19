@@ -13,22 +13,18 @@ public class LabManager {
         this.name = name;
     }
 
-    // Add new equipment
     public Equipment addEquipment(String description, EquipmentType equipment_t, LabLocation lablocation) {
         return new Equipment(UUID.randomUUID(), equipment_t, description, lablocation);
     }
 
-    // Enable equipment
     public void enableEquipment(Equipment equipment) {
         equipment.enable();
     }
 
-    // Disable equipment
     public void disableEquipment(Equipment equipment) {
         equipment.disable();
     }
 
-    // Mark maintenance
     public void markEquipmentMaintenance(Equipment equipment) {
         equipment.markUnavailable();
     }
