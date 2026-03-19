@@ -11,12 +11,19 @@ public class AuthService {
     }
 
     public User login(String email, String password) {
+
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email is required.");
+        }
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password is required.");
+        }
+
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("No user found with that email."));
 
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password.");
         }
-
         return user;
     }
 }

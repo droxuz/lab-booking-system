@@ -1,2 +1,4 @@
 name,id,email,password,type,approved
-Coordinator1,1,coord1@yorku.ca,Strong1!,headlabcoordinator,true
+t1,1,t1@yorku.ca,T1@test!,student,true
+t2,2,t2@yorku.ca,T2@test!,faculty,true
+t3,3,t3@yorku.ca,T3@test!,guest,true
