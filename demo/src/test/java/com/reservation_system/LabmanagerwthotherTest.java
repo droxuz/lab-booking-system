@@ -68,11 +68,11 @@ public class LabmanagerwthotherTest {
         manager.enableEquipment(equipment);
         assertEquals(EquipmentStatus.AVAILABLE, equipment.getEquipmentStatus());
 
-        Sensor sensor = new Sensor(UUID.randomUUID(), SensorType.USAGE_DETECTED, equipment);
+        Sensor sensor = new Sensor(SensorType.BEING_USED, equipment);
         sensor.recordUsage();
 
         assertEquals(EquipmentStatus.IN_USE, equipment.getEquipmentStatus());
-        assertEquals(SensorType.USAGE_DETECTED, equipment.getLastSensorTriggered());
+        assertEquals(SensorType.BEING_USED, equipment.getLastSensorTriggered());
         assertNotNull(equipment.getLastUsedTime());
     }
 }

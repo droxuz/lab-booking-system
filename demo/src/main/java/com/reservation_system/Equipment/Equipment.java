@@ -26,6 +26,7 @@ public class Equipment {
         this.lastSensorTriggered = null;
     }
 
+
     public void enable() {
         this.equipmentStatus = EquipmentStatus.AVAILABLE;
     }
@@ -43,6 +44,7 @@ public class Equipment {
         this.description = description;
         this.labLocation = labLocation;
     }
+
 
     public void reserve() {
         if (equipmentStatus != EquipmentStatus.AVAILABLE) {
@@ -73,31 +75,45 @@ public class Equipment {
         }
         this.equipmentStatus = EquipmentStatus.AVAILABLE;
     }
-
     public void setInUse(SensorType sensorType) {
+        if (this.equipmentStatus == EquipmentStatus.DISABLED ||
+                this.equipmentStatus == EquipmentStatus.MAINTENANCE) {
+            System.out.println("LOG: Blocked 'IN_USE' sensor event. Equipment is currently: " + this.equipmentStatus);
+            return;
+        }
+
         this.equipmentStatus = EquipmentStatus.IN_USE;
         this.lastUsedTime = LocalDateTime.now();
         this.lastSensorTriggered = sensorType;
     }
 
-    public boolean isAvailable() {return equipmentStatus == EquipmentStatus.AVAILABLE;}
+    public void autoSetAvailable() {
+        if (this.equipmentStatus == EquipmentStatus.DISABLED ||
+                this.equipmentStatus == EquipmentStatus.MAINTENANCE) {
+            System.out.println("LOG: Blocked automated 'AVAILABLE' transition. Manual override required.");
+            return;
+        }
 
-    public boolean isReserved() {return equipmentStatus == EquipmentStatus.RESERVED;}
+        this.equipmentStatus = EquipmentStatus.AVAILABLE;
+    }
 
-    public boolean isInUse() {return equipmentStatus == EquipmentStatus.IN_USE;}
+    public boolean isAvailable() { return equipmentStatus == EquipmentStatus.AVAILABLE; }
 
-    public UUID getEquipmentId() {return equipmentId;}
+    public boolean isReserved() { return equipmentStatus == EquipmentStatus.RESERVED; }
 
-    public EquipmentType getEquipmentType() {return equipmentType;}
+    public boolean isInUse() { return equipmentStatus == EquipmentStatus.IN_USE; }
 
-    public String getDescription() {return description;}
+    public UUID getEquipmentId() { return equipmentId; }
 
-    public LabLocation getLabLocation() {return labLocation;}
+    public EquipmentType getEquipmentType() { return equipmentType; }
 
-    public EquipmentStatus getEquipmentStatus() {return equipmentStatus;}
+    public String getDescription() { return description; }
 
-    public LocalDateTime getLastUsedTime() {return lastUsedTime;}
+    public LabLocation getLabLocation() { return labLocation; }
 
-    public SensorType getLastSensorTriggered() {return lastSensorTriggered;}
+    public EquipmentStatus getEquipmentStatus() { return equipmentStatus; }
+
+    public LocalDateTime getLastUsedTime() { return lastUsedTime; }
+
+    public SensorType getLastSensorTriggered() { return lastSensorTriggered; }
 }
-

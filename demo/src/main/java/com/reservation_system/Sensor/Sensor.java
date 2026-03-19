@@ -9,19 +9,20 @@ public class Sensor {
      private SensorType type;
      private Equipment equipment;
 
-     public Sensor(UUID sensorID, SensorType type, Equipment equipment) {
+     public Sensor(SensorType type, Equipment equipment) {
             this.sensorID = UUID.randomUUID();
             this.type = type;
             this.equipment = equipment;
         }
 
-     public void recordUsage() {
-            switch (type) {
-                case USAGE_DETECTED -> equipment.setInUse(type);
-                case IDLE_DETECTED -> equipment.enable();
-                case ERROR_DETECTED -> equipment.markUnavailable();
-            }
+    // Sensor.java
+    public void recordUsage() {
+        switch (type) {
+            case BEING_USED -> equipment.setInUse(type);
+            case IDLE_DETECTED -> equipment.enable();
+            case ERROR_DETECTED -> equipment.markUnavailable();
         }
+    }
 
      public UUID getSensorID() {
             return sensorID;
