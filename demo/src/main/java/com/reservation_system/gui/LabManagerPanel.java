@@ -5,6 +5,7 @@ import com.reservation_system.Equipment.EquipmentType;
 import com.reservation_system.Equipment.LabLocation;
 import com.reservation_system.model.LabManager;
 import com.reservation_system.model.User;
+import com.reservation_system.patterns.observer.EquipmentRegistry;
 import com.reservation_system.services.EquipmentManagementService;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class LabManagerPanel extends JPanel {
 
     private final MainUI mainUI;
     private final EquipmentManagementService equipmentManagementService;
+    private final EquipmentRegistry equipmentRegistry;
 
     private User currentUser;
 
@@ -30,10 +32,13 @@ public class LabManagerPanel extends JPanel {
 
     private final List<Equipment> equipmentList;
 
-    public LabManagerPanel(MainUI mainUI, EquipmentManagementService equipmentManagementService) {
-        this.mainUI = mainUI;
+    public LabManagerPanel(MainUI mainUI,
+                           EquipmentManagementService equipmentManagementService,
+                           EquipmentRegistry equipmentRegistry) {
+        this.mainUI                     = mainUI;
         this.equipmentManagementService = equipmentManagementService;
-        this.equipmentList = new ArrayList<>();
+        this.equipmentRegistry          = equipmentRegistry;
+        this.equipmentList              = new ArrayList<>();
 
         setLayout(new BorderLayout());
 
@@ -46,41 +51,29 @@ public class LabManagerPanel extends JPanel {
         JPanel formPanel = new JPanel(new GridLayout(6, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        descriptionField = new JTextField();
+        descriptionField      = new JTextField();
         equipmentTypeComboBox = new JComboBox<>(EquipmentType.values());
-        labLocationComboBox = new JComboBox<>(LabLocation.values());
+        labLocationComboBox   = new JComboBox<>(LabLocation.values());
 
-        JButton addButton = new JButton("Add Equipment");
-        JButton enableButton = new JButton("Enable");
-        JButton disableButton = new JButton("Disable");
+        JButton addButton         = new JButton("Add Equipment");
+        JButton enableButton      = new JButton("Enable");
+        JButton disableButton     = new JButton("Disable");
         JButton maintenanceButton = new JButton("Mark Maintenance");
-        JButton backButton = new JButton("Back");
+        JButton backButton        = new JButton("Back");
 
-        formPanel.add(new JLabel("Description:"));
-        formPanel.add(descriptionField);
-
-        formPanel.add(new JLabel("Equipment Type:"));
-        formPanel.add(equipmentTypeComboBox);
-
-        formPanel.add(new JLabel("Lab Location:"));
-        formPanel.add(labLocationComboBox);
-
-        formPanel.add(addButton);
-        formPanel.add(enableButton);
-
-        formPanel.add(disableButton);
-        formPanel.add(maintenanceButton);
-
-        formPanel.add(new JLabel());
-        formPanel.add(backButton);
+        formPanel.add(new JLabel("Description:"));    formPanel.add(descriptionField);
+        formPanel.add(new JLabel("Equipment Type:")); formPanel.add(equipmentTypeComboBox);
+        formPanel.add(new JLabel("Lab Location:"));   formPanel.add(labLocationComboBox);
+        formPanel.add(addButton);                     formPanel.add(enableButton);
+        formPanel.add(disableButton);                 formPanel.add(maintenanceButton);
+        formPanel.add(new JLabel());                  formPanel.add(backButton);
 
         equipmentListModel = new DefaultListModel<>();
-        equipmentJList = new JList<>(equipmentListModel);
+        equipmentJList     = new JList<>(equipmentListModel);
         JScrollPane listScrollPane = new JScrollPane(equipmentJList);
 
         centerPanel.add(formPanel);
         centerPanel.add(listScrollPane);
-
         add(centerPanel, BorderLayout.CENTER);
 
         statusArea = new JTextArea(6, 20);
@@ -89,104 +82,77 @@ public class LabManagerPanel extends JPanel {
         statusArea.setWrapStyleWord(true);
         add(new JScrollPane(statusArea), BorderLayout.SOUTH);
 
-        addButton.addActionListener(e -> handleAddEquipment());
-        enableButton.addActionListener(e -> handleEnableEquipment());
-        disableButton.addActionListener(e -> handleDisableEquipment());
+        addButton        .addActionListener(e -> handleAddEquipment());
+        enableButton     .addActionListener(e -> handleEnableEquipment());
+        disableButton    .addActionListener(e -> handleDisableEquipment());
         maintenanceButton.addActionListener(e -> handleMarkMaintenance());
-        backButton.addActionListener(e -> {
-            if (currentUser != null) {
-                mainUI.showDashboard(currentUser);
-            }
+        backButton       .addActionListener(e -> {
+            if (currentUser != null) mainUI.showDashboard(currentUser);
         });
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-        refreshStatus("Logged in as: " + currentUser.getName() + " (" + currentUser.getUserType() + ")");
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        refreshStatus("Logged in as: " + user.getName() + " (" + user.getUserType() + ")");
     }
 
     private LabManager getManager() {
-        if (!(currentUser instanceof LabManager)) {
+        if (!(currentUser instanceof LabManager))
             throw new IllegalStateException("Current user is not a lab manager.");
-        }
         return (LabManager) currentUser;
     }
 
     private void handleAddEquipment() {
         try {
-            String description = descriptionField.getText().trim();
-            EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
-            LabLocation labLocation = (LabLocation) labLocationComboBox.getSelectedItem();
+            String description      = descriptionField.getText().trim();
+            EquipmentType eqType    = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
+            LabLocation labLocation = (LabLocation)   labLocationComboBox.getSelectedItem();
 
-            if (description.isBlank()) {
-                throw new IllegalArgumentException("Description is required.");
-            }
+            if (description.isBlank()) throw new IllegalArgumentException("Description is required.");
 
             Equipment equipment = equipmentManagementService.addEquipment(
-                    getManager(),
-                    description,
-                    equipmentType,
-                    labLocation
-            );
+                    getManager(), description, eqType, labLocation);
 
             equipmentList.add(equipment);
             equipmentListModel.addElement(equipment);
-            refreshStatus("Added equipment: " + equipment.getDescription());
+            equipmentRegistry.addEquipment(equipment);
 
+            refreshStatus("Added equipment: " + equipment.getDescription());
             descriptionField.setText("");
-        } catch (Exception ex) {
-            showError(ex.getMessage());
-        }
+        } catch (Exception ex) { showError(ex.getMessage()); }
     }
 
     private void handleEnableEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) {
-                throw new IllegalArgumentException("Select an equipment item first.");
-            }
-
+            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.enableEquipment(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Enabled equipment: " + equipment.getDescription());
-        } catch (Exception ex) {
-            showError(ex.getMessage());
-        }
+        } catch (Exception ex) { showError(ex.getMessage()); }
     }
 
     private void handleDisableEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) {
-                throw new IllegalArgumentException("Select an equipment item first.");
-            }
-
+            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.disableEquipment(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Disabled equipment: " + equipment.getDescription());
-        } catch (Exception ex) {
-            showError(ex.getMessage());
-        }
+        } catch (Exception ex) { showError(ex.getMessage()); }
     }
 
     private void handleMarkMaintenance() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) {
-                throw new IllegalArgumentException("Select an equipment item first.");
-            }
-
+            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.markEquipmentMaintenance(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Marked maintenance: " + equipment.getDescription());
-        } catch (Exception ex) {
-            showError(ex.getMessage());
-        }
+        } catch (Exception ex) { showError(ex.getMessage()); }
     }
 
-    private void refreshStatus(String message) {
-        statusArea.setText(message);
-    }
+    private void refreshStatus(String message) { statusArea.setText(message); }
 
     private void showError(String message) {
         JOptionPane.showMessageDialog(this, message, "Lab Manager Error", JOptionPane.ERROR_MESSAGE);
