@@ -1,9 +1,14 @@
 package com.reservation_system.app;
 
-import com.reservation_system.patterns.factory.UserFactory;
+import com.reservation_system.gui.MainUI;
+
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Print this");
+        SwingUtilities.invokeLater(() -> {
+            MainUI ui = new MainUI();
+            ui.setVisible(true);
+        });
     }
 }

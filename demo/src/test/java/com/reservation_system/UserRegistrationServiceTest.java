@@ -17,7 +17,7 @@ public class UserRegistrationServiceTest {
     private Path testFile = Path.of("data/test-users.csv");
 
     @BeforeEach
-    void setUp() throws Exception {
+        void setUp() throws Exception {
         Files.createDirectories(testFile.getParent());
 
         Files.writeString(testFile,
@@ -32,7 +32,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRegisterValidGuest() {
+        void shouldRegisterValidGuest() {
         User newUser = registrationService.registerUser(
                 "guest", "guest1", "guest1@gmail.com", "Strong1!"
         );
@@ -43,7 +43,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRegisterValidStudent() {
+        void shouldRegisterValidStudent() {
         User newUser = registrationService.registerUser(
                 "student", "student1", "student1@yorku.ca", "Strong1!"
         );
@@ -54,7 +54,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRegisterValidFaculty() {
+        void shouldRegisterValidFaculty() {
         User newUser = registrationService.registerUser(
                 "faculty", "faculty1", "faculty1@yorku.ca", "Strong1!"
         );
@@ -65,7 +65,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRegisterValidResearcher() {
+        void shouldRegisterValidResearcher() {
         User newUser = registrationService.registerUser(
                 "researcher", "researcher1", "researcher1@yorku.ca", "Strong1!"
         );
@@ -76,7 +76,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectDuplicateEmail() {
+        void shouldRejectDuplicateEmail() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "t1@yorku.ca", "Strong1!"
@@ -85,7 +85,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectInvalidEmail() {
+        void shouldRejectInvalidEmail() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "invalid-email", "Strong1!"
@@ -94,7 +94,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectBlankEmail() {
+        void shouldRejectBlankEmail() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "", "Strong1!"
@@ -103,7 +103,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectBlankName() {
+        void shouldRejectBlankName() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "", "new@yorku.ca", "Strong1!"
@@ -112,7 +112,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectBlankType() {
+        void shouldRejectBlankType() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "", "test", "new@yorku.ca", "Strong1!"
@@ -121,7 +121,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectInvalidType() {
+        void shouldRejectInvalidType() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "admin", "test", "new@yorku.ca", "Strong1!"
@@ -130,7 +130,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectBlankPassword() {
+        void shouldRejectBlankPassword() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new@yorku.ca", ""
@@ -139,7 +139,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectPasswordWithoutUppercase() {
+        void shouldRejectPasswordWithoutUppercase() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new1@yorku.ca", "weak1!"
@@ -148,7 +148,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectPasswordWithoutLowercase() {
+        void shouldRejectPasswordWithoutLowercase() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new2@yorku.ca", "WEAK1!"
@@ -157,7 +157,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectPasswordWithoutNumber() {
+        void shouldRejectPasswordWithoutNumber() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new3@yorku.ca", "Weak!!"
@@ -166,7 +166,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectPasswordWithoutSymbol() {
+        void shouldRejectPasswordWithoutSymbol() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new4@yorku.ca", "Weak1234"
@@ -175,7 +175,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldRejectShortPassword() {
+        void shouldRejectShortPassword() {
         assertThrows(IllegalArgumentException.class, () ->
                 registrationService.registerUser(
                         "student", "test", "new5@yorku.ca", "S1!a"
@@ -184,7 +184,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldPersistRegisteredUserToCsv() {
+        void shouldPersistRegisteredUserToCsv() {
         registrationService.registerUser(
                 "guest", "persist", "persist@gmail.com", "Strong1!"
         );
@@ -194,7 +194,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldAssignNextAvailableIdToRegisteredUser() {
+        void shouldAssignNextAvailableIdToRegisteredUser() {
         User newUser = registrationService.registerUser(
                 "guest", "nextid", "nextid@gmail.com", "Strong1!"
         );
@@ -203,7 +203,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldCreateCorrectSubtypeForStudent() {
+        void shouldCreateCorrectSubtypeForStudent() {
         User newUser = registrationService.registerUser(
                 "student", "student2", "student2@yorku.ca", "Strong1!"
         );
@@ -212,7 +212,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldCreateCorrectSubtypeForGuest() {
+        void shouldCreateCorrectSubtypeForGuest() {
         User newUser = registrationService.registerUser(
                 "guest", "guest2", "guest2@gmail.com", "Strong1!"
         );
@@ -221,7 +221,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldSetGuestAsApproved() {
+        void shouldSetGuestAsApproved() {
         User newUser = registrationService.registerUser(
                 "guest", "guest3", "guest3@gmail.com", "Strong1!"
         );
@@ -230,7 +230,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldSetStudentAsApproved() {
+        void shouldSetStudentAsApproved() {
         User newUser = registrationService.registerUser(
                 "student", "student3", "student3@yorku.ca", "Strong1!"
         );
@@ -239,7 +239,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldSetFacultyAsApproved() {
+        void shouldSetFacultyAsApproved() {
         User newUser = registrationService.registerUser(
                 "faculty", "faculty2", "faculty2@yorku.ca", "Strong1!"
         );
@@ -248,11 +248,50 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    void shouldSetResearcherAsApproved() {
+        void shouldSetResearcherAsApproved() {
         User newUser = registrationService.registerUser(
                 "researcher", "researcher2", "researcher2@yorku.ca", "Strong1!"
         );
 
         assertTrue(newUser.isApproved());
-    }
+        }
+
+        @Test
+        void shouldAllowFirstHeadLabCoordinatorRegistration() {
+        User user = registrationService.registerUser(
+            "headlabcoordinator",
+            "Coordinator",
+            "coord@yorku.ca",
+            "Strong1!"
+        );
+
+        assertEquals("headlabcoordinator", user.getUserType());
+        }       
+        @Test
+        void shouldRejectSecondHeadLabCoordinatorRegistration() {
+        registrationService.registerUser(
+            "headlabcoordinator",
+            "Coordinator1",
+            "coord1@yorku.ca",
+            "Strong1!"
+        );
+
+        assertThrows(IllegalArgumentException.class, () ->
+            registrationService.registerUser(
+                    "headlabcoordinator",
+                    "Coordinator2",
+                    "coord2@yorku.ca",
+                    "Strong1!"
+            )); 
+        }
+        @Test
+        void shouldRejectLabManagerSelfRegistration() {
+        assertThrows(IllegalArgumentException.class, () ->
+            registrationService.registerUser(
+                    "labmanager",
+                    "Manager1",
+                    "manager1@yorku.ca",
+                    "Strong1!"
+                ));
+        }
 }
