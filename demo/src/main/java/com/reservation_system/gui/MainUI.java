@@ -50,7 +50,7 @@ public class MainUI extends JFrame {
         registerPanel           = new RegisterPanel(this, registrationService);
         dashboardPanel          = new DashboardPanel(this);
         generateLabManagerPanel = new GenerateLabManagerPanel(this, coordinatorAccountService);
-        labManagerPanel         = new LabManagerPanel(this, equipmentManagementService, equipmentRegistry);
+        labManagerPanel = new LabManagerPanel(this, equipmentManagementService);
         reservationPanel        = new ReservationPanel(this, reservationService);
 
         equipmentRegistry.addObserver(reservationPanel);

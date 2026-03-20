@@ -2,7 +2,6 @@ package com.reservation_system.services;
 
 import com.reservation_system.Equipment.*;
 import com.reservation_system.model.LabManager;
-
 import java.util.UUID;
 
 public class EquipmentManagementService {

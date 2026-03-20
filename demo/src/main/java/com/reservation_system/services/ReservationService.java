@@ -61,7 +61,7 @@ public class ReservationService {
         if (balance > 0) {
             r.getPaymentStrategy().pay(balance);
         }
-        r.getEquipment().checkIn(SensorType.USAGE_DETECTED);
+        r.getEquipment().checkIn(SensorType.BEING_USED);
         r.setStatus(Reservation.Status.ACTIVE);
     }
 
