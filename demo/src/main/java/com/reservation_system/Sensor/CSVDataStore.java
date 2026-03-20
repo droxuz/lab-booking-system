@@ -1,0 +1,268 @@
+package com.reservation_system.Sensor;
+
+import com.reservation_system.Equipment.Equipment;
+import com.reservation_system.Equipment.EquipmentStatus;
+import com.reservation_system.Equipment.EquipmentType;
+import com.reservation_system.Equipment.LabLocation;
+
+import java.io.*;
+import java.nio.file.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+/**
+ * CSV persistence layer for the Sensor subsystem.
+ * Simulates the database described in the sequence diagram.
+ *
+ * Files (pipe-delimited to avoid commas in descriptions):
+ *   data/sensors.csv      — sensorId | sensorType | linkedEquipmentId | state
+ *   data/equipment.csv    — equipmentId | equipmentType | description | labLocation | status
+ *   data/usage_logs.csv   — logId | sensorId | equipmentId | timestamp | usageStatus
+ */
+public class CSVDataStore {
+
+    private static final String DATA_DIR       = "data" + File.separator;
+    private static final String SENSORS_FILE   = DATA_DIR + "sensors.csv";
+    private static final String EQUIPMENT_FILE = DATA_DIR + "equipment.csv";
+    private static final String LOGS_FILE      = DATA_DIR + "usage_logs.csv";
+
+    private static final DateTimeFormatter FMT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public CSVDataStore() {
+        initFiles();
+    }
+
+    // ── Init ──────────────────────────────────────────────────
+
+    private void initFiles() {
+        try {
+            Files.createDirectories(Paths.get(DATA_DIR));
+            ensureFile(SENSORS_FILE,   "sensorId|sensorType|linkedEquipmentId|state");
+            ensureFile(EQUIPMENT_FILE, "equipmentId|equipmentType|description|labLocation|status");
+            ensureFile(LOGS_FILE,      "logId|sensorId|equipmentId|timestamp|usageStatus");
+        } catch (IOException e) {
+            System.err.println("[CSVDataStore] Init failed: " + e.getMessage());
+        }
+    }
+
+    private void ensureFile(String path, String header) throws IOException {
+        File f = new File(path);
+        if (!f.exists()) {
+            try (PrintWriter pw = new PrintWriter(f)) { pw.println(header); }
+        }
+    }
+
+    // ── Sensor CRUD ───────────────────────────────────────────
+
+    public List<Sensor> loadAllSensors() {
+        List<Sensor> list = new ArrayList<>();
+        for (String[] row : readRows(SENSORS_FILE)) {
+            if (row.length >= 4) {
+                try {
+                    UUID        id    = UUID.fromString(row[0]);
+                    SensorType  type  = SensorType.valueOf(row[1]);
+                    UUID        eqId  = UUID.fromString(row[2]);
+                    SensorState state = parseSensorState(row[3]);
+                    list.add(new Sensor(id, type, eqId, state));
+                } catch (Exception e) {
+                    System.err.println("[CSVDataStore] Skipping bad sensor row: " + e.getMessage());
+                }
+            }
+        }
+        return list;
+    }
+
+    public Sensor loadSensor(UUID sensorId) {
+        return loadAllSensors().stream()
+                .filter(s -> s.getSensorId().equals(sensorId))
+                .findFirst().orElse(null);
+    }
+
+    public void saveSensor(Sensor sensor) {
+        List<Sensor> all = loadAllSensors();
+        boolean found = false;
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getSensorId().equals(sensor.getSensorId())) {
+                all.set(i, sensor); found = true; break;
+            }
+        }
+        if (!found) all.add(sensor);
+        writeAllSensors(all);
+    }
+
+    public void deleteSensor(UUID sensorId) {
+        List<Sensor> all = loadAllSensors();
+        all.removeIf(s -> s.getSensorId().equals(sensorId));
+        writeAllSensors(all);
+    }
+
+    private void writeAllSensors(List<Sensor> list) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(SENSORS_FILE))) {
+            pw.println("sensorId|sensorType|linkedEquipmentId|state");
+            for (Sensor s : list) {
+                pw.println(s.getSensorId() + "|" + s.getSensorType()
+                        + "|" + s.getLinkedEquipmentId() + "|" + s.getStateName());
+            }
+        } catch (IOException e) {
+            System.err.println("[CSVDataStore] Error writing sensors: " + e.getMessage());
+        }
+    }
+
+    // ── Equipment CRUD ────────────────────────────────────────
+
+    public List<Equipment> loadAllEquipment() {
+        List<Equipment> list = new ArrayList<>();
+        for (String[] row : readRows(EQUIPMENT_FILE)) {
+            if (row.length >= 5) {
+                try {
+                    UUID          id     = UUID.fromString(row[0]);
+                    EquipmentType type   = EquipmentType.valueOf(row[1]);
+                    String        desc   = row[2];
+                    LabLocation   loc    = LabLocation.valueOf(row[3]);
+                    EquipmentStatus status = EquipmentStatus.valueOf(row[4]);
+
+                    Equipment eq = new Equipment(id, type, desc, loc);
+                    // Restore persisted status via their public API
+                    applyStatus(eq, status);
+                    list.add(eq);
+                } catch (Exception e) {
+                    System.err.println("[CSVDataStore] Skipping bad equipment row: " + e.getMessage());
+                }
+            }
+        }
+        return list;
+    }
+
+    public Equipment loadEquipment(UUID equipmentId) {
+        return loadAllEquipment().stream()
+                .filter(e -> e.getEquipmentId().equals(equipmentId))
+                .findFirst().orElse(null);
+    }
+
+    public void saveEquipment(Equipment equipment) {
+        List<Equipment> all = loadAllEquipment();
+        boolean found = false;
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getEquipmentId().equals(equipment.getEquipmentId())) {
+                all.set(i, equipment); found = true; break;
+            }
+        }
+        if (!found) all.add(equipment);
+        writeAllEquipment(all);
+    }
+
+    public void updateEquipmentStatus(Equipment equipment) {
+        saveEquipment(equipment);
+    }
+
+    public void deleteEquipment(UUID equipmentId) {
+        List<Equipment> all = loadAllEquipment();
+        all.removeIf(e -> e.getEquipmentId().equals(equipmentId));
+        writeAllEquipment(all);
+    }
+
+    private void writeAllEquipment(List<Equipment> list) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(EQUIPMENT_FILE))) {
+            pw.println("equipmentId|equipmentType|description|labLocation|status");
+            for (Equipment e : list) {
+                pw.println(e.getEquipmentId() + "|"
+                        + e.getEquipmentType() + "|"
+                        + e.getDescription() + "|"
+                        + e.getLabLocation() + "|"
+                        + e.getEquipmentStatus());
+            }
+        } catch (IOException e) {
+            System.err.println("[CSVDataStore] Error writing equipment: " + e.getMessage());
+        }
+    }
+
+    // ── Usage Logs (append-only) ──────────────────────────────
+
+    public List<UsageLogEntry> loadAllUsageLogs() {
+        List<UsageLogEntry> list = new ArrayList<>();
+        for (String[] row : readRows(LOGS_FILE)) {
+            if (row.length >= 5) {
+                try {
+                    LocalDateTime ts = LocalDateTime.parse(row[3], FMT);
+                    list.add(new UsageLogEntry(
+                            row[0],
+                            UUID.fromString(row[1]),
+                            UUID.fromString(row[2]),
+                            ts, row[4]));
+                } catch (Exception e) {
+                    System.err.println("[CSVDataStore] Skipping bad log row.");
+                }
+            }
+        }
+        return list;
+    }
+
+    public void saveUsageLog(UsageLogEntry entry) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(LOGS_FILE, true))) {
+            pw.println(entry.getLogId() + "|"
+                    + entry.getSensorId() + "|"
+                    + entry.getEquipmentId() + "|"
+                    + entry.getTimestamp().format(FMT) + "|"
+                    + entry.getUsageStatus());
+        } catch (IOException e) {
+            System.err.println("[CSVDataStore] Error appending log: " + e.getMessage());
+        }
+    }
+
+    public int countLogs() {
+        return readRows(LOGS_FILE).size();
+    }
+
+    // ── Helpers ───────────────────────────────────────────────
+
+    private List<String[]> readRows(String filePath) {
+        List<String[]> rows = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line; boolean first = true;
+            while ((line = br.readLine()) != null) {
+                if (first) { first = false; continue; }
+                if (!line.isBlank()) rows.add(line.split("\\|", -1));
+            }
+        } catch (IOException e) {
+            System.err.println("[CSVDataStore] Error reading " + filePath + ": " + e.getMessage());
+        }
+        return rows;
+    }
+
+    private SensorState parseSensorState(String s) {
+        switch (s.trim()) {
+            case "INACTIVE": return new InactiveSensorState();
+            case "ERROR":    return new ErrorSensorState();
+            default:         return new ActiveSensorState();
+        }
+    }
+
+    /**
+     * Restores a persisted EquipmentStatus by calling Equipment's public API.
+     * Equipment starts as AVAILABLE by default; adjust from there.
+     */
+    private void applyStatus(Equipment eq, EquipmentStatus target) {
+        switch (target) {
+            case DISABLED:
+                eq.disable();
+                break;
+            case MAINTENANCE:
+                eq.markUnavailable();
+                break;
+            case RESERVED:
+                try { eq.reserve(); } catch (IllegalStateException ignored) {}
+                break;
+            case IN_USE:
+                try { eq.reserve(); eq.setInUse(null); } catch (IllegalStateException ignored) {}
+                break;
+            case AVAILABLE:
+            default:
+                // default state on construction
+                break;
+        }
+    }
+}
