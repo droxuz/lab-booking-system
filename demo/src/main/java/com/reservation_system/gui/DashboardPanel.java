@@ -8,7 +8,6 @@ import java.awt.*;
 public class DashboardPanel extends JPanel {
 
     private final MainUI mainUI;
-
     private User currentUser;
 
     private final JLabel welcomeLabel;
@@ -17,6 +16,7 @@ public class DashboardPanel extends JPanel {
     private final JButton logoutButton;
     private final JButton generateLabManagerButton;
     private final JButton manageEquipmentButton;
+    private final JButton makeReservationButton;
 
     public DashboardPanel(MainUI mainUI) {
         this.mainUI = mainUI;
@@ -26,10 +26,8 @@ public class DashboardPanel extends JPanel {
         JPanel topPanel = new JPanel(new GridLayout(2, 1));
         welcomeLabel = new JLabel("Welcome", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 22));
-
         roleLabel = new JLabel("Role", SwingConstants.CENTER);
         roleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-
         topPanel.add(welcomeLabel);
         topPanel.add(roleLabel);
 
@@ -45,17 +43,19 @@ public class DashboardPanel extends JPanel {
         generateLabManagerButton = new JButton("Generate Lab Manager Account");
         generateLabManagerButton.setVisible(false);
         generateLabManagerButton.addActionListener(e -> {
-            if (currentUser != null) {
-                mainUI.showGenerateLabManagerPanel(currentUser);
-            }
+            if (currentUser != null) mainUI.showGenerateLabManagerPanel(currentUser);
         });
 
         manageEquipmentButton = new JButton("Manage Equipment");
         manageEquipmentButton.setVisible(false);
         manageEquipmentButton.addActionListener(e -> {
-            if (currentUser != null) {
-                mainUI.showLabManagerPanel(currentUser);
-            }
+            if (currentUser != null) mainUI.showLabManagerPanel(currentUser);
+        });
+
+        makeReservationButton = new JButton("Make Reservation");
+        makeReservationButton.setVisible(false);
+        makeReservationButton.addActionListener(e -> {
+            if (currentUser != null) mainUI.showReservationPanel(currentUser);
         });
 
         logoutButton = new JButton("Logout");
@@ -63,6 +63,7 @@ public class DashboardPanel extends JPanel {
 
         bottomPanel.add(generateLabManagerButton);
         bottomPanel.add(manageEquipmentButton);
+        bottomPanel.add(makeReservationButton);
         bottomPanel.add(logoutButton);
 
         add(topPanel, BorderLayout.NORTH);
@@ -87,6 +88,7 @@ public class DashboardPanel extends JPanel {
 
         generateLabManagerButton.setVisible(false);
         manageEquipmentButton.setVisible(false);
+        makeReservationButton.setVisible(false);
 
         switch (type) {
             case "student":
@@ -97,6 +99,7 @@ public class DashboardPanel extends JPanel {
                 message.append("- Reserve available equipment\n");
                 message.append("- Modify or cancel bookings before start\n");
                 message.append("- Extend reservation if equipment remains free\n");
+                makeReservationButton.setVisible(true);
                 break;
 
             case "labmanager":
