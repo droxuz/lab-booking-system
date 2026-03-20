@@ -2,3 +2,5 @@ name,id,email,password,type,approved
 Andrew,1,an54@my.yorku.ca,LoginSystem1@,headlabcoordinator,true
 Bobby,2,bobbylee@gmail.com,BobbyLee1@,Student,true
 Bob,3,labManager@gmail.com,LabManager1@,labmanager,true
+t2,4,m@email.com,Password123!,Researcher,true
+Tim,5,LM@email.com,LM12345678!,labmanager,true
