@@ -1,0 +1,1410 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <help_text>lt=&lt;-</help_text>
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1360</x>
+      <y>775</y>
+      <w>105</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+EquipmentStatus
+--
+    AVAILABLE,
+    IN_USE,
+    RESERVED,
+    MAINTENANCE,
+    DISABLED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1450</x>
+      <y>675</y>
+      <w>105</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+EquipmentType
+--
+OSCILLOSCOPE,
+FPGA_BOARD,
+MULTIMETER,
+POWER_SUPPLY,
+SIGNAL_GENERATOR,
+MICROCONTROLLER,
+SOLDERING_STATION,
+PRINTER_3D</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1250</x>
+      <y>775</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+LabLocation
+--
+    LAS1001,
+    LAS1002,
+    BERGERON200,
+    BERGERON300</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1165</x>
+      <y>510</y>
+      <w>255</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Equipment
+--
+equipmentId: UUID
+- equipmentType: EquipmentType
+- description: String
+- labLocation: LabLocation
+- equipmentStatus: EquipmentStatus
+- lastUsedTime: LocalDateTime
+- lastSensorTriggered: SensorType
+--
++ Equipment(id: UUID, Etype: EquipmentType, description: String, location: LabLocation)
++ enable(): void
++ disable(): void
++ markUnavailable(): void
++ updateDetail(Etype: EquipmentType, description: String, location: LabLocation): void
++ reserve(): void
++ cancelReservation(): void
++ checkIn(sensorType: SensorType): void
++ finishUse(): void
++ setInUse(sensorType: SensorType): void
++ autoSetAvailable(): void
++ isAvailable(): boolean
++ isReserved(): boolean
++ isInUse(): boolean
++ getEquipmentId(): UUID
++ getEquipmentType(): EquipmentType
++ getDescription(): String
++ getLabLocation(): LabLocation
++ getEquipmentStatus(): EquipmentStatus
++ getLastUsedTime(): LocalDateTime
++ getLastSensorTriggered(): SensorType</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1445</x>
+      <y>690</y>
+      <w>15</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1300</x>
+      <y>735</y>
+      <w>15</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1375</x>
+      <y>735</y>
+      <w>15</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>500</y>
+      <w>240</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+User
+--
+- id: int
+- name: String
+- email: String
+- password: String
+- approved: boolean
+--
++ User(id: int, name: String, email: String, password: String, approved: boolean)
++ getID(): int
++ getName(): String
++ getEmail(): String
++ getPassword(): String
++ isApproved(): boolean
++ setApproved(approved: boolean): void
++ getUserType(): String {abstract}
++ requiresDepartmentApproval(): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>745</y>
+      <w>290</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Student
+--
++ Student(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>545</x>
+      <y>785</y>
+      <w>285</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Faculty
+--
++ Faculty(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>825</y>
+      <w>280</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Guest
+--
++ Guest(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>865</y>
+      <w>330</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>HeadLabCoordinator
+--
++ HeadLabCoordinator(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>910</y>
+      <w>300</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Researcher
+--
++ Researcher(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>780</y>
+      <w>380</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>UserFactory
+--
++ createUser(type: String, id: int, name: String, email: String, password: String, approved: boolean): User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>555</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>UserRepository
+--
+- filePath: Path
+--
++ UserRepository(filePath: String)
+- ensureFileExists(): void
++ getAllUsers(): List&lt;User&gt;
++ saveAllUsers(users: List&lt;User&gt;): void
++ addUser(user: User): void
++ findByEmail(email: String): Optional&lt;User&gt;
++ emailExists(email: String): boolean
++ getNextID(): int
++ headLabCoordinatorExists(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>630</y>
+      <w>15</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>630</y>
+      <w>15</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>630</y>
+      <w>15</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>630</y>
+      <w>15</w>
+      <h>245</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;470.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>850</x>
+      <y>630</y>
+      <w>15</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>630</y>
+      <w>15</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>755</y>
+      <w>165</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>785</y>
+      <w>180</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>340.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>785</y>
+      <w>195</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>370.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>785</y>
+      <w>155</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>290.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>785</y>
+      <w>195</w>
+      <h>155</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>370.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>785</y>
+      <w>205</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>390.0;390.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>675</x>
+      <y>615</y>
+      <w>85</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=*</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>375</x>
+      <y>630</y>
+      <w>385</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=..&gt;
+</panel_attributes>
+    <additional_attributes>10.0;310.0;750.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>875</x>
+      <y>800</y>
+      <w>235</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+EquipmentObserver
+--
++ onEquipmentListChanged(allEquipment: List&lt;Equipment&gt;): void
+
+group=group-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>715</y>
+      <w>185</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EquipmentRegistry
+--
+- equipment: List&lt;Equipment&gt;
+- observers: List&lt;EquipmentObserver&gt;
+--
++ addObserver(observer: EquipmentObserver): void
++ addEquipment(e: Equipment): void
++ getAll(): List&lt;Equipment&gt;
+group=group-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>770</y>
+      <w>25</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=0..*
+group=group-1</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1060</x>
+      <y>710</y>
+      <w>115</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=0..*</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>445</y>
+      <w>550</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>CoordinatorAccountService
+--
+- userRepository: UserRepository
+--
++ createHeadLabCoordinator(name: String, email: String, password: String): User
++ autoGenerateLabManagerAccount(currentUser: User, name: String, email: String, password: String): User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>395</y>
+      <w>435</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ReservationService
+--
+- reservations: List&lt;Reservation&gt;
+--
++ getHourlyRate(user: User): double
++ book(user: User, equipment: Equipment, hours: int, certificationId: String, paymentStrategy: PaymentStrategy): Reservation
++ cancel(r: Reservation): void
++ payBalance(r: Reservation): void
++ getForUser(user: User): List&lt;Reservation&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>495</y>
+      <w>435</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>RegistrationService
+--
+- userRepository: UserRepository
+--
++ registerUser(type: String, name: String, email: String, password: String): User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>840</y>
+      <w>550</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>EquipmentManagementService
+--
++ addEquipment(manager: LabManager, description: String, equipmentType: EquipmentType, labLocation: LabLocation): Equipment
++ updateEquipmentDetails(manager: LabManager, equipment: Equipment, description: String,  equipmentType: EquipmentType, labLocation: LabLocation): void
++ removeEquipment(manager: LabManager, equipment: Equipment): void
++ enableEquipment(manager: LabManager, equipment: Equipment): void
++ disableEquipment(manager: LabManager, equipment: Equipment): void
++ markEquipmentMaintenance(manager: LabManager, equipment: Equipment): void
++ loadAllEquipment(): List&lt;Equipment&gt;
+                        </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>245</x>
+      <y>555</y>
+      <w>165</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>AuthService
+--
+- userRepository: UserRepository
+--
++ login(email: String, password: String): User
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>950</y>
+      <w>305</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>LabManager
+--
++ LabManager(id: int, name: String, email: String, password: String, approved: boolean)
++ getUserType(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>530</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>675</x>
+      <y>485</y>
+      <w>15</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>405</x>
+      <y>570</y>
+      <w>45</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>485</y>
+      <w>25</w>
+      <h>305</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;590.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>530</y>
+      <w>20</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;500.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>970</x>
+      <y>460</y>
+      <w>15</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1180</x>
+      <y>460</y>
+      <w>15</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1230</x>
+      <y>735</y>
+      <w>15</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>910</y>
+      <w>55</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1335</x>
+      <y>430</y>
+      <w>190</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>EquipmentStatusObserver
+--
+- dataStore: CSVDataStore
+--
++ onUsageDataReceived(entry: UsageLogEntry): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1355</x>
+      <y>365</y>
+      <w>190</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+SensorObserver
+--
++ onUsageDataReceived(entry: UsageLogEntry): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1420</x>
+      <y>395</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>220</y>
+      <w>180</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+SensorManager
+--
+- instance: SensorManager
+- observers: List&lt;SensorObserver&gt;
+- dataStore: CSVDataStore
+- logCounter: int
+--
++ getInstance(): SensorManager
++ addObserver(observer: SensorObserver): void
++ removeObserver(observer: SensorObserver): void
++ processUsageData(...): String
++ getAllSensors(): List&lt;Sensor&gt;
++ getAllEquipment(): List&lt;Equipment&gt;
++ getAllLogs(): List&lt;UsageLogEntry&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1400</x>
+      <y>330</y>
+      <w>25</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>970</x>
+      <y>205</y>
+      <w>300</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>CSVDataStore
+--
++ loadSensor(id): Sensor
++ loadEquipment(id): Equipment
++ loadAllSensors(): List&lt;Sensor&gt;
++ loadAllEquipment(): List&lt;Equipment&gt;
++ loadAllUsageLogs(): List&lt;UsageLogEntry&gt;
++ saveSensor(sensor): void
++ saveEquipment(eq): void
++ saveUsageLog(entry): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1245</x>
+      <y>285</y>
+      <w>15</w>
+      <h>235</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;450.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>935</x>
+      <y>65</y>
+      <w>400</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>UsageLogEntry
+--
+- logId: String
+- sensorId: UUID
+- equipmentId: UUID
+- timestamp: LocalDateTime
+- usageStatus: String
+--
++ UsageLogEntry(logId: String, sensorId: UUID, equipmentId: UUID, timestamp: LocalDateTime, usageStatus: String)
++ getLogId(): String
++ getSensorId(): UUID
++ getEquipmentId(): UUID
++ getTimestamp(): LocalDateTime
++ getUsageStatus(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1245</x>
+      <y>170</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1355</x>
+      <y>460</y>
+      <w>15</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1325</x>
+      <y>330</y>
+      <w>15</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1310</x>
+      <y>170</y>
+      <w>15</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>330</y>
+      <w>190</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>UsageLogObserver
+--
+- dataStore: CSVDataStore
+--
++ UsageLogObserver(dataStore: CSVDataStore)
++ onUsageDataReceived(entry: UsageLogEntry): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1395</x>
+      <y>35</y>
+      <w>390</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Facade&gt;&gt;
+SensorSubsystemFacade
+--
+- manager: SensorManager
+--
++ SensorSubsystemFacade()
++ sendUsageData(sensorId: UUID, equipmentId: UUID, usageStatus: String, timestamp: LocalDateTime): String
++ getAllSensors(): List&lt;Sensor&gt;
++ addSensor(sensorId: UUID, type: SensorType, linkedEquipmentId: UUID): void
++ removeSensor(sensorId: UUID): void
++ activateSensor(sensorId: UUID): void
++ deactivateSensor(sensorId: UUID): void
++ flagSensorError(sensorId: UUID): void
++ getAllEquipment(): List&lt;Equipment&gt;
++ addEquipment(equipmentId: UUID, type: EquipmentType, description: String, location: LabLocation): void
++ removeEquipment(equipmentId: UUID): void
++ setEquipmentAvailable(equipmentId: UUID): void
++ setEquipmentDisabled(equipmentId: UUID): void
++ setEquipmentMaintenance(equipmentId: UUID): void
++ getAllUsageLogs(): List&lt;UsageLogEntry&gt;
++ addObserver(observer: SensorObserver): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1435</x>
+      <y>190</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1495</x>
+      <y>190</y>
+      <w>15</w>
+      <h>185</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>115</y>
+      <w>75</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1415</x>
+      <y>190</y>
+      <w>145</w>
+      <h>335</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;650.0;270.0;650.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1065</x>
+      <y>365</y>
+      <w>300</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>580.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>285</y>
+      <w>15</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>170</y>
+      <w>70</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>170</y>
+      <w>15</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>400</y>
+      <w>160</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+SensorState
+--
++ onSendData(sensor: Sensor): boolean
++ activate(sensor: Sensor): void
++ deactivate(sensor: Sensor): void
++ flagError(sensor: Sensor): void
++ getStateName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1585</x>
+      <y>225</y>
+      <w>160</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Sensor
+--
+- sensorId: UUID
+- sensorType: SensorType
+- linkedEquipmentId: UUID
+- state: SensorState
+- usageLogs: List&lt;UsageLogEntry&gt;
+--
++ setState(state: SensorState): void
++ getState(): SensorState
++ getStateName(): String
++ activate(): void
++ deactivate(): void
++ flagError(): void
++ canSendData(): boolean
++ recordUsage(entry: UsageLogEntry): void
++ getUsageLogs(): List&lt;UsageLogEntry&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1660</x>
+      <y>355</y>
+      <w>15</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1810</x>
+      <y>495</y>
+      <w>150</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>ErrorSensorState
+--
++ onSendData(sensor: Sensor): boolean
++ activate(sensor: Sensor): void
++ deactivate(sensor: Sensor): void
++ flagError(sensor: Sensor): void
++ getStateName(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1815</x>
+      <y>435</y>
+      <w>140</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>InactiveSensorState
+--
++ onSendData(sensor: Sensor): boolean
++ activate(sensor: Sensor): void
++ deactivate(sensor: Sensor): void
++ flagError(sensor: Sensor): void
++ getStateName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1745</x>
+      <y>380</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1745</x>
+      <y>435</y>
+      <w>80</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1745</x>
+      <y>460</y>
+      <w>75</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1815</x>
+      <y>370</y>
+      <w>145</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ActiveSensorState
+--
++ onSendData(sensor: Sensor): boolean
++ activate(sensor: Sensor): void
++ deactivate(sensor: Sensor): void
++ flagError(sensor: Sensor): void
++ getStateName(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1780</x>
+      <y>240</y>
+      <w>105</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+SensorType
+--
+MOTION,       
+POWER,       
+OCCUPANCY,
+THERMAL  </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1740</x>
+      <y>265</y>
+      <w>50</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>135</y>
+      <w>370</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Reservation
+--
+- id: UUID
+- user: User
+- equipment: Equipment
+- startTime: LocalDateTime
+- hours: int
+- hourlyRate: double
+- deposit: double
+- totalCost: double
+- certificationId: String
+- paymentStrategy: PaymentStrategy
+- status: Status
+--
++ Reservation(u: User, e: Equipment, st: LocalDateTime, h: int, hr: double, ci: String, ps: PaymentStrategy)
+
++ getId(): UUID
++ getUser(): User
++ getEquipment(): Equipment
++ getStartTime(): LocalDateTime
++ getHours(): int
++ getHourlyRate(): double
++ getDeposit(): double
++ getTotalCost(): double
++ getCertificationId(): String
++ getPaymentStrategy(): PaymentStrategy
++ getStatus(): Status
++ setStatus(status: Status): void
++ toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>155</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Status
+--
+PENDING
+ACTIVE
+CANCELLED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>360</y>
+      <w>405</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>790.0;310.0;500.0;250.0;10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>735</x>
+      <y>360</y>
+      <w>50</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;280.0;10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>775</x>
+      <y>330</y>
+      <w>50</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;20.0;80.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>355</x>
+      <y>60</y>
+      <w>105</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>InstitutionalPayment
+--
++ getMethodName(): String
++ pay(amount: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>65</y>
+      <w>105</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+PaymentStrategy
+--
++ getMethodName(): String
++ pay(amount: double): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>65</y>
+      <w>105</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>DebitSystem
+--
++ getMethodName(): String
++ pay(amount: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>565</x>
+      <y>0</y>
+      <w>105</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>CreditSystem
+--
++ getMethodName(): String
++ pay(amount: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>85</y>
+      <w>85</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>605</x>
+      <y>30</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>80</y>
+      <w>115</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>105</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1265</x>
+      <y>205</y>
+      <w>360</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>700.0;40.0;660.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>10</y>
+      <w>505</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>820.0;430.0;990.0;390.0;990.0;10.0;10.0;20.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1475</x>
+      <y>260</y>
+      <w>120</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
