@@ -126,7 +126,8 @@ public class LabManagerPanel extends JPanel {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-        refreshStatus("Logged in as: " + currentUser.getName() + " (" + currentUser.getUserType() + ")");
+        refreshStatus("Logged in as: " + currentUser.getName()
+                + " (" + currentUser.getUserType() + ")");
         loadEquipmentFromCSV();
     }
 
@@ -148,7 +149,8 @@ public class LabManagerPanel extends JPanel {
     private void handleSearchById() {
         try {
             String input = searchIdField.getText().trim();
-            if (input.isBlank()) throw new IllegalArgumentException("Enter an equipment ID to search.");
+            if (input.isBlank()) throw new IllegalArgumentException(
+                    "Enter an equipment ID to search.");
             UUID searchedId;
             try {
                 searchedId = UUID.fromString(input);
@@ -160,82 +162,109 @@ public class LabManagerPanel extends JPanel {
                 if (eq.getEquipmentId().equals(searchedId)) {
                     equipmentJList.setSelectedIndex(i);
                     equipmentJList.ensureIndexIsVisible(i);
-                    refreshStatus("Found: " + eq.getDescription() + " | ID: " + eq.getEquipmentId());
+                    refreshStatus("Found: " + eq.getDescription()
+                            + " | ID: " + eq.getEquipmentId());
                     return;
                 }
             }
             throw new IllegalArgumentException("No equipment found with that ID.");
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleAddEquipment() {
         try {
-            String description      = descriptionField.getText().trim();
-            EquipmentType eqType    = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
-            LabLocation labLocation = (LabLocation)   labLocationComboBox.getSelectedItem();
-            if (description.isBlank()) throw new IllegalArgumentException("Description is required.");
-            Equipment equipment = equipmentManagementService.addEquipment(getManager(), description, eqType, labLocation);
+            String        description   = descriptionField.getText().trim();
+            EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
+            LabLocation   labLocation   = (LabLocation)   labLocationComboBox  .getSelectedItem();
+            if (description.isBlank())
+                throw new IllegalArgumentException("Description is required.");
+            Equipment equipment = equipmentManagementService.addEquipment(
+                    getManager(), description, equipmentType, labLocation);
             equipmentListModel.addElement(equipment);
             equipmentRegistry.addEquipment(equipment);
-            refreshStatus("Added: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            refreshStatus("Added: " + equipment.getDescription()
+                    + " | ID: " + equipment.getEquipmentId());
             clearForm();
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleUpdateEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
-            String description      = descriptionField.getText().trim();
-            EquipmentType eqType    = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
-            LabLocation labLocation = (LabLocation)   labLocationComboBox.getSelectedItem();
-            if (description.isBlank()) throw new IllegalArgumentException("Description is required.");
-            equipmentManagementService.updateEquipmentDetails(getManager(), equipment, description, eqType, labLocation);
+            if (equipment == null)
+                throw new IllegalArgumentException("Select an equipment item first.");
+            String        description   = descriptionField.getText().trim();
+            EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
+            LabLocation   labLocation   = (LabLocation)   labLocationComboBox  .getSelectedItem();
+            if (description.isBlank())
+                throw new IllegalArgumentException("Description is required.");
+            equipmentManagementService.updateEquipmentDetails(
+                    getManager(), equipment, description, equipmentType, labLocation);
             equipmentJList.repaint();
-            refreshStatus("Updated: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            refreshStatus("Updated: " + equipment.getDescription()
+                    + " | ID: " + equipment.getEquipmentId());
             clearForm();
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleRemoveEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
+            if (equipment == null)
+                throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.removeEquipment(getManager(), equipment);
             equipmentListModel.removeElement(equipment);
-            refreshStatus("Removed: " + equipment.getDescription() + " | ID: " + equipment.getEquipmentId());
+            refreshStatus("Removed: " + equipment.getDescription()
+                    + " | ID: " + equipment.getEquipmentId());
             clearForm();
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleEnableEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
+            if (equipment == null)
+                throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.enableEquipment(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Enabled: " + equipment.getDescription());
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleDisableEquipment() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
+            if (equipment == null)
+                throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.disableEquipment(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Disabled: " + equipment.getDescription());
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void handleMarkMaintenance() {
         try {
             Equipment equipment = equipmentJList.getSelectedValue();
-            if (equipment == null) throw new IllegalArgumentException("Select an equipment item first.");
+            if (equipment == null)
+                throw new IllegalArgumentException("Select an equipment item first.");
             equipmentManagementService.markEquipmentMaintenance(getManager(), equipment);
             equipmentJList.repaint();
             refreshStatus("Marked maintenance: " + equipment.getDescription());
-        } catch (Exception ex) { showError(ex.getMessage()); }
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     private void clearForm() {
@@ -249,6 +278,7 @@ public class LabManagerPanel extends JPanel {
     private void refreshStatus(String message) { statusArea.setText(message); }
 
     private void showError(String message) {
-        JOptionPane.showMessageDialog(this, message, "Lab Manager Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, message,
+                "Lab Manager Error", JOptionPane.ERROR_MESSAGE);
     }
 }
