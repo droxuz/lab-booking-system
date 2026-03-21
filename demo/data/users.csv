@@ -1,0 +1,4 @@
+name,id,email,password,type,approved
+Marko,1,Zovic@yorku.ca,Test1234!,Student,true
+Test,2,test@yorku.ca,Test1234!,headlabcoordinator,true
+Lead,3,Lead@yorku.ca,Test1234!,labmanager,true
