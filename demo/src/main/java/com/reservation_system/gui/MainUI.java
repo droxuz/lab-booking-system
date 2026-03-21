@@ -54,6 +54,7 @@ public class MainUI extends JFrame {
         reservationPanel        = new ReservationPanel(this, reservationService);
 
         equipmentRegistry.addObserver(reservationPanel);
+        labManagerPanel.loadEquipmentFromCSV();
 
         mainPanel.add(loginPanel,              "login");
         mainPanel.add(registerPanel,           "register");
