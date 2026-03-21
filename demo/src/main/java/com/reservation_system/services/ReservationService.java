@@ -1,7 +1,6 @@
 package com.reservation_system.services;
 
 import com.reservation_system.Equipment.Equipment;
-import com.reservation_system.Sensor.SensorType;
 import com.reservation_system.model.Reservation;
 import com.reservation_system.model.User;
 import com.reservation_system.patterns.strategy.PaymentStrategy;
@@ -102,7 +101,7 @@ public class ReservationService {
         if (balance > 0) {
             r.getPaymentStrategy().pay(balance);
         }
-        r.getEquipment().checkIn(SensorType.USAGE_DETECTED);
+        r.getEquipment().setInUseDirectly();
         r.setStatus(Reservation.Status.ACTIVE);
     }
 

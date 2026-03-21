@@ -1,9 +1,6 @@
 package com.reservation_system.services;
 
-import com.reservation_system.Equipment.Equipment;
-import com.reservation_system.Equipment.EquipmentStatus;
-import com.reservation_system.Equipment.EquipmentType;
-import com.reservation_system.Equipment.LabLocation;
+import com.reservation_system.Equipment.*;
 import com.reservation_system.model.LabManager;
 
 import java.io.*;
@@ -12,219 +9,139 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Handles all equipment management operations for Lab Managers.
- * Persists equipment to data/equipment.csv so that:
- *   - LabManagerPanel and SensorSubsystem share the same data source
- *   - Equipment survives application restarts
- *
- * CSV format (pipe-delimited):
- *   equipmentId | equipmentType | description | labLocation | status
- */
 public class EquipmentManagementService {
 
-    private static final String DATA_DIR  = "data" + File.separator;
-    private static final String EQUIPMENT_FILE = DATA_DIR + "equipment.csv";
-    private static final String HEADER =
-            "equipmentId|equipmentType|description|labLocation|status";
+    private static final String FILE_PATH = "data/equipment.csv";
+    private static final String HEADER    = "id,description,type,location,status";
 
     public EquipmentManagementService() {
-        initFile();
+        ensureFileExists();
     }
 
-    // ── Init ──────────────────────────────────────────────────
-
-    private void initFile() {
+    private void ensureFileExists() {
         try {
-            Files.createDirectories(Paths.get(DATA_DIR));
-            File f = new File(EQUIPMENT_FILE);
-            if (!f.exists()) {
-                try (PrintWriter pw = new PrintWriter(f)) {
-                    pw.println(HEADER);
+            Path path = Paths.get(FILE_PATH);
+            if (Files.notExists(path.getParent())) Files.createDirectories(path.getParent());
+            if (Files.notExists(path)) {
+                Files.createFile(path);
+                try (BufferedWriter w = Files.newBufferedWriter(path)) {
+                    w.write(HEADER); w.newLine();
                 }
             }
         } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Could not init CSV: "
-                    + e.getMessage());
+            throw new RuntimeException("Failed to initialise equipment.csv", e);
         }
     }
 
-    // ── Public API (called by LabManagerPanel) ─────────────────
-
-    /**
-     * Creates a new piece of equipment, assigns a random UUID,
-     * defaults status to AVAILABLE, and saves to CSV.
-     */
-    public Equipment addEquipment(LabManager manager,
-                                  String description,
-                                  EquipmentType equipmentType,
-                                  LabLocation labLocation) {
-        Equipment equipment = new Equipment(
-                UUID.randomUUID(), equipmentType, description, labLocation);
-        saveToCSV(equipment);
-        return equipment;
+    public Equipment addEquipment(LabManager manager, String description,
+                                  EquipmentType type, LabLocation location) {
+        validateManager(manager);
+        Equipment eq = new Equipment(UUID.randomUUID(), type, description, location);
+        List<Equipment> all = loadAllEquipment();
+        all.add(eq);
+        saveAll(all);
+        return eq;
     }
 
-    /**
-     * Updates description, type, and location of an existing equipment item.
-     * Finds the record by UUID and overwrites it.
-     */
-    public void updateEquipmentDetails(LabManager manager,
-                                       Equipment equipment,
-                                       String description,
-                                       EquipmentType equipmentType,
-                                       LabLocation labLocation) {
-        equipment.updateDetail(equipmentType, description, labLocation);
-        updateInCSV(equipment);
+    public void updateEquipmentDetails(LabManager manager, Equipment equipment,
+                                       String description, EquipmentType type, LabLocation location) {
+        validateManager(manager);
+        equipment.updateDetail(type, description, location);
+        List<Equipment> all = loadAllEquipment();
+        saveAll(replaceById(all, equipment));
     }
 
-    /** Removes equipment from the CSV. */
     public void removeEquipment(LabManager manager, Equipment equipment) {
-        deleteFromCSV(equipment.getEquipmentId());
+        validateManager(manager);
+        List<Equipment> all = loadAllEquipment();
+        all.removeIf(e -> e.getEquipmentId().equals(equipment.getEquipmentId()));
+        saveAll(all);
     }
 
-    /** Sets equipment status to AVAILABLE. */
     public void enableEquipment(LabManager manager, Equipment equipment) {
+        validateManager(manager);
         equipment.enable();
-        updateInCSV(equipment);
+        List<Equipment> all = loadAllEquipment();
+        saveAll(replaceById(all, equipment));
     }
 
-    /** Sets equipment status to DISABLED. */
     public void disableEquipment(LabManager manager, Equipment equipment) {
+        validateManager(manager);
         equipment.disable();
-        updateInCSV(equipment);
+        List<Equipment> all = loadAllEquipment();
+        saveAll(replaceById(all, equipment));
     }
 
-    /** Sets equipment status to MAINTENANCE. */
     public void markEquipmentMaintenance(LabManager manager, Equipment equipment) {
+        validateManager(manager);
         equipment.markUnavailable();
-        updateInCSV(equipment);
+        List<Equipment> all = loadAllEquipment();
+        saveAll(replaceById(all, equipment));
     }
 
-    /**
-     * Loads all equipment from CSV.
-     * Call this in LabManagerPanel on startup to pre-populate the list.
-     */
     public List<Equipment> loadAllEquipment() {
         List<Equipment> list = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(EQUIPMENT_FILE))) {
-            String line;
-            boolean first = true;
-            while ((line = br.readLine()) != null) {
-                if (first) { first = false; continue; } // skip header
-                if (line.isBlank()) continue;
-                String[] parts = line.split("\\|", -1);
-                if (parts.length >= 5) {
-                    try {
-                        UUID          id     = UUID.fromString(parts[0]);
-                        EquipmentType type   = EquipmentType.valueOf(parts[1]);
-                        String        desc   = parts[2];
-                        LabLocation   loc    = LabLocation.valueOf(parts[3]);
-                        EquipmentStatus status = EquipmentStatus.valueOf(parts[4]);
-
-                        Equipment eq = new Equipment(id, type, desc, loc);
-                        applyStatus(eq, status);
-                        list.add(eq);
-                    } catch (Exception e) {
-                        System.err.println("[EquipmentManagementService] Skipping row: "
-                                + e.getMessage());
-                    }
-                }
+        try (BufferedReader r = Files.newBufferedReader(Paths.get(FILE_PATH))) {
+            String line = r.readLine();
+            while ((line = r.readLine()) != null) {
+                String[] p = line.split(",", -1);
+                if (p.length < 5) continue;
+                try {
+                    UUID id            = UUID.fromString(p[0].trim());
+                    String description = p[1].trim();
+                    EquipmentType type = EquipmentType.valueOf(p[2].trim());
+                    LabLocation loc    = LabLocation.valueOf(p[3].trim());
+                    Equipment eq       = new Equipment(id, type, description, loc);
+                    applyStatus(eq, p[4].trim());
+                    list.add(eq);
+                } catch (Exception ignored) {}
             }
         } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Error reading CSV: "
-                    + e.getMessage());
+            throw new RuntimeException("Failed to read equipment.csv", e);
         }
         return list;
     }
 
-    // ── CSV helpers ────────────────────────────────────────────
-
-    /** Appends a new equipment row. */
-    private void saveToCSV(Equipment equipment) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(EQUIPMENT_FILE, true))) {
-            pw.println(toCSVRow(equipment));
-        } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Error saving: " + e.getMessage());
-        }
-    }
-
-    /** Rewrites the whole file, replacing the matching row. */
-    private void updateInCSV(Equipment equipment) {
-        List<String> lines = readAllLines();
-        try (PrintWriter pw = new PrintWriter(new FileWriter(EQUIPMENT_FILE))) {
-            pw.println(HEADER);
-            for (String line : lines) {
-                String[] parts = line.split("\\|", -1);
-                if (parts.length > 0 && parts[0].equals(equipment.getEquipmentId().toString())) {
-                    pw.println(toCSVRow(equipment));
-                } else {
-                    pw.println(line);
-                }
+    private void saveAll(List<Equipment> list) {
+        try (BufferedWriter w = Files.newBufferedWriter(Paths.get(FILE_PATH))) {
+            w.write(HEADER); w.newLine();
+            for (Equipment eq : list) {
+                w.write(String.join(",",
+                        eq.getEquipmentId().toString(),
+                        eq.getDescription(),
+                        eq.getEquipmentType().name(),
+                        eq.getLabLocation().name(),
+                        eq.getEquipmentStatus().name()));
+                w.newLine();
             }
         } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Error updating: " + e.getMessage());
+            throw new RuntimeException("Failed to save equipment.csv", e);
         }
     }
 
-    /** Rewrites the whole file, omitting the matching row. */
-    private void deleteFromCSV(UUID equipmentId) {
-        List<String> lines = readAllLines();
-        try (PrintWriter pw = new PrintWriter(new FileWriter(EQUIPMENT_FILE))) {
-            pw.println(HEADER);
-            for (String line : lines) {
-                String[] parts = line.split("\\|", -1);
-                if (parts.length > 0 && !parts[0].equals(equipmentId.toString())) {
-                    pw.println(line);
-                }
+    private List<Equipment> replaceById(List<Equipment> all, Equipment updated) {
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getEquipmentId().equals(updated.getEquipmentId())) {
+                all.set(i, updated);
+                return all;
             }
-        } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Error deleting: " + e.getMessage());
+        }
+        all.add(updated);
+        return all;
+    }
+
+    private void applyStatus(Equipment eq, String status) {
+        switch (status) {
+            case "DISABLED":    eq.disable();         break;
+            case "MAINTENANCE": eq.markUnavailable(); break;
+            case "RESERVED":    eq.reserve();         break;
+            case "IN_USE":      eq.reserve(); eq.setInUseDirectly(); break;
+            default: break;
         }
     }
 
-    /** Reads all data rows (skips header). */
-    private List<String> readAllLines() {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(EQUIPMENT_FILE))) {
-            String line;
-            boolean first = true;
-            while ((line = br.readLine()) != null) {
-                if (first) { first = false; continue; }
-                if (!line.isBlank()) lines.add(line);
-            }
-        } catch (IOException e) {
-            System.err.println("[EquipmentManagementService] Error reading: " + e.getMessage());
-        }
-        return lines;
-    }
-
-    private String toCSVRow(Equipment eq) {
-        return eq.getEquipmentId() + "|"
-                + eq.getEquipmentType() + "|"
-                + eq.getDescription() + "|"
-                + eq.getLabLocation() + "|"
-                + eq.getEquipmentStatus();
-    }
-
-    /**
-     * Restores a persisted EquipmentStatus by calling Equipment's
-     * public methods. Equipment starts AVAILABLE by default.
-     */
-    private void applyStatus(Equipment eq, EquipmentStatus target) {
-        switch (target) {
-            case DISABLED:    eq.disable();        break;
-            case MAINTENANCE: eq.markUnavailable(); break;
-            case RESERVED:
-                try { eq.reserve(); } catch (IllegalStateException ignored) {}
-                break;
-            case IN_USE:
-                try { eq.reserve(); eq.setInUse(null); }
-                catch (IllegalStateException ignored) {}
-                break;
-            case AVAILABLE:
-            default:
-                break; // default on construction
-        }
+    private void validateManager(LabManager manager) {
+        if (manager == null) throw new IllegalArgumentException("Lab Manager required");
+        if (!manager.isApproved()) throw new IllegalStateException("Lab manager account not approved");
     }
 }
