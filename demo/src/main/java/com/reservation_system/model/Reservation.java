@@ -12,11 +12,11 @@ public class Reservation {
     private final UUID id;
     private final User user;
     private final Equipment equipment;
-    private final LocalDateTime startTime;
-    private final int hours;
+    private LocalDateTime startTime;
+    private int hours;
     private final double hourlyRate;
     private final double deposit;
-    private final double totalCost;
+    private double totalCost;
     private final String certificationId;
     private final PaymentStrategy paymentStrategy;
     private Status status;
@@ -42,6 +42,7 @@ public class Reservation {
     public User getUser()                       { return user; }
     public Equipment getEquipment()             { return equipment; }
     public LocalDateTime getStartTime()         { return startTime; }
+    public LocalDateTime getEndTime()           { return startTime.plusHours(hours); }
     public int getHours()                       { return hours; }
     public double getHourlyRate()               { return hourlyRate; }
     public double getDeposit()                  { return deposit; }
@@ -50,6 +51,20 @@ public class Reservation {
     public PaymentStrategy getPaymentStrategy() { return paymentStrategy; }
     public Status getStatus()                   { return status; }
     public void setStatus(Status status)        { this.status = status; }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setHours(int hours) {
+        this.hours     = hours;
+        this.totalCost = hourlyRate * hours;
+    }
+
+    public void addHours(int extra) {
+        this.hours    += extra;
+        this.totalCost = hourlyRate * this.hours;
+    }
 
     @Override
     public String toString() {
