@@ -35,7 +35,7 @@ public class MainUI extends JFrame {
     public MainUI() {
         super("Lab Equipment Reservation System");
 
-        userRepository            = new UserRepository("data/users.csv");
+        userRepository            = new UserRepository("demo/data/users.csv");
         registrationService       = new RegistrationService(userRepository);
         authenticationService     = new AuthService(userRepository);
         coordinatorAccountService = new CoordinatorAccountService(userRepository);
