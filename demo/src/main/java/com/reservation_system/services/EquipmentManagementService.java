@@ -12,7 +12,7 @@ import java.util.UUID;
 public class EquipmentManagementService {
 
     private static final String FILE_PATH = "data/equipment.csv";
-    private static final String HEADER    = "id,description,type,location,status";
+    private static final String HEADER    = "id|description|type|location|status";
 
     public EquipmentManagementService() {
         ensureFileExists();
@@ -82,16 +82,17 @@ public class EquipmentManagementService {
     public List<Equipment> loadAllEquipment() {
         List<Equipment> list = new ArrayList<>();
         try (BufferedReader r = Files.newBufferedReader(Paths.get(FILE_PATH))) {
-            String line = r.readLine();
+            String line = r.readLine(); // skip header
             while ((line = r.readLine()) != null) {
-                String[] p = line.split(",", -1);
+                if (line.isBlank()) continue;
+                String[] p = line.split("\\|", -1);
                 if (p.length < 5) continue;
                 try {
-                    UUID id            = UUID.fromString(p[0].trim());
-                    String description = p[1].trim();
-                    EquipmentType type = EquipmentType.valueOf(p[2].trim());
-                    LabLocation loc    = LabLocation.valueOf(p[3].trim());
-                    Equipment eq       = new Equipment(id, type, description, loc);
+                    UUID          id          = UUID.fromString(p[0].trim());
+                    String        description = p[1].trim();
+                    EquipmentType type        = EquipmentType.valueOf(p[2].trim());
+                    LabLocation   loc         = LabLocation.valueOf(p[3].trim());
+                    Equipment     eq          = new Equipment(id, type, description, loc);
                     applyStatus(eq, p[4].trim());
                     list.add(eq);
                 } catch (Exception ignored) {}
@@ -106,7 +107,7 @@ public class EquipmentManagementService {
         try (BufferedWriter w = Files.newBufferedWriter(Paths.get(FILE_PATH))) {
             w.write(HEADER); w.newLine();
             for (Equipment eq : list) {
-                w.write(String.join(",",
+                w.write(String.join("|",
                         eq.getEquipmentId().toString(),
                         eq.getDescription(),
                         eq.getEquipmentType().name(),
@@ -132,9 +133,9 @@ public class EquipmentManagementService {
 
     private void applyStatus(Equipment eq, String status) {
         switch (status) {
-            case "DISABLED":    eq.disable();         break;
-            case "MAINTENANCE": eq.markUnavailable(); break;
-            case "RESERVED":    eq.reserve();         break;
+            case "DISABLED":    eq.disable();                    break;
+            case "MAINTENANCE": eq.markUnavailable();            break;
+            case "RESERVED":    eq.reserve();                    break;
             case "IN_USE":      eq.reserve(); eq.setInUseDirectly(); break;
             default: break;
         }

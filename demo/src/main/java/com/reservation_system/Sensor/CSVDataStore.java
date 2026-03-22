@@ -15,22 +15,25 @@ import java.util.UUID;
 
 /**
  * CSV persistence layer for the Sensor subsystem.
- * Simulates the database described in the sequence diagram.
  *
- * Files (pipe-delimited to avoid commas in descriptions):
- *   data/sensors.csv      — sensorId | sensorType | linkedEquipmentId | state
- *   data/equipment.csv    — equipmentId | equipmentType | description | labLocation | status
- *   data/usage_logs.csv   — logId | sensorId | equipmentId | timestamp | usageStatus
+ * equipment.csv column order matches EquipmentManagementService exactly:
+ *   id | description | type | location | status
+ *
+ * sensors.csv:    sensorId | sensorType | linkedEquipmentId | state
+ * usage_logs.csv: logId | sensorId | equipmentId | timestamp | usageStatus
  */
 public class CSVDataStore {
 
-    private static final String DATA_DIR       = "data" + File.separator;
-    private static final String SENSORS_FILE   = DATA_DIR + "sensors.csv";
+    private static final String DATA_DIR     = "data" + File.separator;
+    private static final String SENSORS_FILE = DATA_DIR + "sensors.csv";
     private static final String EQUIPMENT_FILE = DATA_DIR + "equipment.csv";
-    private static final String LOGS_FILE      = DATA_DIR + "usage_logs.csv";
+    private static final String LOGS_FILE    = DATA_DIR + "usage_logs.csv";
 
     private static final DateTimeFormatter FMT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    // Equipment header — must stay in sync with EquipmentManagementService.HEADER
+    private static final String EQUIPMENT_HEADER = "id|description|type|location|status";
 
     public CSVDataStore() {
         initFiles();
@@ -42,7 +45,7 @@ public class CSVDataStore {
         try {
             Files.createDirectories(Paths.get(DATA_DIR));
             ensureFile(SENSORS_FILE,   "sensorId|sensorType|linkedEquipmentId|state");
-            ensureFile(EQUIPMENT_FILE, "equipmentId|equipmentType|description|labLocation|status");
+            ensureFile(EQUIPMENT_FILE, EQUIPMENT_HEADER);
             ensureFile(LOGS_FILE,      "logId|sensorId|equipmentId|timestamp|usageStatus");
         } catch (IOException e) {
             System.err.println("[CSVDataStore] Init failed: " + e.getMessage());
@@ -113,20 +116,21 @@ public class CSVDataStore {
     }
 
     // ── Equipment CRUD ────────────────────────────────────────
+    // Column order: id | description | type | location | status
+    // Matches EquipmentManagementService exactly.
 
     public List<Equipment> loadAllEquipment() {
         List<Equipment> list = new ArrayList<>();
         for (String[] row : readRows(EQUIPMENT_FILE)) {
             if (row.length >= 5) {
                 try {
-                    UUID          id     = UUID.fromString(row[0]);
-                    EquipmentType type   = EquipmentType.valueOf(row[1]);
-                    String        desc   = row[2];
-                    LabLocation   loc    = LabLocation.valueOf(row[3]);
-                    EquipmentStatus status = EquipmentStatus.valueOf(row[4]);
+                    UUID            id     = UUID.fromString(row[0].trim());
+                    String          desc   = row[1].trim();
+                    EquipmentType   type   = EquipmentType.valueOf(row[2].trim());
+                    LabLocation     loc    = LabLocation.valueOf(row[3].trim());
+                    EquipmentStatus status = EquipmentStatus.valueOf(row[4].trim());
 
                     Equipment eq = new Equipment(id, type, desc, loc);
-                    // Restore persisted status via their public API
                     applyStatus(eq, status);
                     list.add(eq);
                 } catch (Exception e) {
@@ -167,12 +171,13 @@ public class CSVDataStore {
 
     private void writeAllEquipment(List<Equipment> list) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(EQUIPMENT_FILE))) {
-            pw.println("equipmentId|equipmentType|description|labLocation|status");
+            pw.println(EQUIPMENT_HEADER);
             for (Equipment e : list) {
-                pw.println(e.getEquipmentId() + "|"
-                        + e.getEquipmentType() + "|"
-                        + e.getDescription() + "|"
-                        + e.getLabLocation() + "|"
+                // id | description | type | location | status
+                pw.println(e.getEquipmentId()     + "|"
+                        + e.getDescription()       + "|"
+                        + e.getEquipmentType()     + "|"
+                        + e.getLabLocation()       + "|"
                         + e.getEquipmentStatus());
             }
         } catch (IOException e) {
@@ -203,9 +208,9 @@ public class CSVDataStore {
 
     public void saveUsageLog(UsageLogEntry entry) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(LOGS_FILE, true))) {
-            pw.println(entry.getLogId() + "|"
-                    + entry.getSensorId() + "|"
-                    + entry.getEquipmentId() + "|"
+            pw.println(entry.getLogId()        + "|"
+                    + entry.getSensorId()       + "|"
+                    + entry.getEquipmentId()    + "|"
                     + entry.getTimestamp().format(FMT) + "|"
                     + entry.getUsageStatus());
         } catch (IOException e) {
@@ -224,7 +229,7 @@ public class CSVDataStore {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line; boolean first = true;
             while ((line = br.readLine()) != null) {
-                if (first) { first = false; continue; }
+                if (first) { first = false; continue; } // skip header
                 if (!line.isBlank()) rows.add(line.split("\\|", -1));
             }
         } catch (IOException e) {
@@ -242,8 +247,8 @@ public class CSVDataStore {
     }
 
     /**
-     * Restores a persisted EquipmentStatus by calling Equipment's public API.
-     * Equipment starts as AVAILABLE by default; adjust from there.
+     * Restores persisted EquipmentStatus via Equipment's public API.
+     * Mirrors applyStatus() in EquipmentManagementService.
      */
     private void applyStatus(Equipment eq, EquipmentStatus target) {
         switch (target) {
@@ -257,11 +262,10 @@ public class CSVDataStore {
                 try { eq.reserve(); } catch (IllegalStateException ignored) {}
                 break;
             case IN_USE:
-                try { eq.reserve(); eq.setInUse(null); } catch (IllegalStateException ignored) {}
+                try { eq.reserve(); eq.setInUseDirectly(); } catch (IllegalStateException ignored) {}
                 break;
             case AVAILABLE:
             default:
-                // default state on construction
                 break;
         }
     }

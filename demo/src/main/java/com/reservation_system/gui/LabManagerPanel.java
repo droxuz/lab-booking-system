@@ -3,6 +3,7 @@ package com.reservation_system.gui;
 import com.reservation_system.Equipment.Equipment;
 import com.reservation_system.Equipment.EquipmentType;
 import com.reservation_system.Equipment.LabLocation;
+import com.reservation_system.Sensor.SensorGUI;
 import com.reservation_system.model.LabManager;
 import com.reservation_system.model.User;
 import com.reservation_system.patterns.observer.EquipmentRegistry;
@@ -98,9 +99,10 @@ public class LabManagerPanel extends JPanel {
         disableButton    .addActionListener(e -> handleDisableEquipment());
         maintenanceButton.addActionListener(e -> handleMarkMaintenance());
 
-        sensorButton.addActionListener(e ->
-            JOptionPane.showMessageDialog(this, "Sensor Dashboard not yet implemented.",
-                    "Coming Soon", JOptionPane.INFORMATION_MESSAGE));
+        sensorButton.addActionListener(e ->{
+            SensorGUI sensorGUI = new SensorGUI(this::loadEquipmentFromCSV);
+            sensorGUI.setVisible(true);
+        });
 
         backButton.addActionListener(e -> {
             if (currentUser != null) mainUI.showDashboard(currentUser);

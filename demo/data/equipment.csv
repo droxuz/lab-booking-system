@@ -1,2 +1,3 @@
-id,description,type,location,status
-8de88129-ed0c-4ce7-b7ff-66973b035b97,wadwa,OSCILLOSCOPE,LAS1001,AVAILABLE
+id|description|type|location|status
+8de88129-ed0c-4ce7-b7ff-66973b035b97|wadwa|OSCILLOSCOPE|LAS1001|MAINTENANCE
+fd9f5349-85f3-44ea-acdc-30f80baecd58|test 2|OSCILLOSCOPE|LAS1001|IN_USE
