@@ -317,7 +317,8 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
     private List<Equipment> getAvailableEquipment() {
         if (currentEquipmentList == null) return List.of();
         return currentEquipmentList.stream()
-                .filter(e -> e.getEquipmentStatus() == EquipmentStatus.AVAILABLE)
+                .filter(e -> e.getEquipmentStatus() != EquipmentStatus.DISABLED
+                          && e.getEquipmentStatus() != EquipmentStatus.MAINTENANCE)
                 .collect(Collectors.toList());
     }
 

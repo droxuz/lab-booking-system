@@ -25,7 +25,14 @@ public class Reservation {
                        LocalDateTime startTime, int hours,
                        double hourlyRate, String certificationId,
                        PaymentStrategy paymentStrategy) {
-        this.id              = UUID.randomUUID();
+        this(UUID.randomUUID(), user, equipment, startTime, hours, hourlyRate, certificationId, paymentStrategy);
+    }
+
+    public Reservation(UUID id, User user, Equipment equipment,
+                       LocalDateTime startTime, int hours,
+                       double hourlyRate, String certificationId,
+                       PaymentStrategy paymentStrategy) {
+        this.id              = id;
         this.user            = user;
         this.equipment       = equipment;
         this.startTime       = startTime;

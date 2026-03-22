@@ -1,4 +1,9 @@
 name,id,email,password,type,approved
-Marko,1,Zovic@yorku.ca,Test1234!,Student,true
-Test,2,Test@yorku.ca,Test1234!,headlabcoordinator,true
-Lead,3,Lead@yorku.ca,Test1234!,labmanager,true
+Test,1,Test@yorku.ca,Test1234!,headlabcoordinator,true
+Lead,2,Lead@yorku.ca,Test1234!,labmanager,true
+Lead,3,Lead2@yorku.ca,Test1234!,Faculty,true
+adad,4,Lead3@yorku.ca,Test1234!,Student,true
+Manager,5,Manager@yorku.ca,Test1234!,labmanager,true
+Adadad,6,Lead4@yorku.ca,Test1234!,Faculty,true
+Adijwaoi,7,Lead5@yorku.ca,Test1234!,Student,true
+aiwjdawoi,8,Lead6@yorku.ca,Test1234!,labmanager,true
