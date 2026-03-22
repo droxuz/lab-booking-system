@@ -35,7 +35,7 @@ public class MainUI extends JFrame {
     public MainUI() {
         super("Lab Equipment Reservation System");
 
-        userRepository            = new UserRepository("demo/data/users.csv");
+        userRepository            = new UserRepository("data/users.csv");
         registrationService       = new RegistrationService(userRepository);
         authenticationService     = new AuthService(userRepository);
         coordinatorAccountService = new CoordinatorAccountService(userRepository);
@@ -51,7 +51,7 @@ public class MainUI extends JFrame {
         dashboardPanel          = new DashboardPanel(this);
         generateLabManagerPanel = new GenerateLabManagerPanel(this, coordinatorAccountService);
         labManagerPanel         = new LabManagerPanel(this, equipmentManagementService, equipmentRegistry);
-        reservationPanel        = new ReservationPanel(this, reservationService);
+        reservationPanel        = new ReservationPanel(this, reservationService, equipmentRegistry);
 
         equipmentRegistry.addObserver(reservationPanel);
         labManagerPanel.loadEquipmentFromCSV();
