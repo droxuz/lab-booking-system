@@ -1,0 +1,15 @@
+START CLASSLITERALS
+CLASSNAME
+com.reservation_system.repository.UserRepository
+LITERALS
+java.lang.String:"demo/data/test-users.csv"
+java.lang.String:"student"
+java.lang.String:"faculty"
+java.lang.String:"researcher"
+java.lang.String:"guest"
+java.lang.String:"headlabcoordinator"
+java.lang.String:"labmanager"
+java.lang.String:"Alice"
+java.lang.String:"alice@example.com"
+java.lang.String:"Password1!"
+END CLASSLITERALS

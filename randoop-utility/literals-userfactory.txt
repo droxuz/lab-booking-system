@@ -1,0 +1,14 @@
+START CLASSLITERALS
+CLASSNAME
+com.reservation_system.patterns.factory.UserFactory
+LITERALS
+java.lang.String:"student"
+java.lang.String:"faculty"
+java.lang.String:"researcher"
+java.lang.String:"guest"
+java.lang.String:"headlabcoordinator"
+java.lang.String:"labmanager"
+java.lang.String:"Andrew"
+java.lang.String:"andrew@example.com"
+java.lang.String:"Password1!"
+END CLASSLITERALS
