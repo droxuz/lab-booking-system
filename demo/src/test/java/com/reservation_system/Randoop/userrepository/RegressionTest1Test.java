@@ -24,7 +24,7 @@ public class RegressionTest1Test {
     public void test0501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0501");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "hi!", "demo/data/test-users.csv", "", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "hi!", "data/test-userrepo.csv", "", false);
         java.lang.String str6 = guest5.getUserType();
         java.lang.String str7 = guest5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Guest" + "'", str6, "Guest");
@@ -44,11 +44,11 @@ public class RegressionTest1Test {
     public void test0503() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0503");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
@@ -76,7 +76,7 @@ public class RegressionTest1Test {
     public void test0505() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0505");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Researcher", 100, "Student", "guest", "demo/data/test-users.csv", false);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Researcher", 100, "Student", "guest", "data/test-userrepo.csv", false);
         org.junit.Assert.assertNotNull(user6);
     }
 
@@ -93,7 +93,7 @@ public class RegressionTest1Test {
     public void test0507() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0507");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (byte) 10, "", "demo/data/test-users.csv", "researcher", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (byte) 10, "", "data/test-userrepo.csv", "researcher", true);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class RegressionTest1Test {
     public void test0511() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0511");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
@@ -162,8 +162,8 @@ public class RegressionTest1Test {
             System.out.format("%n%s%n", "RegressionTest1.test0513");
         // The following exception was thrown during execution in test generation
         try {
-            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("demo/data/test-users.csv", (-1), "Password1!", "headlabcoordinator", "", false);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: demo/data/test-users.csv");
+            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("data/test-userrepo.csv", (-1), "Password1!", "headlabcoordinator", "", false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: data/test-userrepo.csv");
         } catch (java.lang.IllegalArgumentException e) {
             // Expected exception.
         }
@@ -173,7 +173,7 @@ public class RegressionTest1Test {
     public void test0514() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0514");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         com.reservation_system.model.HeadLabCoordinator headLabCoordinator9 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 1, "", "", "guest", false);
@@ -182,30 +182,30 @@ public class RegressionTest1Test {
         boolean boolean13 = userRepository1.emailExists("Faculty");
         boolean boolean15 = userRepository1.emailExists("Alice");
         java.util.List<com.reservation_system.model.User> userList16 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList19 = userRepository18.getAllUsers();
         int int20 = userRepository18.getNextID();
         boolean boolean22 = userRepository18.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher30 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository24.addUser((com.reservation_system.model.User) researcher30);
         java.util.List<com.reservation_system.model.User> userList32 = userRepository24.getAllUsers();
-        com.reservation_system.model.Guest guest38 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest38 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean39 = guest38.requiresDepartmentApproval();
         userRepository24.addUser((com.reservation_system.model.User) guest38);
         boolean boolean42 = userRepository24.emailExists("Alice");
         int int43 = userRepository24.getNextID();
-        com.reservation_system.repository.UserRepository userRepository45 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository45 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean47 = userRepository45.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository49 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository49 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList50 = userRepository49.getAllUsers();
         int int51 = userRepository49.getNextID();
         java.util.List<com.reservation_system.model.User> userList52 = userRepository49.getAllUsers();
         userRepository45.saveAllUsers(userList52);
         userRepository24.saveAllUsers(userList52);
-        com.reservation_system.repository.UserRepository userRepository56 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository56 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean58 = userRepository56.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository60 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository60 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList61 = userRepository60.getAllUsers();
         int int62 = userRepository60.getNextID();
         java.util.List<com.reservation_system.model.User> userList63 = userRepository60.getAllUsers();
@@ -265,7 +265,7 @@ public class RegressionTest1Test {
     public void test0518() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0518");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -294,7 +294,7 @@ public class RegressionTest1Test {
     public void test0519() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0519");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean6 = guest5.requiresDepartmentApproval();
         java.lang.String str7 = guest5.getUserType();
         java.lang.String str8 = guest5.getUserType();
@@ -309,7 +309,7 @@ public class RegressionTest1Test {
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "Guest" + "'", str8, "Guest");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "Password1!" + "'", str9, "Password1!");
         org.junit.Assert.assertEquals("'" + str12 + "' != '" + "Guest" + "'", str12, "Guest");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "demo/data/test-users.csv" + "'", str15, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "data/test-userrepo.csv" + "'", str15, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str16 + "' != '" + "Guest" + "'", str16, "Guest");
     }
 
@@ -317,7 +317,7 @@ public class RegressionTest1Test {
     public void test0520() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0520");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -336,7 +336,7 @@ public class RegressionTest1Test {
     public void test0521() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0521");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) 100, "student", "Guest", "demo/data/test-users.csv", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) 100, "student", "Guest", "data/test-userrepo.csv", true);
     }
 
     @Test
@@ -350,7 +350,7 @@ public class RegressionTest1Test {
     public void test0523() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0523");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) -1, "guest", "demo/data/test-users.csv", "headlabcoordinator", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) -1, "guest", "data/test-userrepo.csv", "headlabcoordinator", false);
         boolean boolean6 = guest5.requiresDepartmentApproval();
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
     }
@@ -370,21 +370,21 @@ public class RegressionTest1Test {
     public void test0525() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0525");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
         java.util.List<com.reservation_system.model.User> userList21 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList21);
         java.util.List<com.reservation_system.model.User> userList23 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher31 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository25.addUser((com.reservation_system.model.User) researcher31);
-        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher40 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository34.addUser((com.reservation_system.model.User) researcher40);
         int int42 = userRepository34.getNextID();
@@ -416,7 +416,7 @@ public class RegressionTest1Test {
     public void test0527() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0527");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         int int4 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.headLabCoordinatorExists();
@@ -489,7 +489,7 @@ public class RegressionTest1Test {
     public void test0533() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0533");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 0, "demo/data/test-users.csv", "Student", "faculty", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 0, "data/test-userrepo.csv", "Student", "faculty", false);
     }
 
     @Test
@@ -503,7 +503,7 @@ public class RegressionTest1Test {
     public void test0535() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0535");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -557,7 +557,7 @@ public class RegressionTest1Test {
     public void test0539() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0539");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -566,7 +566,7 @@ public class RegressionTest1Test {
         student5.setApproved(false);
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "guest" + "'", str9, "guest");
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
     }
@@ -595,7 +595,7 @@ public class RegressionTest1Test {
     public void test0542() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0542");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -612,7 +612,7 @@ public class RegressionTest1Test {
     public void test0543() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0543");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) '4', "demo/data/test-users.csv", "alice@example.com", "Password1!", false);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) '4', "data/test-userrepo.csv", "alice@example.com", "Password1!", false);
     }
 
     @Test
@@ -627,9 +627,9 @@ public class RegressionTest1Test {
     public void test0545() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0545");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean9 = guest8.requiresDepartmentApproval();
         java.lang.String str10 = guest8.getUserType();
         java.lang.String str11 = guest8.getUserType();
@@ -658,7 +658,7 @@ public class RegressionTest1Test {
     public void test0546() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0546");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -701,7 +701,7 @@ public class RegressionTest1Test {
     public void test0549() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0549");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         java.lang.String str6 = guest5.getUserType();
         java.lang.String str7 = guest5.getUserType();
         java.lang.String str8 = guest5.getName();
@@ -714,7 +714,7 @@ public class RegressionTest1Test {
     public void test0550() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0550");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (short) 10, "", "demo/data/test-users.csv", "Student", true);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (short) 10, "", "data/test-userrepo.csv", "Student", true);
     }
 
     @Test
@@ -730,7 +730,7 @@ public class RegressionTest1Test {
     public void test0552() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0552");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         com.reservation_system.model.HeadLabCoordinator headLabCoordinator9 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 1, "", "", "guest", false);
@@ -765,7 +765,7 @@ public class RegressionTest1Test {
     public void test0555() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0555");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         java.util.List<com.reservation_system.model.User> userList3 = userRepository1.getAllUsers();
         org.junit.Assert.assertNotNull(userList2);
@@ -784,29 +784,29 @@ public class RegressionTest1Test {
     public void test0557() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0557");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Faculty faculty7 = new com.reservation_system.model.Faculty(5, "researcher", "guest", "faculty", true);
         java.lang.String str8 = faculty7.getUserType();
         java.lang.String str9 = faculty7.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) faculty7);
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean14 = userRepository12.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList17 = userRepository16.getAllUsers();
         int int18 = userRepository16.getNextID();
         java.util.List<com.reservation_system.model.User> userList19 = userRepository16.getAllUsers();
         userRepository12.saveAllUsers(userList19);
         userRepository1.saveAllUsers(userList19);
-        com.reservation_system.repository.UserRepository userRepository23 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository23 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList24 = userRepository23.getAllUsers();
-        com.reservation_system.model.Guest guest30 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest30 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean31 = guest30.requiresDepartmentApproval();
         java.lang.String str32 = guest30.getUserType();
         java.lang.String str33 = guest30.getUserType();
         guest30.setApproved(true);
         java.lang.String str36 = guest30.getUserType();
         userRepository23.addUser((com.reservation_system.model.User) guest30);
-        com.reservation_system.repository.UserRepository userRepository39 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository39 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList40 = userRepository39.getAllUsers();
         int int41 = userRepository39.getNextID();
         boolean boolean43 = userRepository39.emailExists("headlabcoordinator");
@@ -815,7 +815,7 @@ public class RegressionTest1Test {
         boolean boolean48 = userRepository39.emailExists("Alice");
         boolean boolean50 = userRepository39.emailExists("Guest");
         boolean boolean52 = userRepository39.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository54 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository54 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean56 = userRepository54.emailExists("Alice");
         com.reservation_system.model.Researcher researcher62 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean63 = researcher62.isApproved();
@@ -865,7 +865,7 @@ public class RegressionTest1Test {
     public void test0559() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0559");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("researcher", (-1), "demo/data/test-users.csv", "student", "demo/data/test-users.csv", true);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("researcher", (-1), "data/test-userrepo.csv", "student", "data/test-userrepo.csv", true);
         org.junit.Assert.assertNotNull(user6);
     }
 
@@ -873,19 +873,19 @@ public class RegressionTest1Test {
     public void test0560() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0560");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         int int4 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.headLabCoordinatorExists();
         boolean boolean6 = userRepository1.headLabCoordinatorExists();
         boolean boolean8 = userRepository1.emailExists("Researcher");
         boolean boolean10 = userRepository1.emailExists("alice@example.com");
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList13 = userRepository12.getAllUsers();
         int int14 = userRepository12.getNextID();
         boolean boolean16 = userRepository12.emailExists("headlabcoordinator");
         java.util.Optional<com.reservation_system.model.User> userOptional18 = userRepository12.findByEmail("student");
-        com.reservation_system.repository.UserRepository userRepository20 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository20 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList21 = userRepository20.getAllUsers();
         int int22 = userRepository20.getNextID();
         boolean boolean24 = userRepository20.emailExists("headlabcoordinator");
@@ -945,15 +945,15 @@ public class RegressionTest1Test {
     public void test0564() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0564");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         boolean boolean10 = userRepository1.headLabCoordinatorExists();
         boolean boolean12 = userRepository1.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean16 = userRepository14.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList19 = userRepository18.getAllUsers();
         int int20 = userRepository18.getNextID();
         java.util.List<com.reservation_system.model.User> userList21 = userRepository18.getAllUsers();
@@ -991,11 +991,11 @@ public class RegressionTest1Test {
     public void test0566() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0566");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
@@ -1014,7 +1014,7 @@ public class RegressionTest1Test {
     public void test0567() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0567");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         java.util.List<com.reservation_system.model.User> userList4 = userRepository1.getAllUsers();
@@ -1033,7 +1033,7 @@ public class RegressionTest1Test {
     public void test0568() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0568");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(10, "demo/data/test-users.csv", "Password1!", "hi!", true);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(10, "data/test-userrepo.csv", "Password1!", "hi!", true);
         java.lang.String str6 = guest5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Guest" + "'", str6, "Guest");
     }
@@ -1056,22 +1056,22 @@ public class RegressionTest1Test {
     public void test0571() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0571");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "alice@example.com", "demo/data/test-users.csv", "headlabcoordinator", true);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "alice@example.com", "data/test-userrepo.csv", "headlabcoordinator", true);
         java.lang.String str6 = guest5.getEmail();
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "demo/data/test-users.csv" + "'", str6, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "data/test-userrepo.csv" + "'", str6, "data/test-userrepo.csv");
     }
 
     @Test
     public void test0572() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0572");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         java.util.Optional<com.reservation_system.model.User> userOptional11 = userRepository1.findByEmail("");
         boolean boolean12 = userRepository1.headLabCoordinatorExists();
-        java.util.Optional<com.reservation_system.model.User> userOptional14 = userRepository1.findByEmail("demo/data/test-users.csv");
+        java.util.Optional<com.reservation_system.model.User> userOptional14 = userRepository1.findByEmail("data/test-userrepo.csv");
         org.junit.Assert.assertNotNull(userList9);
         org.junit.Assert.assertNotNull(userOptional11);
         org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
@@ -1089,14 +1089,14 @@ public class RegressionTest1Test {
     public void test0574() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0574");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((-1), "demo/data/test-users.csv", "", "headlabcoordinator", false);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((-1), "data/test-userrepo.csv", "", "headlabcoordinator", false);
     }
 
     @Test
     public void test0575() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0575");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -1145,7 +1145,7 @@ public class RegressionTest1Test {
     public void test0579() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0579");
-        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) (short) 1, "headlabcoordinator", "demo/data/test-users.csv", "Student", true);
+        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) (short) 1, "headlabcoordinator", "data/test-userrepo.csv", "Student", true);
         java.lang.String str6 = faculty5.getPassword();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
     }
@@ -1154,7 +1154,7 @@ public class RegressionTest1Test {
     public void test0580() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0580");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(10, "demo/data/test-users.csv", "Password1!", "alice@example.com", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(10, "data/test-userrepo.csv", "Password1!", "alice@example.com", true);
         java.lang.String str6 = student5.getEmail();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Password1!" + "'", str6, "Password1!");
     }
@@ -1184,7 +1184,7 @@ public class RegressionTest1Test {
     public void test0583() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0583");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -1237,7 +1237,7 @@ public class RegressionTest1Test {
     public void test0587() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0587");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Password1!");
         com.reservation_system.model.Faculty faculty9 = new com.reservation_system.model.Faculty((-1), "headlabcoordinator", "Student", "", false);
         userRepository1.addUser((com.reservation_system.model.User) faculty9);
@@ -1290,7 +1290,7 @@ public class RegressionTest1Test {
     public void test0593() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0593");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -1329,7 +1329,7 @@ public class RegressionTest1Test {
     public void test0596() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0596");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         boolean boolean10 = userRepository1.emailExists("labmanager");
@@ -1373,14 +1373,14 @@ public class RegressionTest1Test {
     public void test0600() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0600");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator(0, "Password1!", "Guest", "demo/data/test-users.csv", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator(0, "Password1!", "Guest", "data/test-userrepo.csv", true);
     }
 
     @Test
     public void test0601() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0601");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(5, "Researcher", "demo/data/test-users.csv", "Alice", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(5, "Researcher", "data/test-userrepo.csv", "Alice", false);
         int int6 = guest5.getID();
         java.lang.String str7 = guest5.getUserType();
         org.junit.Assert.assertTrue("'" + int6 + "' != '" + 5 + "'", int6 == 5);
@@ -1391,7 +1391,7 @@ public class RegressionTest1Test {
     public void test0602() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0602");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(35, "demo/data/test-users.csv", "hi!", "student", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(35, "data/test-userrepo.csv", "hi!", "student", false);
         boolean boolean6 = student5.isApproved();
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
     }
@@ -1400,7 +1400,7 @@ public class RegressionTest1Test {
     public void test0603() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0603");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(0, "demo/data/test-users.csv", "labmanager", "researcher", false);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(0, "data/test-userrepo.csv", "labmanager", "researcher", false);
         boolean boolean6 = labManager5.isApproved();
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
     }
@@ -1429,7 +1429,7 @@ public class RegressionTest1Test {
     public void test0606() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0606");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Password1!");
         int int4 = userRepository1.getNextID();
         java.lang.Class<?> wildcardClass5 = userRepository1.getClass();
@@ -1456,7 +1456,7 @@ public class RegressionTest1Test {
     public void test0609() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0609");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -1465,7 +1465,7 @@ public class RegressionTest1Test {
         boolean boolean10 = userRepository1.emailExists("Alice");
         boolean boolean12 = userRepository1.emailExists("Guest");
         boolean boolean14 = userRepository1.emailExists("headlabcoordinator");
-        com.reservation_system.model.Student student20 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student20 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         userRepository1.addUser((com.reservation_system.model.User) student20);
         java.util.Optional<com.reservation_system.model.User> userOptional23 = userRepository1.findByEmail("student");
         com.reservation_system.model.Student student29 = new com.reservation_system.model.Student((int) (short) -1, "alice@example.com", "student", "student", true);
@@ -1496,16 +1496,16 @@ public class RegressionTest1Test {
     public void test0611() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0611");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
         userRepository1.addUser((com.reservation_system.model.User) guest9);
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher18 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository12.addUser((com.reservation_system.model.User) researcher18);
         java.util.List<com.reservation_system.model.User> userList20 = userRepository12.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher28 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository22.addUser((com.reservation_system.model.User) researcher28);
         java.util.Optional<com.reservation_system.model.User> userOptional31 = userRepository22.findByEmail("alice@example.com");
@@ -1543,7 +1543,7 @@ public class RegressionTest1Test {
     public void test0614() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0614");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -1572,14 +1572,14 @@ public class RegressionTest1Test {
     public void test0615() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0615");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 1, "demo/data/test-users.csv", "researcher", "Guest", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 1, "data/test-userrepo.csv", "researcher", "Guest", false);
     }
 
     @Test
     public void test0616() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0616");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "demo/data/test-users.csv", "guest", "labmanager", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "data/test-userrepo.csv", "guest", "labmanager", true);
         java.lang.String str6 = headLabCoordinator5.getUserType();
         java.lang.String str7 = headLabCoordinator5.getUserType();
         java.lang.String str8 = headLabCoordinator5.getEmail();
@@ -1589,7 +1589,7 @@ public class RegressionTest1Test {
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "headlabcoordinator" + "'", str7, "headlabcoordinator");
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "guest" + "'", str8, "guest");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "headlabcoordinator" + "'", str9, "headlabcoordinator");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "demo/data/test-users.csv" + "'", str10, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "data/test-userrepo.csv" + "'", str10, "data/test-userrepo.csv");
     }
 
     @Test
@@ -1605,7 +1605,7 @@ public class RegressionTest1Test {
     public void test0618() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0618");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
@@ -1641,13 +1641,13 @@ public class RegressionTest1Test {
     public void test0621() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0621");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
         boolean boolean11 = userRepository1.emailExists("faculty");
         java.util.List<com.reservation_system.model.User> userList12 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest18 = new com.reservation_system.model.Guest(1, "demo/data/test-users.csv", "alice@example.com", "faculty", true);
+        com.reservation_system.model.Guest guest18 = new com.reservation_system.model.Guest(1, "data/test-userrepo.csv", "alice@example.com", "faculty", true);
         userRepository1.addUser((com.reservation_system.model.User) guest18);
         org.junit.Assert.assertTrue("'" + int9 + "' != '" + 102 + "'", int9 == 102);
         org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
@@ -1658,7 +1658,7 @@ public class RegressionTest1Test {
     public void test0622() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0622");
-        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty(0, "Student", "hi!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty(0, "Student", "hi!", "data/test-userrepo.csv", true);
         int int6 = faculty5.getID();
         boolean boolean7 = faculty5.requiresDepartmentApproval();
         org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
@@ -1676,26 +1676,26 @@ public class RegressionTest1Test {
     public void test0624() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0624");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList19);
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher28 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository22.addUser((com.reservation_system.model.User) researcher28);
         java.util.List<com.reservation_system.model.User> userList30 = userRepository22.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher38 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository32.addUser((com.reservation_system.model.User) researcher38);
         java.util.List<com.reservation_system.model.User> userList40 = userRepository32.getAllUsers();
         userRepository22.saveAllUsers(userList40);
         userRepository1.saveAllUsers(userList40);
-        com.reservation_system.model.Faculty faculty48 = new com.reservation_system.model.Faculty((int) (byte) -1, "faculty", "demo/data/test-users.csv", "Student", false);
+        com.reservation_system.model.Faculty faculty48 = new com.reservation_system.model.Faculty((int) (byte) -1, "faculty", "data/test-userrepo.csv", "Student", false);
         boolean boolean49 = faculty48.isApproved();
         userRepository1.addUser((com.reservation_system.model.User) faculty48);
         java.util.Optional<com.reservation_system.model.User> userOptional52 = userRepository1.findByEmail("");
@@ -1718,9 +1718,9 @@ public class RegressionTest1Test {
     public void test0626() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0626");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean9 = guest8.requiresDepartmentApproval();
         java.lang.String str10 = guest8.getUserType();
         java.lang.String str11 = guest8.getUserType();
@@ -1742,10 +1742,10 @@ public class RegressionTest1Test {
     public void test0627() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0627");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList6 = userRepository5.getAllUsers();
         int int7 = userRepository5.getNextID();
         boolean boolean9 = userRepository5.emailExists("headlabcoordinator");
@@ -1837,21 +1837,21 @@ public class RegressionTest1Test {
     public void test0634() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0634");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Faculty faculty7 = new com.reservation_system.model.Faculty(5, "researcher", "guest", "faculty", true);
         java.lang.String str8 = faculty7.getUserType();
         java.lang.String str9 = faculty7.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) faculty7);
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean14 = userRepository12.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList17 = userRepository16.getAllUsers();
         int int18 = userRepository16.getNextID();
         java.util.List<com.reservation_system.model.User> userList19 = userRepository16.getAllUsers();
         userRepository12.saveAllUsers(userList19);
         userRepository1.saveAllUsers(userList19);
         boolean boolean22 = userRepository1.headLabCoordinatorExists();
-        boolean boolean24 = userRepository1.emailExists("demo/data/test-users.csv");
+        boolean boolean24 = userRepository1.emailExists("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher30 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean31 = researcher30.isApproved();
         java.lang.String str32 = researcher30.getName();
@@ -1889,7 +1889,7 @@ public class RegressionTest1Test {
     public void test0636() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0636");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -2017,19 +2017,19 @@ public class RegressionTest1Test {
     public void test0646() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0646");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         boolean boolean20 = userRepository11.headLabCoordinatorExists();
         boolean boolean22 = userRepository11.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean26 = userRepository24.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList29 = userRepository28.getAllUsers();
         int int30 = userRepository28.getNextID();
         java.util.List<com.reservation_system.model.User> userList31 = userRepository28.getAllUsers();
@@ -2097,7 +2097,7 @@ public class RegressionTest1Test {
     public void test0651() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0651");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -2142,15 +2142,15 @@ public class RegressionTest1Test {
     public void test0654() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0654");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         boolean boolean10 = userRepository1.headLabCoordinatorExists();
         boolean boolean12 = userRepository1.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean16 = userRepository14.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList19 = userRepository18.getAllUsers();
         int int20 = userRepository18.getNextID();
         java.util.List<com.reservation_system.model.User> userList21 = userRepository18.getAllUsers();
@@ -2193,28 +2193,28 @@ public class RegressionTest1Test {
     public void test0656() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0656");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.Optional<com.reservation_system.model.User> userOptional10 = userRepository1.findByEmail("alice@example.com");
         java.util.List<com.reservation_system.model.User> userList11 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher19 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository13.addUser((com.reservation_system.model.User) researcher19);
         java.util.List<com.reservation_system.model.User> userList21 = userRepository13.getAllUsers();
         boolean boolean23 = userRepository13.emailExists("hi!");
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher31 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository25.addUser((com.reservation_system.model.User) researcher31);
         java.util.List<com.reservation_system.model.User> userList33 = userRepository25.getAllUsers();
-        com.reservation_system.model.Guest guest39 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest39 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean40 = guest39.requiresDepartmentApproval();
         userRepository25.addUser((com.reservation_system.model.User) guest39);
         boolean boolean43 = userRepository25.emailExists("Alice");
         int int44 = userRepository25.getNextID();
-        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean48 = userRepository46.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository50 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository50 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList51 = userRepository50.getAllUsers();
         int int52 = userRepository50.getNextID();
         java.util.List<com.reservation_system.model.User> userList53 = userRepository50.getAllUsers();
@@ -2244,7 +2244,7 @@ public class RegressionTest1Test {
     public void test0657() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0657");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(101, "headlabcoordinator", "Guest", "demo/data/test-users.csv", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(101, "headlabcoordinator", "Guest", "data/test-userrepo.csv", false);
         student5.setApproved(false);
         boolean boolean8 = student5.requiresDepartmentApproval();
         org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
@@ -2264,13 +2264,13 @@ public class RegressionTest1Test {
     public void test0659() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0659");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (short) 0, "Password1!", "demo/data/test-users.csv", "faculty", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (short) 0, "Password1!", "data/test-userrepo.csv", "faculty", true);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getEmail();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
     }
 
     @Test
@@ -2325,14 +2325,14 @@ public class RegressionTest1Test {
     public void test0665() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0665");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
         boolean boolean6 = userRepository1.headLabCoordinatorExists();
         java.util.Optional<com.reservation_system.model.User> userOptional8 = userRepository1.findByEmail("Alice");
         boolean boolean10 = userRepository1.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList13 = userRepository12.getAllUsers();
         int int14 = userRepository12.getNextID();
         boolean boolean16 = userRepository12.emailExists("headlabcoordinator");
@@ -2402,7 +2402,7 @@ public class RegressionTest1Test {
     public void test0670() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0670");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -2437,7 +2437,7 @@ public class RegressionTest1Test {
     public void test0673() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0673");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         boolean boolean7 = student5.requiresDepartmentApproval();
         boolean boolean8 = student5.isApproved();
@@ -2451,7 +2451,7 @@ public class RegressionTest1Test {
     public void test0674() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0674");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Faculty faculty7 = new com.reservation_system.model.Faculty(5, "researcher", "guest", "faculty", true);
         java.lang.String str8 = faculty7.getUserType();
         java.lang.String str9 = faculty7.getUserType();
@@ -2494,21 +2494,21 @@ public class RegressionTest1Test {
     public void test0677() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0677");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
         java.util.Optional<com.reservation_system.model.User> userOptional21 = userRepository1.findByEmail("hi!");
         int int22 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher30 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository24.addUser((com.reservation_system.model.User) researcher30);
         int int32 = userRepository24.getNextID();
-        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int35 = userRepository34.getNextID();
         boolean boolean36 = userRepository34.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest42 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -2518,7 +2518,7 @@ public class RegressionTest1Test {
         java.util.List<com.reservation_system.model.User> userList47 = userRepository34.getAllUsers();
         userRepository24.saveAllUsers(userList47);
         userRepository1.saveAllUsers(userList47);
-        com.reservation_system.repository.UserRepository userRepository51 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository51 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean53 = userRepository51.emailExists("Password1!");
         com.reservation_system.model.Faculty faculty59 = new com.reservation_system.model.Faculty((-1), "headlabcoordinator", "Student", "", false);
         userRepository51.addUser((com.reservation_system.model.User) faculty59);
@@ -2603,7 +2603,7 @@ public class RegressionTest1Test {
     public void test0684() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0684");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
@@ -2631,13 +2631,13 @@ public class RegressionTest1Test {
     public void test0686() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0686");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (byte) 0, "demo/data/test-users.csv", "demo/data/test-users.csv", "Student", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (byte) 0, "data/test-userrepo.csv", "data/test-userrepo.csv", "Student", false);
         java.lang.String str6 = student5.getName();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "demo/data/test-users.csv" + "'", str6, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "data/test-userrepo.csv" + "'", str6, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
     }
 
     @Test
@@ -2664,21 +2664,21 @@ public class RegressionTest1Test {
     public void test0689() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0689");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(102, "demo/data/test-users.csv", "hi!", "guest", true);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(102, "data/test-userrepo.csv", "hi!", "guest", true);
     }
 
     @Test
     public void test0690() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0690");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "demo/data/test-users.csv", "faculty", "guest", true);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) '#', "data/test-userrepo.csv", "faculty", "guest", true);
     }
 
     @Test
     public void test0691() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0691");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         student5.setApproved(true);
         java.lang.String str9 = student5.getUserType();
@@ -2708,16 +2708,16 @@ public class RegressionTest1Test {
     public void test0694() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0694");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
         int int20 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList23 = userRepository22.getAllUsers();
         userRepository1.saveAllUsers(userList23);
         java.util.Optional<com.reservation_system.model.User> userOptional26 = userRepository1.findByEmail("Password1!");
@@ -2737,7 +2737,7 @@ public class RegressionTest1Test {
     public void test0695() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0695");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("headlabcoordinator", (int) (byte) 100, "demo/data/test-users.csv", "Alice", "", false);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("headlabcoordinator", (int) (byte) 100, "data/test-userrepo.csv", "Alice", "", false);
         org.junit.Assert.assertNotNull(user6);
     }
 
@@ -2745,7 +2745,7 @@ public class RegressionTest1Test {
     public void test0696() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0696");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 0, "Guest", "demo/data/test-users.csv", "labmanager", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 0, "Guest", "data/test-userrepo.csv", "labmanager", false);
     }
 
     @Test
@@ -2768,7 +2768,7 @@ public class RegressionTest1Test {
     public void test0698() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0698");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(98, "hi!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(98, "hi!", "data/test-userrepo.csv", "Guest", true);
     }
 
     @Test
@@ -2784,33 +2784,33 @@ public class RegressionTest1Test {
     public void test0700() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0700");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
         int int20 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean24 = userRepository22.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository26 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository26 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList27 = userRepository26.getAllUsers();
         int int28 = userRepository26.getNextID();
         java.util.List<com.reservation_system.model.User> userList29 = userRepository26.getAllUsers();
         userRepository22.saveAllUsers(userList29);
         userRepository1.saveAllUsers(userList29);
         java.util.Optional<com.reservation_system.model.User> userOptional33 = userRepository1.findByEmail("alice@example.com");
-        com.reservation_system.repository.UserRepository userRepository35 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository35 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean37 = userRepository35.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository39 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository39 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList40 = userRepository39.getAllUsers();
         int int41 = userRepository39.getNextID();
         java.util.List<com.reservation_system.model.User> userList42 = userRepository39.getAllUsers();
         userRepository35.saveAllUsers(userList42);
         userRepository1.saveAllUsers(userList42);
-        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int47 = userRepository46.getNextID();
         int int48 = userRepository46.getNextID();
         com.reservation_system.model.Researcher researcher54 = new com.reservation_system.model.Researcher((int) (byte) 1, "Faculty", "", "Guest", false);
@@ -2866,7 +2866,7 @@ public class RegressionTest1Test {
     public void test0704() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0704");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         java.util.Optional<com.reservation_system.model.User> userOptional5 = userRepository1.findByEmail("guest");
@@ -2925,7 +2925,7 @@ public class RegressionTest1Test {
     public void test0710() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0710");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         java.lang.String str6 = student5.getEmail();
         boolean boolean7 = student5.isApproved();
         java.lang.String str8 = student5.getUserType();
@@ -2940,7 +2940,7 @@ public class RegressionTest1Test {
     public void test0711() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0711");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(10, "Password1!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(10, "Password1!", "data/test-userrepo.csv", "Guest", true);
         java.lang.String str6 = labManager5.getUserType();
         java.lang.String str7 = labManager5.getPassword();
         java.lang.Class<?> wildcardClass8 = labManager5.getClass();
@@ -2960,7 +2960,7 @@ public class RegressionTest1Test {
     public void test0713() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0713");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
@@ -3048,17 +3048,17 @@ public class RegressionTest1Test {
     public void test0722() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0722");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Guest", (int) (short) 10, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Guest", (int) (short) 10, "Password1!", "data/test-userrepo.csv", "researcher", false);
         java.lang.String str7 = user6.getEmail();
         org.junit.Assert.assertNotNull(user6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "demo/data/test-users.csv" + "'", str7, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "data/test-userrepo.csv" + "'", str7, "data/test-userrepo.csv");
     }
 
     @Test
     public void test0723() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0723");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -3098,7 +3098,7 @@ public class RegressionTest1Test {
     public void test0726() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0726");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -3119,22 +3119,22 @@ public class RegressionTest1Test {
     public void test0727() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0727");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         int int4 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.headLabCoordinatorExists();
         boolean boolean6 = userRepository1.headLabCoordinatorExists();
         boolean boolean8 = userRepository1.emailExists("Researcher");
         boolean boolean10 = userRepository1.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher18 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository12.addUser((com.reservation_system.model.User) researcher18);
         java.util.List<com.reservation_system.model.User> userList20 = userRepository12.getAllUsers();
         boolean boolean21 = userRepository12.headLabCoordinatorExists();
         boolean boolean23 = userRepository12.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean27 = userRepository25.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList30 = userRepository29.getAllUsers();
         int int31 = userRepository29.getNextID();
         java.util.List<com.reservation_system.model.User> userList32 = userRepository29.getAllUsers();
@@ -3173,11 +3173,11 @@ public class RegressionTest1Test {
     public void test0729() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0729");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         java.lang.String str6 = student5.getPassword();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getUserType();
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "demo/data/test-users.csv" + "'", str6, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "data/test-userrepo.csv" + "'", str6, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "Student" + "'", str8, "Student");
     }
@@ -3211,7 +3211,7 @@ public class RegressionTest1Test {
     public void test0733() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0733");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean6 = guest5.requiresDepartmentApproval();
         java.lang.String str7 = guest5.getUserType();
         java.lang.String str8 = guest5.getUserType();
@@ -3235,7 +3235,7 @@ public class RegressionTest1Test {
     public void test0735() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0735");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (byte) 1, "demo/data/test-users.csv", "alice@example.com", "", false);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (byte) 1, "data/test-userrepo.csv", "alice@example.com", "", false);
         java.lang.String str6 = researcher5.getUserType();
         java.lang.String str7 = researcher5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Researcher" + "'", str6, "Researcher");
@@ -3255,7 +3255,7 @@ public class RegressionTest1Test {
     public void test0737() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0737");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 0, "demo/data/test-users.csv", "demo/data/test-users.csv", "Researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 0, "data/test-userrepo.csv", "data/test-userrepo.csv", "Researcher", false);
         guest5.setApproved(false);
         boolean boolean8 = guest5.isApproved();
         org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
@@ -3283,7 +3283,7 @@ public class RegressionTest1Test {
     public void test0739() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0739");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -3292,7 +3292,7 @@ public class RegressionTest1Test {
         boolean boolean10 = userRepository1.emailExists("Alice");
         boolean boolean12 = userRepository1.emailExists("Guest");
         boolean boolean14 = userRepository1.emailExists("headlabcoordinator");
-        com.reservation_system.model.Researcher researcher20 = new com.reservation_system.model.Researcher((int) '#', "demo/data/test-users.csv", "Student", "faculty", false);
+        com.reservation_system.model.Researcher researcher20 = new com.reservation_system.model.Researcher((int) '#', "data/test-userrepo.csv", "Student", "faculty", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher20);
         boolean boolean23 = userRepository1.emailExists("student");
         org.junit.Assert.assertNotNull(userList2);
@@ -3310,11 +3310,11 @@ public class RegressionTest1Test {
     public void test0740() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0740");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
@@ -3353,7 +3353,7 @@ public class RegressionTest1Test {
     public void test0743() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0743");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -3363,10 +3363,10 @@ public class RegressionTest1Test {
         int int12 = student5.getID();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "demo/data/test-users.csv" + "'", str11, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "data/test-userrepo.csv" + "'", str11, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + int12 + "' != '" + 1 + "'", int12 == 1);
     }
 
@@ -3405,14 +3405,14 @@ public class RegressionTest1Test {
     public void test0747() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0747");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((int) '#', "demo/data/test-users.csv", "student", "faculty", false);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((int) '#', "data/test-userrepo.csv", "student", "faculty", false);
     }
 
     @Test
     public void test0748() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0748");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "demo/data/test-users.csv", "guest", "labmanager", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "data/test-userrepo.csv", "guest", "labmanager", true);
         java.lang.String str6 = headLabCoordinator5.getUserType();
         java.lang.String str7 = headLabCoordinator5.getUserType();
         java.lang.String str8 = headLabCoordinator5.getEmail();
@@ -3456,7 +3456,7 @@ public class RegressionTest1Test {
     public void test0751() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0751");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "demo/data/test-users.csv", "alice@example.com", "student", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "data/test-userrepo.csv", "alice@example.com", "student", true);
         boolean boolean6 = headLabCoordinator5.requiresDepartmentApproval();
         java.lang.String str7 = headLabCoordinator5.getUserType();
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
@@ -3467,7 +3467,7 @@ public class RegressionTest1Test {
     public void test0752() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0752");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(100, "demo/data/test-users.csv", "guest", "faculty", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(100, "data/test-userrepo.csv", "guest", "faculty", true);
         java.lang.String str6 = student5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
     }
@@ -3476,7 +3476,7 @@ public class RegressionTest1Test {
     public void test0753() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0753");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (short) 10, "Researcher", "", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (short) 10, "Researcher", "", "data/test-userrepo.csv", true);
         java.lang.String str6 = researcher5.getEmail();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
     }
@@ -3515,7 +3515,7 @@ public class RegressionTest1Test {
     public void test0757() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0757");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -3527,7 +3527,7 @@ public class RegressionTest1Test {
         boolean boolean14 = student5.requiresDepartmentApproval();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "guest" + "'", str9, "guest");
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + 1 + "'", int11 == 1);
@@ -3540,14 +3540,14 @@ public class RegressionTest1Test {
     public void test0758() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0758");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
         java.util.Optional<com.reservation_system.model.User> userOptional11 = userRepository1.findByEmail("headlabcoordinator");
         int int12 = userRepository1.getNextID();
         java.util.Optional<com.reservation_system.model.User> userOptional14 = userRepository1.findByEmail("Faculty");
-        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList17 = userRepository16.getAllUsers();
         userRepository1.saveAllUsers(userList17);
         boolean boolean20 = userRepository1.emailExists("Faculty");
@@ -3594,7 +3594,7 @@ public class RegressionTest1Test {
     public void test0761() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0761");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(102, "Faculty", "Password1!", "demo/data/test-users.csv", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(102, "Faculty", "Password1!", "data/test-userrepo.csv", false);
     }
 
     @Test
@@ -3629,11 +3629,11 @@ public class RegressionTest1Test {
     public void test0764() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0764");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
@@ -3665,7 +3665,7 @@ public class RegressionTest1Test {
     public void test0766() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0766");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -3715,7 +3715,7 @@ public class RegressionTest1Test {
     public void test0769() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0769");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
@@ -3758,12 +3758,12 @@ public class RegressionTest1Test {
     public void test0772() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0772");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Password1!");
         boolean boolean5 = userRepository1.emailExists("hi!");
         java.util.List<com.reservation_system.model.User> userList6 = userRepository1.getAllUsers();
         boolean boolean8 = userRepository1.emailExists("Guest");
-        com.reservation_system.model.LabManager labManager14 = new com.reservation_system.model.LabManager((int) (byte) -1, "headlabcoordinator", "demo/data/test-users.csv", "headlabcoordinator", false);
+        com.reservation_system.model.LabManager labManager14 = new com.reservation_system.model.LabManager((int) (byte) -1, "headlabcoordinator", "data/test-userrepo.csv", "headlabcoordinator", false);
         userRepository1.addUser((com.reservation_system.model.User) labManager14);
         org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
 // flaky "22) test0772(com.reservation_system.randoop.userrepository.RegressionTest1)":         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3775,7 +3775,7 @@ public class RegressionTest1Test {
     public void test0773() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0773");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((int) (byte) -1, "headlabcoordinator", "demo/data/test-users.csv", "headlabcoordinator", false);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager((int) (byte) -1, "headlabcoordinator", "data/test-userrepo.csv", "headlabcoordinator", false);
         java.lang.String str6 = labManager5.getName();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "headlabcoordinator" + "'", str6, "headlabcoordinator");
     }
@@ -3807,12 +3807,12 @@ public class RegressionTest1Test {
     public void test0777() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0777");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         java.lang.String str6 = student5.getPassword();
         int int7 = student5.getID();
         java.lang.String str8 = student5.getEmail();
         student5.setApproved(true);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "demo/data/test-users.csv" + "'", str6, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "data/test-userrepo.csv" + "'", str6, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "Password1!" + "'", str8, "Password1!");
     }
@@ -3828,7 +3828,7 @@ public class RegressionTest1Test {
     public void test0779() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0779");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
@@ -3868,7 +3868,7 @@ public class RegressionTest1Test {
     public void test0782() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0782");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
@@ -3899,7 +3899,7 @@ public class RegressionTest1Test {
     public void test0784() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0784");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -3910,7 +3910,7 @@ public class RegressionTest1Test {
         boolean boolean13 = student5.requiresDepartmentApproval();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "guest" + "'", str9, "guest");
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + 1 + "'", int11 == 1);
@@ -3949,7 +3949,7 @@ public class RegressionTest1Test {
     public void test0788() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0788");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -3957,7 +3957,7 @@ public class RegressionTest1Test {
         int int11 = userRepository1.getNextID();
         boolean boolean13 = userRepository1.emailExists("headlabcoordinator");
         java.util.List<com.reservation_system.model.User> userList14 = userRepository1.getAllUsers();
-        com.reservation_system.model.LabManager labManager20 = new com.reservation_system.model.LabManager(10, "Password1!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.LabManager labManager20 = new com.reservation_system.model.LabManager(10, "Password1!", "data/test-userrepo.csv", "Guest", true);
         java.lang.String str21 = labManager20.getUserType();
         java.lang.String str22 = labManager20.getPassword();
         java.lang.String str23 = labManager20.getEmail();
@@ -3970,7 +3970,7 @@ public class RegressionTest1Test {
         org.junit.Assert.assertNotNull(userList14);
         org.junit.Assert.assertEquals("'" + str21 + "' != '" + "labmanager" + "'", str21, "labmanager");
         org.junit.Assert.assertEquals("'" + str22 + "' != '" + "Guest" + "'", str22, "Guest");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "demo/data/test-users.csv" + "'", str23, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "data/test-userrepo.csv" + "'", str23, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
     }
 
@@ -4006,7 +4006,7 @@ public class RegressionTest1Test {
     public void test0793() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0793");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -4038,7 +4038,7 @@ public class RegressionTest1Test {
     public void test0795() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0795");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -4047,7 +4047,7 @@ public class RegressionTest1Test {
         boolean boolean10 = userRepository1.emailExists("Alice");
         boolean boolean12 = userRepository1.emailExists("Guest");
         boolean boolean14 = userRepository1.emailExists("headlabcoordinator");
-        com.reservation_system.model.Researcher researcher20 = new com.reservation_system.model.Researcher((int) '#', "demo/data/test-users.csv", "Student", "faculty", false);
+        com.reservation_system.model.Researcher researcher20 = new com.reservation_system.model.Researcher((int) '#', "data/test-userrepo.csv", "Student", "faculty", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher20);
         java.util.List<com.reservation_system.model.User> userList22 = userRepository1.getAllUsers();
         org.junit.Assert.assertNotNull(userList2);
@@ -4067,8 +4067,8 @@ public class RegressionTest1Test {
             System.out.format("%n%s%n", "RegressionTest1.test0796");
         // The following exception was thrown during execution in test generation
         try {
-            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("demo/data/test-users.csv", 98, "Faculty", "demo/data/test-users.csv", "Alice", false);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: demo/data/test-users.csv");
+            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("data/test-userrepo.csv", 98, "Faculty", "data/test-userrepo.csv", "Alice", false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: data/test-userrepo.csv");
         } catch (java.lang.IllegalArgumentException e) {
             // Expected exception.
         }
@@ -4078,17 +4078,17 @@ public class RegressionTest1Test {
     public void test0797() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0797");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         int int4 = userRepository1.getNextID();
         java.util.List<com.reservation_system.model.User> userList5 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository7 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository7 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList8 = userRepository7.getAllUsers();
         int int9 = userRepository7.getNextID();
         boolean boolean11 = userRepository7.emailExists("headlabcoordinator");
         java.util.Optional<com.reservation_system.model.User> userOptional13 = userRepository7.findByEmail("student");
-        com.reservation_system.repository.UserRepository userRepository15 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository15 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList16 = userRepository15.getAllUsers();
         userRepository7.saveAllUsers(userList16);
         userRepository1.saveAllUsers(userList16);
@@ -4107,10 +4107,10 @@ public class RegressionTest1Test {
     public void test0798() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0798");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList6 = userRepository5.getAllUsers();
         int int7 = userRepository5.getNextID();
         boolean boolean9 = userRepository5.emailExists("headlabcoordinator");
@@ -4187,7 +4187,7 @@ public class RegressionTest1Test {
     public void test0804() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0804");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("Alice");
@@ -4200,7 +4200,7 @@ public class RegressionTest1Test {
     public void test0805() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0805");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) (byte) 1, "Faculty", "", "Guest", false);
@@ -4219,7 +4219,7 @@ public class RegressionTest1Test {
     public void test0806() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0806");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(5, "Password1!", "labmanager", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(5, "Password1!", "labmanager", "data/test-userrepo.csv", true);
     }
 
     @Test
@@ -4233,7 +4233,7 @@ public class RegressionTest1Test {
     public void test0808() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0808");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -4241,7 +4241,7 @@ public class RegressionTest1Test {
         int int11 = userRepository1.getNextID();
         boolean boolean13 = userRepository1.emailExists("headlabcoordinator");
         java.util.List<com.reservation_system.model.User> userList14 = userRepository1.getAllUsers();
-        com.reservation_system.model.LabManager labManager20 = new com.reservation_system.model.LabManager(10, "Password1!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.LabManager labManager20 = new com.reservation_system.model.LabManager(10, "Password1!", "data/test-userrepo.csv", "Guest", true);
         java.lang.String str21 = labManager20.getUserType();
         java.lang.String str22 = labManager20.getPassword();
         java.lang.String str23 = labManager20.getEmail();
@@ -4255,7 +4255,7 @@ public class RegressionTest1Test {
         org.junit.Assert.assertNotNull(userList14);
         org.junit.Assert.assertEquals("'" + str21 + "' != '" + "labmanager" + "'", str21, "labmanager");
         org.junit.Assert.assertEquals("'" + str22 + "' != '" + "Guest" + "'", str22, "Guest");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "demo/data/test-users.csv" + "'", str23, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "data/test-userrepo.csv" + "'", str23, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
         org.junit.Assert.assertNotNull(userOptional27);
     }
@@ -4273,7 +4273,7 @@ public class RegressionTest1Test {
     public void test0810() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0810");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Researcher", (int) (byte) 100, "Faculty", "demo/data/test-users.csv", "Password1!", false);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("Researcher", (int) (byte) 100, "Faculty", "data/test-userrepo.csv", "Password1!", false);
         org.junit.Assert.assertNotNull(user6);
     }
 
@@ -4281,7 +4281,7 @@ public class RegressionTest1Test {
     public void test0811() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0811");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -4290,9 +4290,9 @@ public class RegressionTest1Test {
         java.lang.Class<?> wildcardClass11 = student5.getClass();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "demo/data/test-users.csv" + "'", str10, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "data/test-userrepo.csv" + "'", str10, "data/test-userrepo.csv");
         org.junit.Assert.assertNotNull(wildcardClass11);
     }
 
@@ -4343,26 +4343,26 @@ public class RegressionTest1Test {
     public void test0816() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0816");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList19);
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher28 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository22.addUser((com.reservation_system.model.User) researcher28);
         java.util.List<com.reservation_system.model.User> userList30 = userRepository22.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher38 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository32.addUser((com.reservation_system.model.User) researcher38);
         java.util.List<com.reservation_system.model.User> userList40 = userRepository32.getAllUsers();
         userRepository22.saveAllUsers(userList40);
         userRepository1.saveAllUsers(userList40);
-        com.reservation_system.model.Faculty faculty48 = new com.reservation_system.model.Faculty((int) (byte) -1, "faculty", "demo/data/test-users.csv", "Student", false);
+        com.reservation_system.model.Faculty faculty48 = new com.reservation_system.model.Faculty((int) (byte) -1, "faculty", "data/test-userrepo.csv", "Student", false);
         boolean boolean49 = faculty48.isApproved();
         userRepository1.addUser((com.reservation_system.model.User) faculty48);
         java.lang.String str51 = faculty48.getUserType();
@@ -4378,7 +4378,7 @@ public class RegressionTest1Test {
     public void test0817() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0817");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -4422,7 +4422,7 @@ public class RegressionTest1Test {
     public void test0820() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0820");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -4462,7 +4462,7 @@ public class RegressionTest1Test {
     public void test0823() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0823");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
@@ -4497,7 +4497,7 @@ public class RegressionTest1Test {
     public void test0826() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0826");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         boolean boolean9 = userRepository1.headLabCoordinatorExists();
@@ -4517,7 +4517,7 @@ public class RegressionTest1Test {
     public void test0828() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0828");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         student5.setApproved(false);
         java.lang.String str9 = student5.getUserType();
@@ -4531,7 +4531,7 @@ public class RegressionTest1Test {
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
         org.junit.Assert.assertEquals("'" + str11 + "' != '" + "Student" + "'", str11, "Student");
         org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "demo/data/test-users.csv" + "'", str13, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "data/test-userrepo.csv" + "'", str13, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
     }
 
@@ -4568,7 +4568,7 @@ public class RegressionTest1Test {
     public void test0832() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0832");
-        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) ' ', "labmanager", "student", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) ' ', "labmanager", "student", "data/test-userrepo.csv", true);
         java.lang.String str6 = faculty5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Faculty" + "'", str6, "Faculty");
     }
@@ -4602,7 +4602,7 @@ public class RegressionTest1Test {
     public void test0835() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0835");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -4625,7 +4625,7 @@ public class RegressionTest1Test {
     public void test0836() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0836");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         java.util.List<com.reservation_system.model.User> userList4 = userRepository1.getAllUsers();
@@ -4653,10 +4653,10 @@ public class RegressionTest1Test {
     public void test0838() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0838");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList6 = userRepository5.getAllUsers();
         int int7 = userRepository5.getNextID();
         int int8 = userRepository5.getNextID();
@@ -4676,7 +4676,7 @@ public class RegressionTest1Test {
     public void test0839() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0839");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.Optional<com.reservation_system.model.User> userOptional3 = userRepository1.findByEmail("hi!");
         boolean boolean4 = userRepository1.headLabCoordinatorExists();
         java.util.Optional<com.reservation_system.model.User> userOptional6 = userRepository1.findByEmail("");
@@ -4711,13 +4711,13 @@ public class RegressionTest1Test {
     public void test0842() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0842");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(5, "Researcher", "demo/data/test-users.csv", "Alice", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(5, "Researcher", "data/test-userrepo.csv", "Alice", false);
         java.lang.String str6 = guest5.getUserType();
         java.lang.String str7 = guest5.getName();
         java.lang.String str8 = guest5.getEmail();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Guest" + "'", str6, "Guest");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Researcher" + "'", str7, "Researcher");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
     }
 
     @Test
@@ -4741,19 +4741,19 @@ public class RegressionTest1Test {
     public void test0844() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0844");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         boolean boolean20 = userRepository11.headLabCoordinatorExists();
         boolean boolean22 = userRepository11.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean26 = userRepository24.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList29 = userRepository28.getAllUsers();
         int int30 = userRepository28.getNextID();
         java.util.List<com.reservation_system.model.User> userList31 = userRepository28.getAllUsers();
@@ -4785,28 +4785,28 @@ public class RegressionTest1Test {
     public void test0846() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0846");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.Optional<com.reservation_system.model.User> userOptional10 = userRepository1.findByEmail("alice@example.com");
         java.util.List<com.reservation_system.model.User> userList11 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher19 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository13.addUser((com.reservation_system.model.User) researcher19);
         java.util.List<com.reservation_system.model.User> userList21 = userRepository13.getAllUsers();
         boolean boolean23 = userRepository13.emailExists("hi!");
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher31 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository25.addUser((com.reservation_system.model.User) researcher31);
         java.util.List<com.reservation_system.model.User> userList33 = userRepository25.getAllUsers();
-        com.reservation_system.model.Guest guest39 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest39 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean40 = guest39.requiresDepartmentApproval();
         userRepository25.addUser((com.reservation_system.model.User) guest39);
         boolean boolean43 = userRepository25.emailExists("Alice");
         int int44 = userRepository25.getNextID();
-        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository46 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean48 = userRepository46.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository50 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository50 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList51 = userRepository50.getAllUsers();
         int int52 = userRepository50.getNextID();
         java.util.List<com.reservation_system.model.User> userList53 = userRepository50.getAllUsers();
@@ -4852,7 +4852,7 @@ public class RegressionTest1Test {
     public void test0849() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0849");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (short) 10, "headlabcoordinator", "demo/data/test-users.csv", "Alice", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student((int) (short) 10, "headlabcoordinator", "data/test-userrepo.csv", "Alice", true);
     }
 
     @Test
@@ -4878,25 +4878,25 @@ public class RegressionTest1Test {
     public void test0852() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0852");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
         boolean boolean6 = userRepository1.headLabCoordinatorExists();
         int int7 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository9 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository9 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher15 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository9.addUser((com.reservation_system.model.User) researcher15);
         int int17 = userRepository9.getNextID();
-        com.reservation_system.repository.UserRepository userRepository19 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository19 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher25 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository19.addUser((com.reservation_system.model.User) researcher25);
         java.util.List<com.reservation_system.model.User> userList27 = userRepository19.getAllUsers();
         boolean boolean28 = userRepository19.headLabCoordinatorExists();
         boolean boolean30 = userRepository19.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean34 = userRepository32.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository36 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository36 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList37 = userRepository36.getAllUsers();
         int int38 = userRepository36.getNextID();
         java.util.List<com.reservation_system.model.User> userList39 = userRepository36.getAllUsers();
@@ -4927,11 +4927,11 @@ public class RegressionTest1Test {
     public void test0853() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0853");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
@@ -4963,7 +4963,7 @@ public class RegressionTest1Test {
     public void test0855() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0855");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher(10, "demo/data/test-users.csv", "Student", "faculty", false);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher(10, "data/test-userrepo.csv", "Student", "faculty", false);
         java.lang.String str6 = researcher5.getEmail();
         java.lang.String str7 = researcher5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
@@ -4996,7 +4996,7 @@ public class RegressionTest1Test {
     public void test0858() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0858");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(10, "Password1!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(10, "Password1!", "data/test-userrepo.csv", "Guest", true);
         java.lang.String str6 = labManager5.getUserType();
         java.lang.String str7 = labManager5.getPassword();
         labManager5.setApproved(true);
@@ -5008,16 +5008,16 @@ public class RegressionTest1Test {
     public void test0859() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0859");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
         userRepository1.addUser((com.reservation_system.model.User) guest9);
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher18 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository12.addUser((com.reservation_system.model.User) researcher18);
         java.util.List<com.reservation_system.model.User> userList20 = userRepository12.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher28 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository22.addUser((com.reservation_system.model.User) researcher28);
         java.util.Optional<com.reservation_system.model.User> userOptional31 = userRepository22.findByEmail("alice@example.com");
@@ -5025,7 +5025,7 @@ public class RegressionTest1Test {
         userRepository12.saveAllUsers(userList32);
         userRepository1.saveAllUsers(userList32);
         java.util.Optional<com.reservation_system.model.User> userOptional36 = userRepository1.findByEmail("researcher");
-        com.reservation_system.repository.UserRepository userRepository38 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository38 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList39 = userRepository38.getAllUsers();
         int int40 = userRepository38.getNextID();
         boolean boolean42 = userRepository38.emailExists("headlabcoordinator");
@@ -5055,7 +5055,7 @@ public class RegressionTest1Test {
     public void test0860() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0860");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -5090,7 +5090,7 @@ public class RegressionTest1Test {
     public void test0862() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0862");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean6 = guest5.requiresDepartmentApproval();
         java.lang.String str7 = guest5.getUserType();
         java.lang.String str8 = guest5.getUserType();
@@ -5126,22 +5126,22 @@ public class RegressionTest1Test {
     public void test0865() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0865");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         int int4 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.headLabCoordinatorExists();
         boolean boolean6 = userRepository1.headLabCoordinatorExists();
         boolean boolean8 = userRepository1.emailExists("Researcher");
         boolean boolean10 = userRepository1.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher18 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository12.addUser((com.reservation_system.model.User) researcher18);
         java.util.List<com.reservation_system.model.User> userList20 = userRepository12.getAllUsers();
         boolean boolean21 = userRepository12.headLabCoordinatorExists();
         boolean boolean23 = userRepository12.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean27 = userRepository25.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList30 = userRepository29.getAllUsers();
         int int31 = userRepository29.getNextID();
         java.util.List<com.reservation_system.model.User> userList32 = userRepository29.getAllUsers();
@@ -5171,7 +5171,7 @@ public class RegressionTest1Test {
     public void test0866() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0866");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 10, "hi!", "researcher", "demo/data/test-users.csv", false);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 10, "hi!", "researcher", "data/test-userrepo.csv", false);
     }
 
     @Test
@@ -5185,7 +5185,7 @@ public class RegressionTest1Test {
     public void test0868() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0868");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "demo/data/test-users.csv", "alice@example.com", "student", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "data/test-userrepo.csv", "alice@example.com", "student", true);
         java.lang.String str6 = headLabCoordinator5.getEmail();
         java.lang.String str7 = headLabCoordinator5.getUserType();
         java.lang.String str8 = headLabCoordinator5.getUserType();
@@ -5199,7 +5199,7 @@ public class RegressionTest1Test {
     public void test0869() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0869");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.Optional<com.reservation_system.model.User> userOptional10 = userRepository1.findByEmail("alice@example.com");
@@ -5218,7 +5218,7 @@ public class RegressionTest1Test {
     public void test0870() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0870");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = researcher7.getID();
@@ -5231,22 +5231,22 @@ public class RegressionTest1Test {
     public void test0871() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0871");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
         java.util.List<com.reservation_system.model.User> userList21 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList21);
         java.util.List<com.reservation_system.model.User> userList23 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher31 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository25.addUser((com.reservation_system.model.User) researcher31);
         java.util.List<com.reservation_system.model.User> userList33 = userRepository25.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository35 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository35 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher41 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository35.addUser((com.reservation_system.model.User) researcher41);
         java.util.Optional<com.reservation_system.model.User> userOptional44 = userRepository35.findByEmail("alice@example.com");
@@ -5254,7 +5254,7 @@ public class RegressionTest1Test {
         userRepository25.saveAllUsers(userList45);
         com.reservation_system.model.Student student52 = new com.reservation_system.model.Student((int) (short) 100, "guest", "Guest", "faculty", false);
         userRepository25.addUser((com.reservation_system.model.User) student52);
-        com.reservation_system.repository.UserRepository userRepository55 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository55 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int56 = userRepository55.getNextID();
         int int57 = userRepository55.getNextID();
         java.util.List<com.reservation_system.model.User> userList58 = userRepository55.getAllUsers();
@@ -5293,7 +5293,7 @@ public class RegressionTest1Test {
     public void test0873() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0873");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         student5.setApproved(false);
         boolean boolean9 = student5.requiresDepartmentApproval();
@@ -5315,7 +5315,7 @@ public class RegressionTest1Test {
     public void test0875() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0875");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         com.reservation_system.model.HeadLabCoordinator headLabCoordinator9 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 1, "", "", "guest", false);
@@ -5323,16 +5323,16 @@ public class RegressionTest1Test {
         java.util.List<com.reservation_system.model.User> userList11 = userRepository1.getAllUsers();
         boolean boolean13 = userRepository1.emailExists("Faculty");
         java.util.List<com.reservation_system.model.User> userList14 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList17 = userRepository16.getAllUsers();
-        com.reservation_system.model.Guest guest23 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest23 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean24 = guest23.requiresDepartmentApproval();
         java.lang.String str25 = guest23.getUserType();
         java.lang.String str26 = guest23.getUserType();
         guest23.setApproved(true);
         java.lang.String str29 = guest23.getUserType();
         userRepository16.addUser((com.reservation_system.model.User) guest23);
-        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList33 = userRepository32.getAllUsers();
         int int34 = userRepository32.getNextID();
         boolean boolean36 = userRepository32.emailExists("headlabcoordinator");
@@ -5341,7 +5341,7 @@ public class RegressionTest1Test {
         boolean boolean41 = userRepository32.emailExists("Alice");
         boolean boolean43 = userRepository32.emailExists("Guest");
         boolean boolean45 = userRepository32.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository47 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository47 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean49 = userRepository47.emailExists("Alice");
         com.reservation_system.model.Researcher researcher55 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean56 = researcher55.isApproved();
@@ -5428,7 +5428,7 @@ public class RegressionTest1Test {
     public void test0880() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0880");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (byte) -1, "demo/data/test-users.csv", "Alice", "faculty", true);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) (byte) -1, "data/test-userrepo.csv", "Alice", "faculty", true);
         java.lang.String str6 = researcher5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Researcher" + "'", str6, "Researcher");
     }
@@ -5453,7 +5453,7 @@ public class RegressionTest1Test {
     public void test0883() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0883");
-        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) 'a', "", "labmanager", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Researcher researcher5 = new com.reservation_system.model.Researcher((int) 'a', "", "labmanager", "data/test-userrepo.csv", true);
         researcher5.setApproved(false);
         researcher5.setApproved(false);
     }
@@ -5471,7 +5471,7 @@ public class RegressionTest1Test {
     public void test0885() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0885");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -5513,7 +5513,7 @@ public class RegressionTest1Test {
     public void test0889() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0889");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 0, "Password1!", "demo/data/test-users.csv", "student", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (short) 0, "Password1!", "data/test-userrepo.csv", "student", false);
         guest5.setApproved(true);
     }
 
@@ -5530,7 +5530,7 @@ public class RegressionTest1Test {
     public void test0891() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0891");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -5567,7 +5567,7 @@ public class RegressionTest1Test {
     public void test0894() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0894");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.Optional<com.reservation_system.model.User> userOptional3 = userRepository1.findByEmail("hi!");
         boolean boolean4 = userRepository1.headLabCoordinatorExists();
         java.util.Optional<com.reservation_system.model.User> userOptional6 = userRepository1.findByEmail("");
@@ -5589,20 +5589,20 @@ public class RegressionTest1Test {
     public void test0895() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0895");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository4 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository4 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher10 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository4.addUser((com.reservation_system.model.User) researcher10);
         java.util.List<com.reservation_system.model.User> userList12 = userRepository4.getAllUsers();
-        com.reservation_system.model.Guest guest18 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest18 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean19 = guest18.requiresDepartmentApproval();
         userRepository4.addUser((com.reservation_system.model.User) guest18);
         boolean boolean22 = userRepository4.emailExists("Alice");
         int int23 = userRepository4.getNextID();
-        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository25 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean27 = userRepository25.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository29 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList30 = userRepository29.getAllUsers();
         int int31 = userRepository29.getNextID();
         java.util.List<com.reservation_system.model.User> userList32 = userRepository29.getAllUsers();
@@ -5643,11 +5643,11 @@ public class RegressionTest1Test {
     public void test0897() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0897");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
@@ -5673,21 +5673,21 @@ public class RegressionTest1Test {
     public void test0899() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0899");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
         java.util.Optional<com.reservation_system.model.User> userOptional21 = userRepository1.findByEmail("hi!");
         int int22 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher30 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository24.addUser((com.reservation_system.model.User) researcher30);
         int int32 = userRepository24.getNextID();
-        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository34 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int35 = userRepository34.getNextID();
         boolean boolean36 = userRepository34.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest42 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -5697,19 +5697,19 @@ public class RegressionTest1Test {
         java.util.List<com.reservation_system.model.User> userList47 = userRepository34.getAllUsers();
         userRepository24.saveAllUsers(userList47);
         userRepository1.saveAllUsers(userList47);
-        com.reservation_system.repository.UserRepository userRepository51 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository51 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean53 = userRepository51.emailExists("Password1!");
         com.reservation_system.model.Faculty faculty59 = new com.reservation_system.model.Faculty((-1), "headlabcoordinator", "Student", "", false);
         userRepository51.addUser((com.reservation_system.model.User) faculty59);
         faculty59.setApproved(true);
         java.lang.String str63 = faculty59.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) faculty59);
-        com.reservation_system.repository.UserRepository userRepository66 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository66 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher72 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository66.addUser((com.reservation_system.model.User) researcher72);
         java.util.Optional<com.reservation_system.model.User> userOptional75 = userRepository66.findByEmail("alice@example.com");
         java.util.List<com.reservation_system.model.User> userList76 = userRepository66.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository78 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository78 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int79 = userRepository78.getNextID();
         int int80 = userRepository78.getNextID();
         com.reservation_system.model.HeadLabCoordinator headLabCoordinator86 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 1, "", "", "guest", false);
@@ -5741,7 +5741,7 @@ public class RegressionTest1Test {
     public void test0900() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0900");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -5753,7 +5753,7 @@ public class RegressionTest1Test {
         java.lang.String str14 = student5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "guest" + "'", str9, "guest");
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + 1 + "'", int11 == 1);
@@ -5766,7 +5766,7 @@ public class RegressionTest1Test {
     public void test0901() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0901");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "demo/data/test-users.csv", "guest", "labmanager", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) (short) -1, "data/test-userrepo.csv", "guest", "labmanager", true);
         boolean boolean6 = headLabCoordinator5.isApproved();
         java.lang.String str7 = headLabCoordinator5.getUserType();
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -5784,7 +5784,7 @@ public class RegressionTest1Test {
     public void test0903() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0903");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -5812,7 +5812,7 @@ public class RegressionTest1Test {
     public void test0905() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0905");
-        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(1, "student", "demo/data/test-users.csv", "hi!", false);
+        com.reservation_system.model.LabManager labManager5 = new com.reservation_system.model.LabManager(1, "student", "data/test-userrepo.csv", "hi!", false);
         java.lang.String str6 = labManager5.getUserType();
         int int7 = labManager5.getID();
         java.lang.String str8 = labManager5.getUserType();
@@ -5925,7 +5925,7 @@ public class RegressionTest1Test {
     public void test0915() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0915");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(5, "Faculty", "Student", "demo/data/test-users.csv", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(5, "Faculty", "Student", "data/test-userrepo.csv", false);
     }
 
     @Test
@@ -5945,7 +5945,7 @@ public class RegressionTest1Test {
     public void test0917() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0917");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -5968,19 +5968,19 @@ public class RegressionTest1Test {
     public void test0918() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0918");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         boolean boolean20 = userRepository11.headLabCoordinatorExists();
         boolean boolean22 = userRepository11.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository24 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean26 = userRepository24.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository28 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList29 = userRepository28.getAllUsers();
         int int30 = userRepository28.getNextID();
         java.util.List<com.reservation_system.model.User> userList31 = userRepository28.getAllUsers();
@@ -5989,7 +5989,7 @@ public class RegressionTest1Test {
         java.util.List<com.reservation_system.model.User> userList34 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList34);
         java.util.Optional<com.reservation_system.model.User> userOptional37 = userRepository1.findByEmail("hi!");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator43 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "demo/data/test-users.csv", "alice@example.com", "student", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator43 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) -1, "data/test-userrepo.csv", "alice@example.com", "student", true);
         java.lang.String str44 = headLabCoordinator43.getEmail();
         java.lang.String str45 = headLabCoordinator43.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) headLabCoordinator43);
@@ -6024,21 +6024,21 @@ public class RegressionTest1Test {
     public void test0921() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0921");
-        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) (byte) 10, "demo/data/test-users.csv", "hi!", "Researcher", true);
+        com.reservation_system.model.Faculty faculty5 = new com.reservation_system.model.Faculty((int) (byte) 10, "data/test-userrepo.csv", "hi!", "Researcher", true);
     }
 
     @Test
     public void test0922() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0922");
-        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) '#', "demo/data/test-users.csv", "", "guest", true);
+        com.reservation_system.model.HeadLabCoordinator headLabCoordinator5 = new com.reservation_system.model.HeadLabCoordinator((int) '#', "data/test-userrepo.csv", "", "guest", true);
     }
 
     @Test
     public void test0923() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0923");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -6059,13 +6059,13 @@ public class RegressionTest1Test {
     public void test0924() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0924");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         java.lang.String str6 = student5.getPassword();
         int int7 = student5.getID();
         java.lang.String str8 = student5.getEmail();
         java.lang.String str9 = student5.getUserType();
         int int10 = student5.getID();
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "demo/data/test-users.csv" + "'", str6, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "data/test-userrepo.csv" + "'", str6, "data/test-userrepo.csv");
         org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "Password1!" + "'", str8, "Password1!");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "Student" + "'", str9, "Student");
@@ -6109,7 +6109,7 @@ public class RegressionTest1Test {
     public void test0927() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0927");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 100, "Student", "Guest", "demo/data/test-users.csv", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest((int) (byte) 100, "Student", "Guest", "data/test-userrepo.csv", false);
         java.lang.String str6 = guest5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Guest" + "'", str6, "Guest");
     }
@@ -6125,7 +6125,7 @@ public class RegressionTest1Test {
     public void test0929() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0929");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         guest5.setApproved(false);
         int int8 = guest5.getID();
         java.lang.String str9 = guest5.getPassword();
@@ -6157,16 +6157,16 @@ public class RegressionTest1Test {
     public void test0932() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0932");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         boolean boolean19 = userRepository1.emailExists("Alice");
         int int20 = userRepository1.getNextID();
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList23 = userRepository22.getAllUsers();
         userRepository1.saveAllUsers(userList23);
         java.util.Optional<com.reservation_system.model.User> userOptional26 = userRepository1.findByEmail("Password1!");
@@ -6235,11 +6235,11 @@ public class RegressionTest1Test {
     public void test0938() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0938");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
@@ -6253,7 +6253,7 @@ public class RegressionTest1Test {
         userRepository1.addUser((com.reservation_system.model.User) headLabCoordinator28);
         boolean boolean36 = userRepository1.emailExists("researcher");
         java.util.Optional<com.reservation_system.model.User> userOptional38 = userRepository1.findByEmail("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository40 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository40 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher46 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository40.addUser((com.reservation_system.model.User) researcher46);
         boolean boolean49 = userRepository40.emailExists("labmanager");
@@ -6293,7 +6293,7 @@ public class RegressionTest1Test {
     public void test0940() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0940");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean4 = userRepository1.emailExists("Alice");
         boolean boolean5 = userRepository1.headLabCoordinatorExists();
@@ -6319,7 +6319,7 @@ public class RegressionTest1Test {
     public void test0942() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0942");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         guest5.setApproved(false);
         boolean boolean8 = guest5.requiresDepartmentApproval();
         java.lang.String str9 = guest5.getUserType();
@@ -6334,7 +6334,7 @@ public class RegressionTest1Test {
     public void test0943() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0943");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(52, "headlabcoordinator", "demo/data/test-users.csv", "faculty", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(52, "headlabcoordinator", "data/test-userrepo.csv", "faculty", false);
         java.lang.String str6 = guest5.getUserType();
         java.lang.String str7 = guest5.getName();
         java.lang.String str8 = guest5.getName();
@@ -6356,7 +6356,7 @@ public class RegressionTest1Test {
     public void test0945() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0945");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         boolean boolean10 = userRepository1.emailExists("labmanager");
@@ -6371,16 +6371,16 @@ public class RegressionTest1Test {
     public void test0946() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0946");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest8 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean9 = guest8.requiresDepartmentApproval();
         java.lang.String str10 = guest8.getUserType();
         java.lang.String str11 = guest8.getUserType();
         guest8.setApproved(true);
         java.lang.String str14 = guest8.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) guest8);
-        com.reservation_system.repository.UserRepository userRepository17 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository17 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList18 = userRepository17.getAllUsers();
         int int19 = userRepository17.getNextID();
         boolean boolean21 = userRepository17.emailExists("headlabcoordinator");
@@ -6389,7 +6389,7 @@ public class RegressionTest1Test {
         boolean boolean26 = userRepository17.emailExists("Alice");
         boolean boolean28 = userRepository17.emailExists("Guest");
         boolean boolean30 = userRepository17.emailExists("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository32 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean34 = userRepository32.emailExists("Alice");
         com.reservation_system.model.Researcher researcher40 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean41 = researcher40.isApproved();
@@ -6429,7 +6429,7 @@ public class RegressionTest1Test {
     public void test0947() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0947");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         int int3 = userRepository1.getNextID();
         com.reservation_system.model.HeadLabCoordinator headLabCoordinator9 = new com.reservation_system.model.HeadLabCoordinator((int) (byte) 1, "", "", "guest", false);
@@ -6468,7 +6468,7 @@ public class RegressionTest1Test {
     public void test0950() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0950");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -6476,7 +6476,7 @@ public class RegressionTest1Test {
         userRepository1.addUser((com.reservation_system.model.User) researcher9);
         boolean boolean13 = userRepository1.headLabCoordinatorExists();
         java.util.Optional<com.reservation_system.model.User> userOptional15 = userRepository1.findByEmail("");
-        com.reservation_system.repository.UserRepository userRepository17 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository17 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList18 = userRepository17.getAllUsers();
         int int19 = userRepository17.getNextID();
         boolean boolean21 = userRepository17.emailExists("headlabcoordinator");
@@ -6511,23 +6511,23 @@ public class RegressionTest1Test {
     public void test0951() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0951");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Faculty faculty7 = new com.reservation_system.model.Faculty(5, "researcher", "guest", "faculty", true);
         java.lang.String str8 = faculty7.getUserType();
         java.lang.String str9 = faculty7.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) faculty7);
-        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository12 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean14 = userRepository12.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository16 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList17 = userRepository16.getAllUsers();
         int int18 = userRepository16.getNextID();
         java.util.List<com.reservation_system.model.User> userList19 = userRepository16.getAllUsers();
         userRepository12.saveAllUsers(userList19);
         userRepository1.saveAllUsers(userList19);
         boolean boolean22 = userRepository1.headLabCoordinatorExists();
-        boolean boolean24 = userRepository1.emailExists("demo/data/test-users.csv");
+        boolean boolean24 = userRepository1.emailExists("data/test-userrepo.csv");
         java.util.Optional<com.reservation_system.model.User> userOptional26 = userRepository1.findByEmail("alice@example.com");
-        com.reservation_system.model.Guest guest32 = new com.reservation_system.model.Guest(5, "guest", "demo/data/test-users.csv", "Faculty", false);
+        com.reservation_system.model.Guest guest32 = new com.reservation_system.model.Guest(5, "guest", "data/test-userrepo.csv", "Faculty", false);
         userRepository1.addUser((com.reservation_system.model.User) guest32);
         com.reservation_system.model.Faculty faculty39 = new com.reservation_system.model.Faculty((int) (short) -1, "faculty", "Student", "hi!", true);
         userRepository1.addUser((com.reservation_system.model.User) faculty39);
@@ -6546,11 +6546,11 @@ public class RegressionTest1Test {
     public void test0952() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0952");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         java.util.Optional<com.reservation_system.model.User> userOptional19 = userRepository1.findByEmail("guest");
@@ -6648,11 +6648,11 @@ public class RegressionTest1Test {
     public void test0962() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0962");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
@@ -6671,7 +6671,7 @@ public class RegressionTest1Test {
     public void test0963() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0963");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -6682,7 +6682,7 @@ public class RegressionTest1Test {
         boolean boolean14 = userRepository1.emailExists("headlabcoordinator");
         java.util.List<com.reservation_system.model.User> userList15 = userRepository1.getAllUsers();
         java.util.Optional<com.reservation_system.model.User> userOptional17 = userRepository1.findByEmail("Faculty");
-        com.reservation_system.model.Student student23 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student23 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str24 = student23.getUserType();
         java.lang.String str25 = student23.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) student23);
@@ -6710,7 +6710,7 @@ public class RegressionTest1Test {
     public void test0964() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0964");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         java.lang.String str6 = student5.getEmail();
         boolean boolean7 = student5.isApproved();
         java.lang.String str8 = student5.getEmail();
@@ -6766,7 +6766,7 @@ public class RegressionTest1Test {
     public void test0970() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0970");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -6776,7 +6776,7 @@ public class RegressionTest1Test {
         java.util.List<com.reservation_system.model.User> userList14 = userRepository1.getAllUsers();
         int int15 = userRepository1.getNextID();
         java.util.List<com.reservation_system.model.User> userList16 = userRepository1.getAllUsers();
-        com.reservation_system.model.LabManager labManager22 = new com.reservation_system.model.LabManager(10, "Password1!", "demo/data/test-users.csv", "Guest", true);
+        com.reservation_system.model.LabManager labManager22 = new com.reservation_system.model.LabManager(10, "Password1!", "data/test-userrepo.csv", "Guest", true);
         java.lang.String str23 = labManager22.getUserType();
         labManager22.setApproved(false);
         userRepository1.addUser((com.reservation_system.model.User) labManager22);
@@ -6800,7 +6800,7 @@ public class RegressionTest1Test {
     public void test0971() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0971");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getName();
@@ -6811,7 +6811,7 @@ public class RegressionTest1Test {
         java.lang.String str13 = student5.getEmail();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
         org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Student" + "'", str7, "Student");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "demo/data/test-users.csv" + "'", str8, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "data/test-userrepo.csv" + "'", str8, "data/test-userrepo.csv");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "guest" + "'", str9, "guest");
         org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Student" + "'", str10, "Student");
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + 1 + "'", int11 == 1);
@@ -6822,7 +6822,7 @@ public class RegressionTest1Test {
     public void test0972() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0972");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -6867,7 +6867,7 @@ public class RegressionTest1Test {
     public void test0975() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0975");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str6 = student5.getUserType();
         java.lang.String str7 = student5.getUserType();
         java.lang.String str8 = student5.getUserType();
@@ -6884,12 +6884,12 @@ public class RegressionTest1Test {
     public void test0976() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0976");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         boolean boolean11 = userRepository1.emailExists("hi!");
-        com.reservation_system.model.LabManager labManager17 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "demo/data/test-users.csv", false);
+        com.reservation_system.model.LabManager labManager17 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "data/test-userrepo.csv", false);
         userRepository1.addUser((com.reservation_system.model.User) labManager17);
         labManager17.setApproved(true);
         org.junit.Assert.assertNotNull(userList9);
@@ -6915,8 +6915,8 @@ public class RegressionTest1Test {
             System.out.format("%n%s%n", "RegressionTest1.test0978");
         // The following exception was thrown during execution in test generation
         try {
-            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("demo/data/test-users.csv", (int) (short) 100, "", "Alice", "hi!", true);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: demo/data/test-users.csv");
+            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("data/test-userrepo.csv", (int) (short) 100, "", "Alice", "hi!", true);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: data/test-userrepo.csv");
         } catch (java.lang.IllegalArgumentException e) {
             // Expected exception.
         }
@@ -6926,7 +6926,7 @@ public class RegressionTest1Test {
     public void test0979() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0979");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int2 = userRepository1.getNextID();
         boolean boolean3 = userRepository1.headLabCoordinatorExists();
         com.reservation_system.model.Guest guest9 = new com.reservation_system.model.Guest((int) (byte) -1, "hi!", "", "Password1!", false);
@@ -6949,12 +6949,12 @@ public class RegressionTest1Test {
     public void test0980() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0980");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         boolean boolean11 = userRepository1.emailExists("hi!");
-        com.reservation_system.model.LabManager labManager17 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "demo/data/test-users.csv", false);
+        com.reservation_system.model.LabManager labManager17 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "data/test-userrepo.csv", false);
         userRepository1.addUser((com.reservation_system.model.User) labManager17);
         int int19 = labManager17.getID();
         java.lang.String str20 = labManager17.getUserType();
@@ -6981,11 +6981,11 @@ public class RegressionTest1Test {
     public void test0982() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0982");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest15 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean16 = guest15.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) guest15);
         java.util.Optional<com.reservation_system.model.User> userOptional19 = userRepository1.findByEmail("Student");
@@ -7007,7 +7007,7 @@ public class RegressionTest1Test {
     public void test0984() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0984");
-        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "demo/data/test-users.csv", "researcher", false);
+        com.reservation_system.model.Guest guest5 = new com.reservation_system.model.Guest(0, "Password1!", "data/test-userrepo.csv", "researcher", false);
         boolean boolean6 = guest5.requiresDepartmentApproval();
         java.lang.String str7 = guest5.getUserType();
         java.lang.String str8 = guest5.getUserType();
@@ -7022,14 +7022,14 @@ public class RegressionTest1Test {
         org.junit.Assert.assertEquals("'" + str8 + "' != '" + "Guest" + "'", str8, "Guest");
         org.junit.Assert.assertEquals("'" + str9 + "' != '" + "Password1!" + "'", str9, "Password1!");
         org.junit.Assert.assertEquals("'" + str12 + "' != '" + "Guest" + "'", str12, "Guest");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "demo/data/test-users.csv" + "'", str15, "demo/data/test-users.csv");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "data/test-userrepo.csv" + "'", str15, "data/test-userrepo.csv");
     }
 
     @Test
     public void test0985() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0985");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
@@ -7039,7 +7039,7 @@ public class RegressionTest1Test {
         java.lang.String str18 = student16.getEmail();
         boolean boolean19 = student16.requiresDepartmentApproval();
         userRepository1.addUser((com.reservation_system.model.User) student16);
-        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository22 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher28 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository22.addUser((com.reservation_system.model.User) researcher28);
         java.lang.String str30 = researcher28.getUserType();
@@ -7072,12 +7072,12 @@ public class RegressionTest1Test {
     public void test0987() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0987");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         int int9 = userRepository1.getNextID();
         java.util.Optional<com.reservation_system.model.User> userOptional11 = userRepository1.findByEmail("headlabcoordinator");
-        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository13 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList14 = userRepository13.getAllUsers();
         int int15 = userRepository13.getNextID();
         boolean boolean17 = userRepository13.emailExists("headlabcoordinator");
@@ -7086,7 +7086,7 @@ public class RegressionTest1Test {
         boolean boolean22 = userRepository13.emailExists("Alice");
         boolean boolean24 = userRepository13.emailExists("Guest");
         boolean boolean26 = userRepository13.emailExists("headlabcoordinator");
-        com.reservation_system.model.Student student32 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "demo/data/test-users.csv", true);
+        com.reservation_system.model.Student student32 = new com.reservation_system.model.Student(0, "Guest", "Password1!", "data/test-userrepo.csv", true);
         userRepository13.addUser((com.reservation_system.model.User) student32);
         userRepository1.addUser((com.reservation_system.model.User) student32);
         java.util.List<com.reservation_system.model.User> userList35 = userRepository1.getAllUsers();
@@ -7107,7 +7107,7 @@ public class RegressionTest1Test {
     public void test0988() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0988");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList2 = userRepository1.getAllUsers();
         int int3 = userRepository1.getNextID();
         boolean boolean5 = userRepository1.emailExists("headlabcoordinator");
@@ -7118,12 +7118,12 @@ public class RegressionTest1Test {
         boolean boolean14 = userRepository1.emailExists("headlabcoordinator");
         java.util.List<com.reservation_system.model.User> userList15 = userRepository1.getAllUsers();
         java.util.Optional<com.reservation_system.model.User> userOptional17 = userRepository1.findByEmail("Faculty");
-        com.reservation_system.model.Student student23 = new com.reservation_system.model.Student(1, "demo/data/test-users.csv", "alice@example.com", "guest", false);
+        com.reservation_system.model.Student student23 = new com.reservation_system.model.Student(1, "data/test-userrepo.csv", "alice@example.com", "guest", false);
         java.lang.String str24 = student23.getUserType();
         java.lang.String str25 = student23.getUserType();
         userRepository1.addUser((com.reservation_system.model.User) student23);
         java.util.Optional<com.reservation_system.model.User> userOptional28 = userRepository1.findByEmail("guest");
-        com.reservation_system.repository.UserRepository userRepository30 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository30 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher36 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository30.addUser((com.reservation_system.model.User) researcher36);
         boolean boolean39 = userRepository30.emailExists("headlabcoordinator");
@@ -7166,22 +7166,22 @@ public class RegressionTest1Test {
     public void test0991() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0991");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.List<com.reservation_system.model.User> userList19 = userRepository11.getAllUsers();
         userRepository1.saveAllUsers(userList19);
         boolean boolean21 = userRepository1.headLabCoordinatorExists();
-        com.reservation_system.repository.UserRepository userRepository23 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository23 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList24 = userRepository23.getAllUsers();
         int int25 = userRepository23.getNextID();
         boolean boolean27 = userRepository23.emailExists("headlabcoordinator");
         java.util.Optional<com.reservation_system.model.User> userOptional29 = userRepository23.findByEmail("student");
-        com.reservation_system.repository.UserRepository userRepository31 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository31 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList32 = userRepository31.getAllUsers();
         int int33 = userRepository31.getNextID();
         boolean boolean35 = userRepository31.emailExists("headlabcoordinator");
@@ -7220,15 +7220,15 @@ public class RegressionTest1Test {
     public void test0992() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0992");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
         boolean boolean10 = userRepository1.headLabCoordinatorExists();
         boolean boolean12 = userRepository1.emailExists("guest");
-        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository14 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean16 = userRepository14.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository18 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList19 = userRepository18.getAllUsers();
         int int20 = userRepository18.getNextID();
         java.util.List<com.reservation_system.model.User> userList21 = userRepository18.getAllUsers();
@@ -7257,7 +7257,7 @@ public class RegressionTest1Test {
     public void test0993() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0993");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
         com.reservation_system.model.Researcher researcher9 = new com.reservation_system.model.Researcher((int) 'a', "labmanager", "faculty", "", false);
         boolean boolean10 = researcher9.isApproved();
@@ -7282,7 +7282,7 @@ public class RegressionTest1Test {
     public void test0994() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0994");
-        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("headlabcoordinator", 98, "Researcher", "headlabcoordinator", "demo/data/test-users.csv", false);
+        com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("headlabcoordinator", 98, "Researcher", "headlabcoordinator", "data/test-userrepo.csv", false);
         org.junit.Assert.assertNotNull(user6);
     }
 
@@ -7290,9 +7290,9 @@ public class RegressionTest1Test {
     public void test0995() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0995");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         boolean boolean3 = userRepository1.emailExists("Alice");
-        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository5 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         java.util.List<com.reservation_system.model.User> userList6 = userRepository5.getAllUsers();
         int int7 = userRepository5.getNextID();
         java.util.List<com.reservation_system.model.User> userList8 = userRepository5.getAllUsers();
@@ -7311,8 +7311,8 @@ public class RegressionTest1Test {
             System.out.format("%n%s%n", "RegressionTest1.test0996");
         // The following exception was thrown during execution in test generation
         try {
-            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("demo/data/test-users.csv", 52, "researcher", "Faculty", "Password1!", false);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: demo/data/test-users.csv");
+            com.reservation_system.model.User user6 = com.reservation_system.patterns.factory.UserFactory.createUser("data/test-userrepo.csv", 52, "researcher", "Faculty", "Password1!", false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Invalid user type: data/test-userrepo.csv");
         } catch (java.lang.IllegalArgumentException e) {
             // Expected exception.
         }
@@ -7333,7 +7333,7 @@ public class RegressionTest1Test {
     public void test0998() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0998");
-        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(10, "demo/data/test-users.csv", "Password1!", "alice@example.com", true);
+        com.reservation_system.model.Student student5 = new com.reservation_system.model.Student(10, "data/test-userrepo.csv", "Password1!", "alice@example.com", true);
         java.lang.String str6 = student5.getUserType();
         org.junit.Assert.assertEquals("'" + str6 + "' != '" + "Student" + "'", str6, "Student");
     }
@@ -7342,11 +7342,11 @@ public class RegressionTest1Test {
     public void test0999() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0999");
-        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository1 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher7 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository1.addUser((com.reservation_system.model.User) researcher7);
         java.util.List<com.reservation_system.model.User> userList9 = userRepository1.getAllUsers();
-        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository11 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher17 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository11.addUser((com.reservation_system.model.User) researcher17);
         java.util.Optional<com.reservation_system.model.User> userOptional20 = userRepository11.findByEmail("alice@example.com");
@@ -7354,17 +7354,17 @@ public class RegressionTest1Test {
         userRepository1.saveAllUsers(userList21);
         com.reservation_system.model.Student student28 = new com.reservation_system.model.Student((int) (short) 100, "guest", "Guest", "faculty", false);
         userRepository1.addUser((com.reservation_system.model.User) student28);
-        com.reservation_system.repository.UserRepository userRepository31 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository31 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         int int32 = userRepository31.getNextID();
         int int33 = userRepository31.getNextID();
         java.util.List<com.reservation_system.model.User> userList34 = userRepository31.getAllUsers();
         userRepository1.saveAllUsers(userList34);
-        com.reservation_system.repository.UserRepository userRepository37 = new com.reservation_system.repository.UserRepository("demo/data/test-users.csv");
+        com.reservation_system.repository.UserRepository userRepository37 = new com.reservation_system.repository.UserRepository("data/test-userrepo.csv");
         com.reservation_system.model.Researcher researcher43 = new com.reservation_system.model.Researcher(5, "hi!", "labmanager", "Guest", false);
         userRepository37.addUser((com.reservation_system.model.User) researcher43);
         java.util.List<com.reservation_system.model.User> userList45 = userRepository37.getAllUsers();
         boolean boolean47 = userRepository37.emailExists("hi!");
-        com.reservation_system.model.LabManager labManager53 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "demo/data/test-users.csv", false);
+        com.reservation_system.model.LabManager labManager53 = new com.reservation_system.model.LabManager(1, "Researcher", "labmanager", "data/test-userrepo.csv", false);
         userRepository37.addUser((com.reservation_system.model.User) labManager53);
         userRepository1.addUser((com.reservation_system.model.User) labManager53);
         java.util.Optional<com.reservation_system.model.User> userOptional57 = userRepository1.findByEmail("alice@example.com");
