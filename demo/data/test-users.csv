@@ -2,4 +2,4 @@ name,id,email,password,type,approved
 t1,1,t1@yorku.ca,T1@test!,Student,true
 t2,2,t2@yorku.ca,T2@test!,Faculty,true
 t3,3,t3@yorku.ca,T3@test!,Guest,true
-nextid,4,nextid@gmail.com,Strong1!,Guest,true
+t4,4,t4@gmail.com,Strong1!,Guest,true

@@ -16,7 +16,7 @@ public class EquipmentRegistry {
 
     public void addEquipment(Equipment e) {
         equipment.add(e);
-        List<Equipment> snapshot = Collections.unmodifiableList(equipment);
+        List<Equipment> snapshot = new ArrayList<>(equipment);
         for (EquipmentObserver o : observers) {
             o.onEquipmentListChanged(snapshot);
         }
@@ -25,7 +25,7 @@ public class EquipmentRegistry {
     public void replaceAll(List<Equipment> newList) {
         equipment.clear();
         equipment.addAll(newList);
-        List<Equipment> snapshot = Collections.unmodifiableList(equipment);
+        List<Equipment> snapshot = new ArrayList<>(equipment);
         for (EquipmentObserver o : observers) {
             o.onEquipmentListChanged(snapshot);
         }

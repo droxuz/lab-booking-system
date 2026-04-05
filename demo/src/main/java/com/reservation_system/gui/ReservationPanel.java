@@ -5,6 +5,7 @@ import com.reservation_system.Equipment.EquipmentStatus;
 import com.reservation_system.model.Reservation;
 import com.reservation_system.model.User;
 import com.reservation_system.patterns.observer.EquipmentObserver;
+import com.reservation_system.patterns.observer.EquipmentRegistry;
 import com.reservation_system.patterns.strategy.CreditCardPayment;
 import com.reservation_system.patterns.strategy.DebitCardPayment;
 import com.reservation_system.patterns.strategy.InstitutionalPayment;
@@ -13,11 +14,14 @@ import com.reservation_system.services.ReservationService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.reservation_system.patterns.strategy.GrantPayment;
 
 public class ReservationPanel extends JPanel implements EquipmentObserver {
 
@@ -26,6 +30,7 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
 
     private final MainUI mainUI;
     private final ReservationService reservationService;
+    private final EquipmentRegistry equipmentRegistry;
     private User currentUser;
     private List<Equipment> currentEquipmentList;
 
@@ -41,9 +46,11 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
     private final JSpinner dateSpinner;
     private final JSpinner hourOfDaySpinner;
 
-    public ReservationPanel(MainUI mainUI, ReservationService reservationService) {
+    public ReservationPanel(MainUI mainUI, ReservationService reservationService,
+                            EquipmentRegistry equipmentRegistry) {
         this.mainUI             = mainUI;
         this.reservationService = reservationService;
+        this.equipmentRegistry  = equipmentRegistry;
 
         setLayout(new BorderLayout(8, 8));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -80,7 +87,7 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
 
         hoursSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 12, 1));
         paymentBox   = new JComboBox<>(new String[]{
-                "Credit Card", "Debit Card", "Institutional Account"
+                "Credit Card", "Debit Card", "Institutional Account", "Research Grant"
         });
 
         JButton bookBtn       = new JButton("Book & Pay Deposit");
@@ -127,6 +134,8 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
+        this.currentEquipmentList = equipmentRegistry.getAll();
+        refreshEquipmentTable();
         refreshReservations();
     }
 
@@ -300,6 +309,7 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
         switch ((String) paymentBox.getSelectedItem()) {
             case "Debit Card":            return new DebitCardPayment();
             case "Institutional Account": return new InstitutionalPayment();
+            case "Research Grant":        return new GrantPayment();
             default:                      return new CreditCardPayment();
         }
     }
@@ -307,7 +317,8 @@ public class ReservationPanel extends JPanel implements EquipmentObserver {
     private List<Equipment> getAvailableEquipment() {
         if (currentEquipmentList == null) return List.of();
         return currentEquipmentList.stream()
-                .filter(e -> e.getEquipmentStatus() == EquipmentStatus.AVAILABLE)
+                .filter(e -> e.getEquipmentStatus() != EquipmentStatus.DISABLED
+                          && e.getEquipmentStatus() != EquipmentStatus.MAINTENANCE)
                 .collect(Collectors.toList());
     }
 

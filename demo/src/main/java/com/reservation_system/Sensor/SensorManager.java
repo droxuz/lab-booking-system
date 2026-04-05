@@ -27,6 +27,11 @@ public class SensorManager {
     public static SensorManager getInstance() {
         if (instance == null) {
             instance = new SensorManager();
+            // Wire observers exactly once here — not in Facade constructor.
+            // This prevents duplicate log entries when multiple Facade instances
+            // are created (e.g. opening the sensor window more than once).
+            instance.addObserver(new UsageLogObserver(instance.dataStore));
+            instance.addObserver(new EquipmentStatusObserver(instance.dataStore));
         }
         return instance;
     }

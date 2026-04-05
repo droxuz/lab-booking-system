@@ -41,7 +41,7 @@ public class MainUI extends JFrame {
         coordinatorAccountService = new CoordinatorAccountService(userRepository);
         equipmentManagementService = new EquipmentManagementService();
         equipmentRegistry         = new EquipmentRegistry();
-        reservationService        = new ReservationService();
+        reservationService        = new ReservationService(userRepository, equipmentRegistry);
 
         cardLayout = new CardLayout();
         mainPanel  = new JPanel(cardLayout);
@@ -50,11 +50,12 @@ public class MainUI extends JFrame {
         registerPanel           = new RegisterPanel(this, registrationService);
         dashboardPanel          = new DashboardPanel(this);
         generateLabManagerPanel = new GenerateLabManagerPanel(this, coordinatorAccountService);
-        labManagerPanel = new LabManagerPanel(this, equipmentManagementService);
-        reservationPanel        = new ReservationPanel(this, reservationService);
+        labManagerPanel         = new LabManagerPanel(this, equipmentManagementService, equipmentRegistry);
+        reservationPanel        = new ReservationPanel(this, reservationService, equipmentRegistry);
 
         equipmentRegistry.addObserver(reservationPanel);
         labManagerPanel.loadEquipmentFromCSV();
+        reservationService.loadAll();
 
         mainPanel.add(loginPanel,              "login");
         mainPanel.add(registerPanel,           "register");
