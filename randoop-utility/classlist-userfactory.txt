@@ -1,0 +1,7 @@
+com.reservation_system.patterns.factory.UserFactory
+com.reservation_system.model.Student
+com.reservation_system.model.Faculty
+com.reservation_system.model.Researcher
+com.reservation_system.model.Guest
+com.reservation_system.model.HeadLabCoordinator
+com.reservation_system.model.LabManager
