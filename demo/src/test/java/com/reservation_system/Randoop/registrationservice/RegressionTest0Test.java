@@ -1,4 +1,4 @@
-package com.reservation_system.Randoop.registrationservice;
+package com.reservation_system.Randoop.Equipment;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
