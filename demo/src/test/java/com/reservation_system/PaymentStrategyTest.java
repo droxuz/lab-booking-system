@@ -1,8 +1,12 @@
 package com.reservation_system;
 
-import com.reservation_system.patterns.strategy.*;
-
 import org.junit.jupiter.api.Test;
+
+import com.reservation_system.patterns.strategy.CreditCardPayment;
+import com.reservation_system.patterns.strategy.DebitCardPayment;
+import com.reservation_system.patterns.strategy.GrantPayment;
+import com.reservation_system.patterns.strategy.InstitutionalPayment;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PaymentStrategyTest {
