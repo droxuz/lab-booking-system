@@ -22,6 +22,15 @@ public class EquipmentRegistry {
         }
     }
 
+    public void replaceAll(List<Equipment> newList) {
+        equipment.clear();
+        equipment.addAll(newList);
+        List<Equipment> snapshot = Collections.unmodifiableList(equipment);
+        for (EquipmentObserver o : observers) {
+            o.onEquipmentListChanged(snapshot);
+        }
+    }
+
     public List<Equipment> getAll() {
         return Collections.unmodifiableList(equipment);
     }

@@ -80,6 +80,11 @@ public class Equipment {
         this.lastSensorTriggered = sensorType;
     }
 
+    public void setInUseDirectly() {
+        this.equipmentStatus = EquipmentStatus.IN_USE;
+        this.lastUsedTime = LocalDateTime.now();
+    }
+
     public boolean isAvailable() {
         return equipmentStatus == EquipmentStatus.AVAILABLE;
     }

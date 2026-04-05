@@ -1,7 +1,6 @@
 package com.reservation_system.services;
 
 import com.reservation_system.Equipment.Equipment;
-import com.reservation_system.Sensor.SensorType;
 import com.reservation_system.model.Reservation;
 import com.reservation_system.model.User;
 import com.reservation_system.patterns.strategy.PaymentStrategy;
@@ -26,8 +25,8 @@ public class ReservationService {
     }
 
     public Reservation book(User user, Equipment equipment,
-                            int hours, String certificationId,
-                            PaymentStrategy paymentStrategy) {
+                            LocalDateTime startTime, int hours,
+                            String certificationId, PaymentStrategy paymentStrategy) {
         if (!equipment.isAvailable()) {
             throw new IllegalStateException("Equipment is not available.");
         }
@@ -37,12 +36,53 @@ public class ReservationService {
         if (certificationId == null || certificationId.isBlank()) {
             throw new IllegalArgumentException("Student/Staff ID or certification number is required.");
         }
+        if (startTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Start time must be in the future.");
+        }
+        LocalDateTime endTime = startTime.plusHours(hours);
+        if (hasConflict(equipment, startTime, endTime, null)) {
+            throw new IllegalStateException("Equipment is already booked during that time.");
+        }
         equipment.reserve();
         Reservation r = new Reservation(user, equipment,
-                LocalDateTime.now(), hours, getHourlyRate(user), certificationId, paymentStrategy);
+                startTime, hours, getHourlyRate(user), certificationId, paymentStrategy);
         paymentStrategy.pay(r.getDeposit());
         reservations.add(r);
         return r;
+    }
+
+    public void modify(Reservation r, LocalDateTime newStartTime, int newHours) {
+        if (r.getStatus() != Reservation.Status.PENDING) {
+            throw new IllegalStateException("Only pending reservations can be modified.");
+        }
+        if (newStartTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Start time must be in the future.");
+        }
+        if (newHours < 1) {
+            throw new IllegalArgumentException("Must book at least 1 hour.");
+        }
+        LocalDateTime newEnd = newStartTime.plusHours(newHours);
+        if (hasConflict(r.getEquipment(), newStartTime, newEnd, r)) {
+            throw new IllegalStateException("Equipment is already booked during that time.");
+        }
+        r.setStartTime(newStartTime);
+        r.setHours(newHours);
+    }
+
+    public void extend(Reservation r, int extraHours) {
+        if (r.getStatus() != Reservation.Status.ACTIVE) {
+            throw new IllegalStateException("Only active reservations can be extended.");
+        }
+        if (extraHours < 1) {
+            throw new IllegalArgumentException("Must extend by at least 1 hour.");
+        }
+        LocalDateTime newEnd = r.getEndTime().plusHours(extraHours);
+        if (hasConflict(r.getEquipment(), r.getEndTime(), newEnd, r)) {
+            throw new IllegalStateException("Equipment is already booked during the extension period.");
+        }
+        double extensionCost = r.getHourlyRate() * extraHours;
+        r.getPaymentStrategy().pay(extensionCost);
+        r.addHours(extraHours);
     }
 
     public void cancel(Reservation r) {
@@ -61,7 +101,7 @@ public class ReservationService {
         if (balance > 0) {
             r.getPaymentStrategy().pay(balance);
         }
-        r.getEquipment().checkIn(SensorType.BEING_USED);
+        r.getEquipment().setInUseDirectly();
         r.setStatus(Reservation.Status.ACTIVE);
     }
 
@@ -69,5 +109,15 @@ public class ReservationService {
         return reservations.stream()
                 .filter(r -> r.getUser().getID() == user.getID())
                 .collect(Collectors.toList());
+    }
+
+    private boolean hasConflict(Equipment equipment, LocalDateTime start,
+                                 LocalDateTime end, Reservation exclude) {
+        return reservations.stream()
+                .filter(r -> r != exclude)
+                .filter(r -> r.getEquipment().equals(equipment))
+                .filter(r -> r.getStatus() == Reservation.Status.PENDING
+                          || r.getStatus() == Reservation.Status.ACTIVE)
+                .anyMatch(r -> start.isBefore(r.getEndTime()) && end.isAfter(r.getStartTime()));
     }
 }

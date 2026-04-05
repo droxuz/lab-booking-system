@@ -3,9 +3,9 @@ package com.reservation_system.gui;
 import com.reservation_system.Equipment.Equipment;
 import com.reservation_system.Equipment.EquipmentType;
 import com.reservation_system.Equipment.LabLocation;
-import com.reservation_system.Sensor.SensorGUI;
 import com.reservation_system.model.LabManager;
 import com.reservation_system.model.User;
+import com.reservation_system.patterns.observer.EquipmentRegistry;
 import com.reservation_system.services.EquipmentManagementService;
 
 import javax.swing.*;
@@ -17,6 +17,7 @@ public class LabManagerPanel extends JPanel {
 
     private final MainUI mainUI;
     private final EquipmentManagementService equipmentManagementService;
+    private final EquipmentRegistry equipmentRegistry;
 
     private User currentUser;
 
@@ -31,14 +32,15 @@ public class LabManagerPanel extends JPanel {
     private final JTextArea statusArea;
 
     public LabManagerPanel(MainUI mainUI,
-                           EquipmentManagementService equipmentManagementService) {
+                           EquipmentManagementService equipmentManagementService,
+                           EquipmentRegistry equipmentRegistry) {
         this.mainUI = mainUI;
         this.equipmentManagementService = equipmentManagementService;
+        this.equipmentRegistry = equipmentRegistry;
 
         setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Lab Manager Equipment Control",
-                SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Lab Manager Equipment Control", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         add(titleLabel, BorderLayout.NORTH);
 
@@ -47,8 +49,8 @@ public class LabManagerPanel extends JPanel {
         JPanel formPanel = new JPanel(new GridLayout(10, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        searchIdField        = new JTextField();
-        descriptionField     = new JTextField();
+        searchIdField         = new JTextField();
+        descriptionField      = new JTextField();
         equipmentTypeComboBox = new JComboBox<>(EquipmentType.values());
         labLocationComboBox   = new JComboBox<>(LabLocation.values());
 
@@ -87,7 +89,6 @@ public class LabManagerPanel extends JPanel {
         statusArea.setWrapStyleWord(true);
         add(new JScrollPane(statusArea), BorderLayout.SOUTH);
 
-        // ── Listeners ─────────────────────────────────────────
         searchByIdButton .addActionListener(e -> handleSearchById());
         clearButton      .addActionListener(e -> clearForm());
         addButton        .addActionListener(e -> handleAddEquipment());
@@ -97,14 +98,9 @@ public class LabManagerPanel extends JPanel {
         disableButton    .addActionListener(e -> handleDisableEquipment());
         maintenanceButton.addActionListener(e -> handleMarkMaintenance());
 
-        // Opens sensor GUI as a separate window.
-        // Passes this::loadEquipmentFromCSV as a callback — when any sensor
-        // event successfully changes equipment status, this panel's list
-        // refreshes automatically on the Swing EDT with no manual click needed.
-        sensorButton.addActionListener(e -> {
-            SensorGUI sensorGUI = new SensorGUI(this::loadEquipmentFromCSV);
-            sensorGUI.setVisible(true);
-        });
+        sensorButton.addActionListener(e ->
+            JOptionPane.showMessageDialog(this, "Sensor Dashboard not yet implemented.",
+                    "Coming Soon", JOptionPane.INFORMATION_MESSAGE));
 
         backButton.addActionListener(e -> {
             if (currentUser != null) mainUI.showDashboard(currentUser);
@@ -123,40 +119,28 @@ public class LabManagerPanel extends JPanel {
             }
         });
 
-        // Load persisted equipment on startup
         loadEquipmentFromCSV();
     }
-
-    // ── Called when the lab manager logs in ───────────────────
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
         refreshStatus("Logged in as: " + currentUser.getName()
                 + " (" + currentUser.getUserType() + ")");
-        // Reload in case another session added equipment
         loadEquipmentFromCSV();
     }
 
-    // ── Load from CSV ─────────────────────────────────────────
-
-    /**
-     * Public so SensorGUI can pass this::loadEquipmentFromCSV as a
-     * Runnable callback for real-time equipment status sync.
-     */
     public void loadEquipmentFromCSV() {
         equipmentListModel.clear();
         List<Equipment> all = equipmentManagementService.loadAllEquipment();
+        equipmentRegistry.replaceAll(all);
         for (Equipment eq : all) {
             equipmentListModel.addElement(eq);
         }
     }
 
-    // ── Handlers ──────────────────────────────────────────────
-
     private LabManager getManager() {
-        if (!(currentUser instanceof LabManager)) {
+        if (!(currentUser instanceof LabManager))
             throw new IllegalStateException("Current user is not a lab manager.");
-        }
         return (LabManager) currentUser;
     }
 
@@ -165,14 +149,12 @@ public class LabManagerPanel extends JPanel {
             String input = searchIdField.getText().trim();
             if (input.isBlank()) throw new IllegalArgumentException(
                     "Enter an equipment ID to search.");
-
             UUID searchedId;
             try {
                 searchedId = UUID.fromString(input);
             } catch (IllegalArgumentException ex) {
                 throw new IllegalArgumentException("Invalid equipment ID format.");
             }
-
             for (int i = 0; i < equipmentListModel.size(); i++) {
                 Equipment eq = equipmentListModel.getElementAt(i);
                 if (eq.getEquipmentId().equals(searchedId)) {
@@ -194,14 +176,12 @@ public class LabManagerPanel extends JPanel {
             String        description   = descriptionField.getText().trim();
             EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
             LabLocation   labLocation   = (LabLocation)   labLocationComboBox  .getSelectedItem();
-
             if (description.isBlank())
                 throw new IllegalArgumentException("Description is required.");
-
             Equipment equipment = equipmentManagementService.addEquipment(
                     getManager(), description, equipmentType, labLocation);
-
             equipmentListModel.addElement(equipment);
+            equipmentRegistry.addEquipment(equipment);
             refreshStatus("Added: " + equipment.getDescription()
                     + " | ID: " + equipment.getEquipmentId());
             clearForm();
@@ -215,17 +195,13 @@ public class LabManagerPanel extends JPanel {
             Equipment equipment = equipmentJList.getSelectedValue();
             if (equipment == null)
                 throw new IllegalArgumentException("Select an equipment item first.");
-
             String        description   = descriptionField.getText().trim();
             EquipmentType equipmentType = (EquipmentType) equipmentTypeComboBox.getSelectedItem();
             LabLocation   labLocation   = (LabLocation)   labLocationComboBox  .getSelectedItem();
-
             if (description.isBlank())
                 throw new IllegalArgumentException("Description is required.");
-
             equipmentManagementService.updateEquipmentDetails(
                     getManager(), equipment, description, equipmentType, labLocation);
-
             equipmentJList.repaint();
             refreshStatus("Updated: " + equipment.getDescription()
                     + " | ID: " + equipment.getEquipmentId());
@@ -240,7 +216,6 @@ public class LabManagerPanel extends JPanel {
             Equipment equipment = equipmentJList.getSelectedValue();
             if (equipment == null)
                 throw new IllegalArgumentException("Select an equipment item first.");
-
             equipmentManagementService.removeEquipment(getManager(), equipment);
             equipmentListModel.removeElement(equipment);
             refreshStatus("Removed: " + equipment.getDescription()
@@ -289,8 +264,6 @@ public class LabManagerPanel extends JPanel {
             showError(ex.getMessage());
         }
     }
-
-    // ── Helpers ───────────────────────────────────────────────
 
     private void clearForm() {
         searchIdField.setText("");
