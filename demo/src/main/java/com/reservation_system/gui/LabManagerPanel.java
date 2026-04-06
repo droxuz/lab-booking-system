@@ -3,7 +3,6 @@ package com.reservation_system.gui;
 import com.reservation_system.Equipment.Equipment;
 import com.reservation_system.Equipment.EquipmentType;
 import com.reservation_system.Equipment.LabLocation;
-import com.reservation_system.Sensor.SensorGUI;
 import com.reservation_system.model.LabManager;
 import com.reservation_system.model.User;
 import com.reservation_system.patterns.observer.EquipmentRegistry;

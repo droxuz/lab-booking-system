@@ -1,6 +1,10 @@
-package com.reservation_system.Sensor;
+package com.reservation_system.gui;
 
 import com.reservation_system.Equipment.Equipment;
+import com.reservation_system.Sensor.Sensor;
+import com.reservation_system.Sensor.SensorSubsystemFacade;
+import com.reservation_system.Sensor.SensorType;
+import com.reservation_system.Sensor.UsageLogEntry;
 
 import javax.swing.*;
 import javax.swing.border.*;

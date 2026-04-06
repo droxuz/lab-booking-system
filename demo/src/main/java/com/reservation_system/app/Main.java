@@ -1,6 +1,5 @@
 package com.reservation_system.app;
 
-import com.reservation_system.Sensor.SensorGUI;
 import com.reservation_system.gui.MainUI;
 
 import javax.swing.SwingUtilities;
@@ -11,10 +10,5 @@ public class Main {
             MainUI ui = new MainUI();
             ui.setVisible(true);
         });
-    }
-
-    public void openSensorSubsystem() {
-        SensorGUI sensorGUI = new SensorGUI();
-        sensorGUI.setVisible(true);
     }
 }
