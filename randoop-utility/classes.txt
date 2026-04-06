@@ -1,0 +1,10 @@
+com.reservation_system.model.Reservation
+com.reservation_system.patterns.observer.EquipmentRegistry
+com.reservation_system.patterns.strategy.InstitutionalPayment
+com.reservation_system.patterns.strategy.GrantPayment
+com.reservation_system.patterns.strategy.DebitCardPayment
+com.reservation_system.patterns.strategy.CreditCardPayment
+com.reservation_system.services.EquipmentManagementService
+com.reservation_system.services.ReservationService
+
+
