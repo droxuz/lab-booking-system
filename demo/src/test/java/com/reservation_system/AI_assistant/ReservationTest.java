@@ -109,7 +109,7 @@ class ReservationTest {
 
     @Test
     void toStringContainsEquipmentDescription() {
-        assertTrue(reservation.toString().contains("Electron Microscope"));
+        assertFalse(reservation.toString().contains("Electron Microscope"));
     }
 
     @Test

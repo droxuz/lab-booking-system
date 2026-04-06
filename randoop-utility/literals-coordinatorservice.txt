@@ -1,0 +1,13 @@
+START CLASSLITERALS
+CLASSNAME
+com.reservation_system.services.CoordinatorAccountService
+LITERALS
+java.lang.String:"data/test-users.csv"
+java.lang.String:"Coordinator"
+java.lang.String:"coord@yorku.ca"
+java.lang.String:"Coordinator2"
+java.lang.String:"coord2@yorku.ca"
+java.lang.String:"Manager1"
+java.lang.String:"manager1@yorku.ca"
+java.lang.String:"Strong1!"
+END CLASSLITERALS
